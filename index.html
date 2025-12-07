@@ -5,235 +5,277 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Ayasofya Charity Testnet</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
 body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(to bottom right, #f9f7ff, #eceaf5);
-    text-align: center;
-    color: #222;
-    position: relative;
+  font-family: "Poppins", sans-serif;
+  background: radial-gradient(circle at top, #f7f4ff 0, #eceaf8 40%, #e1e1f0 100%);
+  color: #222;
+  min-height: 100vh;
 }
 
-/* Ayasofya filigranı (istersen kullan, yoksa silebilirsin) */
-.ayasofya-watermark {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    width: 90%;
-    height: 90%;
-    background: url('images/ayasofya-real-photo.jpg') no-repeat center/contain;
-    opacity: 0.06;
-    transform: translate(-50%, -50%);
-    z-index: 0;
-    pointer-events: none;
+/* Üst bar */
+.header {
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.header-title {
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #4b2ca0;
+}
+.header-badge {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #f5c24233;
+  color: #4b2c20;
 }
 
-/* Ana kapsayıcı */
-.page-wrap {
-    position: relative;
-    z-index: 2;
-    padding: 20px;
-}
-
-/* Logo kutusu */
+/* Logo */
 .logo-box {
-    width: 220px;
-    margin: 0 auto 20px auto;
-    padding: 18px;
-    border-radius: 22px;
-    background: rgba(255,255,255,0.8);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 6px 22px rgba(0,0,0,0.12);
+  width: 220px;
+  margin: 10px auto 0 auto;
+}
+.logo-box img {
+  width: 100%;
+  height: auto;
 }
 
-/* Logonun kendisi */
-.logo {
-    width: 100%;
-    height: auto;
+/* Ana alan */
+.main {
+  max-width: 1100px;
+  margin: 10px auto 40px auto;
+  padding: 0 16px 40px 16px;
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1.5fr);
+  gap: 24px;
+}
+@media (max-width: 900px) {
+  .main { grid-template-columns: 1fr; }
 }
 
-/* Başlık */
-h1 {
-    font-size: 26px;
-    font-weight: 700;
-    color: #4b2ca0; /* logodaki mora yakın */
-    margin-bottom: 5px;
-}
-
-/* Alt başlık */
-.subtitle {
-    font-size: 15px;
-    color: #555;
-    margin-bottom: 10px;
-}
-
-/* Testnet rozeti */
-.testnet-badge {
-    display: inline-block;
-    margin-top: 8px;
-    padding: 6px 16px;
-    border-radius: 999px;
-    background: #f5c242;
-    color: #2b1a56;
-    font-size: 13px;
-    font-weight: 600;
-}
-
-/* Card (bağış kutusu) */
+/* Kart genel stil */
 .card {
-    margin: 25px auto;
-    max-width: 420px;
-    background: rgba(255,255,255,0.75);
-    backdrop-filter: blur(16px);
-    border-radius: 20px;
-    box-shadow: 0 10px 32px rgba(0,0,0,0.15);
-    padding: 25px;
+  background: rgba(255,255,255,0.85);
+  border-radius: 20px;
+  box-shadow: 0 18px 45px rgba(15,15,40,0.18);
+  padding: 22px 20px;
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top right, #f5c24233, transparent 50%);
+  z-index: 0;
+}
+.card-content { position: relative; z-index: 1; }
+
+/* Sol kart (bağış) */
+.card-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #4b2ca0;
+  margin-bottom: 6px;
+}
+.card-subtitle {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 16px;
 }
 
-/* Bağış butonları */
-.donation-buttons button {
-    background: linear-gradient(135deg, #8f5dff, #6b3bff);
-    color: white;
-    border: none;
-    border-radius: 14px;
-    padding: 12px 22px;
-    margin: 8px;
-    font-size: 17px;
-    cursor: pointer;
-    transition: 0.25s;
+.status-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  font-size: 13px;
 }
-.donation-buttons button:hover {
-    transform: scale(1.08);
+.status-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #26c56b;
+}
+.status-text-strong { font-weight: 600; color: #26a154; }
+
+/* Bağış tutar butonları */
+.amount-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.amount-btn {
+  border-radius: 999px;
+  border: 1px solid #d5cafe;
+  background: #f8f6ff;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #4b2ca0;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+.amount-btn:hover {
+  background: #ede6ff;
+}
+.amount-btn.active {
+  background: #4b2ca0;
+  color: #fff;
+  border-color: #4b2ca0;
 }
 
 /* Gönder butonu */
-.send-btn {
-    margin-top: 15px;
-    background: #7b4bff;
-    padding: 13px 26px;
-    border-radius: 14px;
-    font-size: 17px;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: 0.25s;
+.primary-btn {
+  margin-top: 8px;
+  width: 100%;
+  border: none;
+  border-radius: 14px;
+  padding: 13px 16px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(135deg,#4b2ca0,#7b4bff);
+  box-shadow: 0 12px 28px rgba(75,44,160,0.45);
+  transition: all 0.18s ease;
 }
-.send-btn:hover {
-    transform: scale(1.08);
+.primary-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+.primary-btn:not(:disabled):hover {
+  transform: translateY(-2px);
 }
 
-/* Progress bar */
-.progress {
-    margin-top: 20px;
-    width: 100%;
-    height: 12px;
-    background: rgba(123,75,255,0.25);
-    border-radius: 10px;
+/* Progress */
+.progress-wrap {
+  margin-top: 18px;
+}
+.progress-top {
+  display:flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color:#555;
+  margin-bottom: 6px;
+}
+.progress-bar {
+  width: 100%;
+  height: 9px;
+  border-radius: 999px;
+  background: #ece8ff;
+  overflow: hidden;
 }
 .progress-fill {
-    height: 100%;
-    width: 0%;
-    background: #7b4bff;
-    border-radius: 10px;
-    transition: width 0.5s;
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: linear-gradient(90deg,#f5c242,#f39c12);
+  transition: width 0.35s ease;
 }
 
 /* Bağış geçmişi */
-.history-box {
-    margin-top: 15px;
-    font-size: 15px;
-    text-align: left;
-    color: #444;
+.history-title {
+  margin-top: 18px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+}
+.history-list {
+  margin-top: 6px;
+  max-height: 180px;
+  overflow-y: auto;
+  font-size: 13px;
+}
+.history-item {
+  padding: 6px 8px;
+  margin-bottom: 4px;
+  border-radius: 10px;
+  background: #f5f3ff;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+.history-empty {
+  font-size: 13px;
+  font-style: italic;
+  color: #888;
 }
 
-/* Alt link */
-.footer-link {
-    text-align: center;
-    padding: 20px;
-    font-size: 15px;
-    color: #6b3bff;
-    font-weight: 600;
+/* Sağ kartlar */
+.info-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #4b2ca0;
+  margin-bottom: 8px;
 }
+.info-text {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Güvenlik listesi */
+.bullet-list {
+  font-size: 13px;
+  color: #555;
+  margin-left: 14px;
+  margin-top: 6px;
+}
+.bullet-list li { margin-bottom: 4px; }
+
+/* Alt */
+.footer {
+  text-align: center;
+  font-size: 12px;
+  color: #777;
+  padding: 10px 16px 18px 16px;
+  border-top: 1px solid #ddd;
+}
+.footer a {
+  color: #4b2ca0;
+  text-decoration: none;
+}
+.footer a:hover { text-decoration: underline; }
 </style>
 </head>
-
 <body>
 
-<div class="ayasofya-watermark"></div>
+<header class="header">
+  <div class="header-left">
+    <div class="header-title">AYASOFYA CHARITY</div>
+    <div class="header-badge">Pi Network Testnet</div>
+  </div>
+  <div style="font-size: 12px; color:#666;">Test amaçlıdır – gerçek para içermez.</div>
+</header>
 
-<div class="page-wrap">
-
-    <div class="logo-box">
-        <!-- HERO İÇİNDE EN ÜSTE KOYDUĞUN LOGO -->
-        <img src="images/ayasofya-charity-logo.png"
-             class="logo"
-             alt="Ayasofya Charity Logo">
-    </div>
-
-    <h1>AYASOFYA CHARITY</h1>
-    <p class="subtitle">Pi Network Testnet üzerinden şeffaf bağış platformu</p>
-    <span class="testnet-badge">Testnet v23 • Sadece Test Pi ile deneme</span>
-
-    <div class="card">
-        <h2>Bağış Yap (Test Pi)</h2>
-
-        <p style="color:green; font-weight:600">✔ Wallet bağlandıktan sonra butonlar aktif olur.</p>
-
-        <div class="donation-buttons">
-            <button onclick="selectAmount(1)">π 1 Test Pi</button>
-            <button onclick="selectAmount(5)">π 5 Test Pi</button>
-            <button onclick="selectAmount(10)">π 10 Test Pi</button>
-        </div>
-
-        <button class="send-btn" id="sendBtn" onclick="sendDonation()" disabled>Bağışı Gönder</button>
-
-        <div class="progress">
-            <div class="progress-fill" id="progressFill"></div>
-        </div>
-
-        <p>Toplam: <span id="total">0</span> Test Pi — Hedef: 100 Test Pi</p>
-
-        <div class="history-box" id="historyBox">
-            <b>Bağış Geçmişi:</b><br>
-            <i>Henüz bağış yok. Önce wallet bağla ve miktar seç.</i>
-        </div>
-    </div>
-
-    <div class="footer-link">
-        Gizlilik & Güven • Ayasofya Charity Testnet
-    </div>
-
+<div class="logo-box">
+  <img src="images/ayasofya-charity-logo.png" alt="Ayasofya Charity Logo">
 </div>
 
-<script src="https://testnet.sdk.minepi.com/pi-sdk.js"></script>
-<script>
-let selectedAmount = 0;
-let totalRaised = 0;
+<main class="main">
+  <!-- SOL: Bağış kartı -->
+  <section class="card">
+    <div class="card-content">
+      <h2 class="card-title">Bağış Yap (Test Pi)</h2>
+      <p class="card-subtitle">Pi Network Testnet üzerinde Ayasofya için şeffaf bağış simülasyonu.</p>
 
-function selectAmount(amount) {
-    selectedAmount = amount;
-    document.getElementById('sendBtn').disabled = false;
-    document.getElementById('sendBtn').innerText = amount + ' Test Pi Bağışla';
-}
+      <div class="status-row">
+        <div class="status-dot"></div>
+        <div class="status-text-strong" id="statusText">Valide bağlantı bekleniyor…</div>
+      </div>
 
-async function sendDonation() {
-    if (!selectedAmount) {
-        alert('Lütfen önce bir bağış miktarı seç.');
-        return;
-    }
-    // Buraya daha sonra gerçek Pi Testnet ödeme kodu ekleyebilirsin
-    totalRaised += selectedAmount;
-    document.getElementById('total').innerText = totalRaised;
-    document.getElementById('progressFill').style.width = Math.min((totalRaised / 100) * 100, 100) + '%';
-    const box = document.getElementById('historyBox');
-    box.innerHTML += '<br>+' + selectedAmount + ' Test Pi bağışı (simülasyon).';
-    alert(selectedAmount + ' Test Pi bağış simülasyonu tamamlandı.');
-}
-</script>
-
-</body>
-</html>
+      <p style="font-size: 12px; color:#777; margin
