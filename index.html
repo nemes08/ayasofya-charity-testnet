@@ -1,94 +1,133 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Ayasofya Charity Testnet</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>🕌 Ayasofya Charity | Pi Network Testnet</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
-body {
-    margin: 0; padding: 0; font-family: 'Poppins', sans-serif;
-    background: linear-gradient(to bottom right, #f9f7ff, #eceaf5); text-align: center; color: #222;
-    position: relative;
-}
-.ayasofya-watermark {
-    position: fixed; top: 50%; left: 50%; width: 90%; height: 90%;
-    background: url('images/ayasofya-real-photo.jpg') no-repeat center/contain; opacity: 0.06;
-    transform: translate(-50%, -50%); z-index: 0; pointer-events: none;
-}
-.page-wrap { position: relative; z-index: 2; padding: 20px; }
-.logo-box { width: 180px; margin: 0 auto 20px auto; padding: 18px; border-radius: 22px;
-    background: rgba(255,255,255,0.7); backdrop-filter: blur(10px); box-shadow: 0 6px 22px rgba(0,0,0,0.12); }
-h1 { font-size: 26px; font-weight: 700; color: #6b3bff; margin-bottom: 5px; }
-.card { margin: 25px auto; max-width: 420px; background: rgba(255,255,255,0.35);
-    backdrop-filter: blur(16px); border-radius: 20px; box-shadow: 0 10px 32px rgba(0,0,0,0.15); padding: 25px; }
-.donation-buttons button, .test-btn { background: linear-gradient(135deg, #8f5dff, #6b3bff); color: white;
-    border: none; border-radius: 14px; padding: 12px 22px; margin: 8px; font-size: 17px; cursor: pointer; transition: 0.25s; }
-.donation-buttons button:hover, .test-btn:hover { transform: scale(1.08); }
-.send-btn { margin-top: 15px; background: #7b4bff; padding: 13px 26px; border-radius: 14px;
-    font-size: 17px; color: white; border: none; cursor: pointer; transition: 0.25s; }
-.send-btn:hover, .testnet-badge { transform: scale(1.08); }
-.progress { margin-top: 20px; width: 100%; height: 12px; background: rgba(123,75,255,0.25); border-radius: 10px; }
-.progress-fill { height: 100%; width: 0%; background: #7b4bff; border-radius: 10px; transition: width 0.5s; }
-.history-box { margin-top: 15px; font-size: 15px; text-align: left; color: #444; }
-.testnet-badge { background: linear-gradient(135deg, #ffd700, #ffed4a); color: #333; padding: 10px 20px;
-    border-radius: 25px; font-weight: 600; margin: 15px auto; display: inline-block; box-shadow: 0 4px 15px rgba(255,215,0,0.4); }
-.footer-link { text-align: center; padding: 20px; font-size: 15px; color: #6b3bff; font-weight: 600; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Poppins',sans-serif; background:linear-gradient(135deg,#0f0f23 0%,#1a1a3e 50%,#2d1b69 100%); color:#fff; overflow-x:hidden; }
+.hero { min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:20px; position:relative; }
+.hero::before { content:''; position:absolute; top:0; left:0; right:0; bottom:0; background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%"><stop offset="0%" stop-color="%23ffffff11"/><stop offset="100%" stop-color="%23ffffff00"/></radialGradient></defs><circle cx="300" cy="300" r="200" fill="url(%23a)"><animate attributeName="r" values="200;250;200" dur="3s" repeatCount="indefinite"/></circle><circle cx="700" cy="400" r="150" fill="url(%23a)"><animate attributeName="r" values="150;200;150" dur="4s" repeatCount="indefinite"/></circle></svg>'); animation:stars 20s linear infinite; }
+@keyframes stars { to { transform:rotate(360deg); } }
+.logo { width:120px; margin-bottom:20px; filter:drop-shadow(0 10px 30px rgba(107,59,255,0.5)); animation:float 6s ease-in-out infinite; }
+@keyframes float { 0%,100%{transform:translateY(0px);} 50%{transform:translateY(-10px);} }
+h1 { font-size:clamp(2.2rem,6vw,4rem); font-weight:700; background:linear-gradient(135deg,#ffd700,#ffed4a,#ffd700); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:15px; }
+.subtitle { font-size:clamp(1.1rem,3vw,1.4rem); max-width:600px; margin:0 auto 30px; opacity:0.9; }
+.testnet-badge { background:linear-gradient(135deg,#ffd700,#ffed4a); color:#1a1a3e; padding:12px 30px; border-radius:50px; font-weight:600; font-size:1.1rem; box-shadow:0 10px 30px rgba(255,215,0,0.4); margin-bottom:40px; animation:pulse 2s infinite; }
+@keyframes pulse { 0%,100%{box-shadow:0 10px 30px rgba(255,215,0,0.4);} 50%{box-shadow:0 15px 40px rgba(255,215,0,0.6);} }
+.donation-card { background:linear-gradient(145deg,rgba(255,255,255,0.1),rgba(255,255,255,0.05)); backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,0.2); border-radius:30px; padding:40px 30px; max-width:450px; box-shadow:0 25px 60px rgba(0,0,0,0.3); }
+.donation-title { font-size:1.6rem; margin-bottom:20px; color:#ffd700; }
+.amount-buttons { display:grid; grid-template-columns:repeat(auto-fit,minmax(100px,1fr)); gap:15px; margin-bottom:25px; }
+.amount-btn { background:linear-gradient(135deg,rgba(255,215,0,0.2),rgba(255,237,74,0.1)); color:#ffd700; border:2px solid rgba(255,215,0,0.3); border-radius:20px; padding:18px 10px; font-size:1.3rem; font-weight:600; cursor:pointer; transition:all 0.3s; backdrop-filter:blur(10px); }
+.amount-btn:hover,.amount-btn.active { background:linear-gradient(135deg,#ffd700,#ffed4a); color:#1a1a3e; transform:translateY(-3px); box-shadow:0 15px 35px rgba(255,215,0,0.4); }
+.connect-btn,.send-btn { width:100%; padding:20px; font-size:1.4rem; font-weight:600; border:none; border-radius:25px; cursor:pointer; transition:all 0.3s; margin-bottom:20px; backdrop-filter:blur(10px); }
+.connect-btn { background:linear-gradient(135deg,#6b3bff,#8f5dff); box-shadow:0 10px 30px rgba(107,59,255,0.4); color:#fff; }
+.connect-btn:hover { transform:translateY(-3px); box-shadow:0 15px 40px rgba(107,59,255,0.6); }
+.send-btn { background:linear-gradient(135deg,#00c851,#00b140); box-shadow:0 10px 30px rgba(0,200,81,0.4); color:#fff; }
+.send-btn:hover { transform:translateY(-3px); box-shadow:0 15px 40px rgba(0,200,81,0.6); }
+.progress-container { background:rgba(255,255,255,0.1); border-radius:15px; padding:15px; margin:25px 0; }
+.progress-bar { height:12px; background:linear-gradient(90deg,rgba(255,215,0,0.3),rgba(255,255,255,0.2)); border-radius:10px; overflow:hidden; }
+.progress-fill { height:100%; background:linear-gradient(90deg,#ffd700,#ffed4a); border-radius:10px; transition:all 1s; box-shadow:0 0 20px rgba(255,215,0,0.6); }
+.history { background:rgba(255,255,255,0.05); border-radius:15px; padding:20px; text-align:left; font-size:0.95rem; margin-top:20px; max-height:200px; overflow-y:auto; }
+.history-entry { color:#ffd700; margin:8px 0; padding:8px; background:rgba(255,215,0,0.1); border-radius:10px; border-left:4px solid #ffd700; }
+.footer { padding:40px 20px; text-align:center; opacity:0.8; font-size:0.9rem; }
+.stats { display:flex; justify-content:center; gap:30px; margin:30px 0; flex-wrap:wrap; }
+.stat { text-align:center; }
+.stat-number { font-size:2.5rem; font-weight:700; background:linear-gradient(135deg,#ffd700,#ffed4a); -webkit-background-clip:text; -webkit-text-fill-color:transparent; display:block; }
+@media (max-width:768px) { .hero{padding:40px 20px;} .donation-card{padding:30px 20px;} .stats{gap:20px;} }
 </style>
 </head>
 <body>
-<div class="ayasofya-watermark"></div>
-<div class="page-wrap">
-    <div class="logo-box">
-        <img src="images/logo.png" width="150" onerror="this.style.display='none'" />
+<div class="hero">
+  <img src="images/logo.png" class="logo" onerror="this.style.display='none'" alt="Ayasofya Charity">
+  <h1><i class="fas fa-mosque"></i> Ayasofya Charity</h1>
+  <p class="subtitle">Pi Network Testnet ile şeffaf hayırseverlik<br>Ayasofya restorasyonu için Test Pi bağışları</p>
+  
+  <div class="testnet-badge">
+    <i class="fas fa-check-circle"></i> Testnet v23 Aktif | Checklist Ready
+  </div>
+
+  <div class="donation-card">
+    <div class="donation-title">
+      <i class="fas fa-hand-holding-heart"></i> Test Bağış Yap
     </div>
-    <h1>🕌 Ayasofya Charity Testnet</h1>
-    <p>Pi Network Testnet – Checklist 10. Adım ✓</p>
     
-    <span class="testnet-badge">✅ Testnet v23 Aktif | Wallet Connect Ready</span>
-
-    <div class="card">
-        <h2>Testnet Bağlantı</h2>
-        <p style="color:green; font-weight:600">✔ Testnet bağlantı hazır!</p>
-        
-        <button class="test-btn" onclick="connectWallet()">🔗 Pi Testnet Wallet Bağla</button>
-        <button class="test-btn" onclick="testPayment()">💸 0.1 Test Pi Gönder</button>
-        <a href="https://testnet.minepi.com/faucet" class="test-btn" target="_blank">💧 Test Pi Faucet</a>
-
-        <div class="progress">
-            <div class="progress-fill" id="progressFill"></div>
-        </div>
-        <p>Status: <span id="status">Bağlı değil</span> | Toplam: <span id="total">0</span> Test Pi</p>
-
-        <div class="history-box" id="history">
-            <b>Transaction Geçmişi:</b><br><i>Wallet bağlanmadı.</i>
-        </div>
+    <div class="amount-buttons">
+      <button class="amount-btn" onclick="selectAmount(1)"><i class="fas fa-coins"></i> 1 Test Pi</button>
+      <button class="amount-btn" onclick="selectAmount(5)"><i class="fas fa-coins"></i> 5 Test Pi</button>
+      <button class="amount-btn" onclick="selectAmount(10)" data-amount="10"><i class="fas fa-coins"></i> 10 Test Pi</button>
     </div>
 
-    <div class="footer-link">
-        nemes08.github.io/ayasofya-charity-testnet | Pi Developer Checklist ✓
+    <button class="connect-btn" onclick="connectWallet()">
+      <i class="fas fa-wallet"></i> Pi Testnet Wallet Bağla
+    </button>
+    
+    <button class="send-btn" id="sendBtn" onclick="sendDonation()" disabled>
+      <i class="fas fa-paper-plane"></i> Bağışı Gönder (0 Test Pi)
+    </button>
+
+    <div class="progress-container">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width:0%"></div>
+      </div>
+      <p style="margin-top:10px; font-size:0.9rem;">Toplam: <span id="totalRaised">0</span> Test Pi | Hedef: 100 Test Pi</p>
     </div>
+
+    <div class="history" id="historyBox">
+      <div style="color:#aaa; font-style:italic;">Wallet bağlanmadı. İlk bağışını yap!</div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number" id="txCount">0</span>
+      <div>Transaction</div>
+    </div>
+    <div class="stat">
+      <span class="stat-number" id="walletStatus">X</span>
+      <div>Bağlı Cüzdan</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p><i class="fas fa-shield-alt"></i> nemes08.github.io/ayasofya-charity-testnet | 
+    Pi Network Testnet dApp | Developer Checklist 10/10 ✓</p>
+  </div>
 </div>
 
 <script src="https://testnet.sdk.minepi.com/pi-sdk.js"></script>
 <script>
-let piAuth = null; let txCount = 0;
-async function connectWallet() {
-    try {
-        piAuth = await pi.authenticate(['username','payments'], onIncompletePaymentFound);
-        document.getElementById('status').innerText = `${piAuth.user.username} ✅`;
-        document.getElementById('history').innerHTML = '<b>Transaction Geçmişi:</b><br>✅ Wallet bağlandı!';
-    } catch(e) { alert('Pi Browser Testnet açın!'); }
+let piAuth = null; let selectedAmount = 0; let txCount = 0; let totalRaised = 0;
+function selectAmount(amount) {
+  selectedAmount = amount; 
+  document.querySelectorAll('.amount-btn').forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('sendBtn').innerHTML = `<i class="fas fa-paper-plane"></i> ${amount} Test Pi Gönder`;
+  document.getElementById('sendBtn').disabled = false;
 }
-async function testPayment() {
-    if(!piAuth) return alert('Önce wallet bağla!');
-    try {
-        const payment = await pi.createPayment({amount: 0.1, memo: 'Ayasofya Test Tx '+Date.now()});
-        await pi.sendPayment(payment.id, piAuth);
-        txCount++; document.getElementById('total').innerText = txCount*0.1;
-        document.getElementById('history').innerHTML += `<br>✅ Tx ${txCount}: ${payment.id.slice(-8)}`;
-        alert('✅ Test transfer başarılı! Checklist tamamlandı.');
-    } catch(e) { alert('Hata: '+e.message); }
+async function connectWallet() {
+  try {
+    piAuth = await pi.authenticate(['username','payments']);
+    document.getElementById('walletStatus').textContent = '✅';
+    document.getElementById('historyBox').innerHTML = `<div class="history-entry"><i class="fas fa-wallet"></i> ${piAuth.user.username} wallet bağlandı!</div>`;
+    alert('✅ Wallet bağlandı! Bağış yapabilirsin.');
+  } catch(e) { alert('Pi Browser Testnet açın!'); }
+}
+async function sendDonation() {
+  if(!piAuth || !selectedAmount) return alert('Wallet bağla ve miktar seç!');
+  try {
+    const payment = await pi.createPayment({amount:selectedAmount, memo:`Ayasofya Charity Test Tx #${++txCount}`});
+    await pi.sendPayment(payment.id, piAuth);
+    totalRaised += selectedAmount;
+    document.getElementById('totalRaised').textContent = totalRaised;
+    document.getElementById('txCount').textContent = txCount;
+    document.getElementById('progressFill').style.width = `${Math.min((totalRaised/100)*100,100)}%`;
+    document.getElementById('historyBox').innerHTML += `<div class="history-entry"><i class="fas fa-check-circle"></i> +${selectedAmount} Test Pi (Tx: ${payment.id.slice(-8)})</div>`;
+    alert(`✅ ${selectedAmount} Test Pi bağışlandı! Checklist tamamlandı.`);
+  } catch(e) { alert('Hata: '+e.message); }
 }
 </script>
 </body>
