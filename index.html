@@ -3,32 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AyasofyaCharity | Global Giving with Pi Network</title>
+    <title>AyasofyaCharity | Global Pi Network Charity Platform</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Hagia_Sophia_logo.svg/1200px-Hagia_Sophia_logo.svg.png">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome Icons -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
         :root {
             --primary-blue: #1a5fb4;
             --primary-light: #62a0ea;
-            --primary-dark: #1c71d8;
             --secondary-green: #26a269;
             --secondary-light: #8ff0a4;
-            --accent-orange: #ff7800;
             --accent-gold: #f5c211;
-            --neutral-light: #f6f5f4;
-            --neutral-dark: #241f31;
-            --neutral-gray: #c0bfbc;
+            --accent-orange: #ff7800;
+            --dark-bg: #0f172a;
+            --light-bg: #f8fafc;
             --gradient-primary: linear-gradient(135deg, #1a5fb4, #1c71d8);
-            --gradient-secondary: linear-gradient(135deg, #26a269, #8ff0a4);
-            --gradient-accent: linear-gradient(135deg, #ff7800, #f5c211);
-            --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.08);
-            --shadow-medium: 0 15px 40px rgba(0, 0, 0, 0.12);
-            --shadow-hard: 0 20px 50px rgba(0, 0, 0, 0.15);
+            --gradient-secondary: linear-gradient(135deg, #26a269, #2ecc71);
+            --gradient-gold: linear-gradient(135deg, #f5c211, #ffd700);
         }
         
         * {
@@ -39,252 +38,164 @@
         
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #f8f9fa;
+            background-color: var(--light-bg);
             color: #333;
             line-height: 1.6;
             overflow-x: hidden;
-            scroll-behavior: smooth;
         }
         
-        h1, h2, h3, h4, h5, h6 {
+        h1, h2, h3, h4, h5, .brand-font {
             font-family: 'Playfair Display', serif;
-            font-weight: 600;
+            font-weight: 700;
         }
         
-        /* Logo Bar */
-        .logo-bar {
+        /* Header & Navigation */
+        .navbar {
             background: rgba(255, 255, 255, 0.95);
-            padding: 15px 0;
-            box-shadow: var(--shadow-soft);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
-            backdrop-filter: blur(10px);
             transition: all 0.3s ease;
         }
         
-        .logo-bar.scrolled {
-            padding: 10px 0;
+        .navbar.scrolled {
+            padding: 0.7rem 0;
             background: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
         }
         
-        .logo-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        
-        .main-logo {
+        .navbar-brand {
             display: flex;
             align-items: center;
             text-decoration: none;
-            transition: transform 0.3s ease;
         }
         
-        .main-logo:hover {
-            transform: scale(1.05);
-        }
-        
-        .logo-icon {
-            font-size: 2.8rem;
-            color: var(--primary-blue);
+        .logo-img {
+            height: 50px;
             margin-right: 15px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
         }
         
-        .logo-text {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .logo-main {
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
+        .brand-name {
             font-size: 1.8rem;
+            font-weight: 700;
             background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            line-height: 1;
-            letter-spacing: -0.5px;
         }
         
-        .logo-sub {
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.9rem;
+        .brand-tagline {
+            font-size: 0.85rem;
             color: var(--secondary-green);
             font-weight: 500;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            margin-top: 3px;
+            letter-spacing: 1px;
+            margin-top: -5px;
         }
         
         /* Hero Section */
         .hero-section {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1541414778236-f051d974d61c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80');
+            min-height: 100vh;
+            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.9)), 
+                        url('https://images.unsplash.com/photo-1541414778236-f051d974d61c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
             color: white;
-            padding: 160px 0 100px;
-            position: relative;
-            overflow: hidden;
-            min-height: 100vh;
             display: flex;
             align-items: center;
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
         }
         
         .hero-content {
             position: relative;
             z-index: 2;
-            text-align: center;
         }
         
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, #ffffff, var(--accent-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            max-width: 700px;
+        }
+        
+        /* Connection Status */
         .connection-status {
             display: inline-flex;
             align-items: center;
             background: rgba(38, 162, 105, 0.2);
             backdrop-filter: blur(10px);
             color: white;
-            padding: 12px 24px;
+            padding: 0.8rem 1.5rem;
             border-radius: 50px;
             font-weight: 600;
-            margin-bottom: 40px;
+            margin-bottom: 2rem;
             border: 1px solid rgba(255, 255, 255, 0.2);
             animation: pulse 2s infinite;
         }
         
         @keyframes pulse {
-            0% { 
-                box-shadow: 0 0 0 0 rgba(38, 162, 105, 0.7);
-                transform: scale(1);
-            }
-            70% { 
-                box-shadow: 0 0 0 15px rgba(38, 162, 105, 0);
-                transform: scale(1.02);
-            }
-            100% { 
-                box-shadow: 0 0 0 0 rgba(38, 162, 105, 0);
-                transform: scale(1);
-            }
+            0% { box-shadow: 0 0 0 0 rgba(38, 162, 105, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(38, 162, 105, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(38, 162, 105, 0); }
         }
         
         .status-dot {
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             background-color: var(--secondary-green);
             border-radius: 50%;
             margin-right: 10px;
-            animation: blink 2s infinite;
+            animation: blink 1.5s infinite;
         }
         
         @keyframes blink {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(0.8); }
-        }
-        
-        .hero-title {
-            font-size: 4rem;
-            font-weight: 700;
-            margin-bottom: 25px;
-            background: linear-gradient(90deg, #ffffff, #ffcc00);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-            line-height: 1.1;
-        }
-        
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.8rem;
-            }
-        }
-        
-        .hero-subtitle {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto 50px;
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 300;
-        }
-        
-        /* Floating Elements Animation */
-        .floating-elements {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-        
-        .floating-element {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            animation: float 20s infinite linear;
-        }
-        
-        .floating-element:nth-child(1) {
-            width: 40px;
-            height: 40px;
-            top: 20%;
-            left: 10%;
-            animation-delay: 0s;
-            background: rgba(255, 204, 0, 0.2);
-        }
-        
-        .floating-element:nth-child(2) {
-            width: 60px;
-            height: 60px;
-            top: 60%;
-            left: 80%;
-            animation-delay: -5s;
-            animation-duration: 25s;
-            background: rgba(38, 162, 105, 0.2);
-        }
-        
-        .floating-element:nth-child(3) {
-            width: 30px;
-            height: 30px;
-            top: 40%;
-            left: 85%;
-            animation-delay: -10s;
-            animation-duration: 18s;
-            background: rgba(26, 95, 180, 0.2);
-        }
-        
-        @keyframes float {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            25% { transform: translate(20px, 50px) rotate(90deg); }
-            50% { transform: translate(40px, 0) rotate(180deg); }
-            75% { transform: translate(20px, -50px) rotate(270deg); }
-            100% { transform: translate(0, 0) rotate(360deg); }
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
         
         /* Donation Bucket Animation */
         .bucket-container {
-            margin: 60px auto 40px;
+            margin: 3rem auto;
             max-width: 500px;
             position: relative;
         }
         
-        .bucket {
+        .bucket-wrapper {
             position: relative;
             width: 280px;
             height: 350px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .bucket {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 0 0 140px 140px;
             overflow: hidden;
-            border: 8px solid rgba(255, 255, 255, 0.25);
+            border: 8px solid rgba(255, 255, 255, 0.3);
             box-shadow: 
                 inset 0 0 40px rgba(0, 0, 0, 0.3),
-                0 25px 60px rgba(0, 0, 0, 0.4);
+                0 20px 50px rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(5px);
         }
         
@@ -292,9 +203,9 @@
             position: absolute;
             bottom: 0;
             width: 100%;
-            background: linear-gradient(to top, var(--primary-dark), var(--primary-light));
-            height: 30%; /* Başlangıç seviyesi */
-            transition: height 2s cubic-bezier(0.34, 1.56, 0.64, 1);
+            background: linear-gradient(to top, var(--primary-blue), var(--primary-light));
+            height: 30%;
+            transition: height 1.5s ease;
             border-radius: 0 0 130px 130px;
             overflow: hidden;
         }
@@ -303,8 +214,8 @@
             position: absolute;
             top: -20px;
             width: 200%;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.25);
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
             border-radius: 40%;
             animation: wave 5s infinite linear;
             transform: translateX(-25%);
@@ -313,8 +224,8 @@
         .water-wave:nth-child(2) {
             top: -10px;
             animation: wave 7s infinite linear;
-            opacity: 0.6;
             animation-delay: -2.5s;
+            opacity: 0.7;
         }
         
         @keyframes wave {
@@ -324,81 +235,72 @@
         
         .bucket-handle {
             position: absolute;
-            top: -60px;
+            top: -50px;
             left: 50%;
             transform: translateX(-50%);
-            width: 140px;
-            height: 100px;
-            border: 12px solid rgba(255, 255, 255, 0.3);
+            width: 120px;
+            height: 80px;
+            border: 10px solid rgba(255, 255, 255, 0.3);
             border-top: none;
-            border-radius: 0 0 70px 70px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-        
-        .bucket-coins {
-            position: absolute;
-            bottom: 10px;
-            width: 100%;
-            height: 40px;
-            display: flex;
-            justify-content: center;
-            gap: 5px;
-        }
-        
-        .coin {
-            width: 20px;
-            height: 20px;
-            background: linear-gradient(45deg, #f5c211, #ffcc00);
-            border-radius: 50%;
-            animation: coin-spin 4s infinite linear;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-        }
-        
-        .coin:nth-child(2) {
-            animation-delay: -1s;
-            background: linear-gradient(45deg, #c0bfbc, #e0e0e0);
-        }
-        
-        .coin:nth-child(3) {
-            animation-delay: -2s;
-            background: linear-gradient(45deg, #ff7800, #ff9900);
-        }
-        
-        @keyframes coin-spin {
-            0% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-10px) rotate(180deg); }
-            100% { transform: translateY(0) rotate(360deg); }
+            border-radius: 0 0 60px 60px;
         }
         
         .bucket-stats {
             text-align: center;
-            margin-top: 30px;
+            margin-top: 2rem;
             color: white;
         }
         
         .bucket-amount {
             font-size: 2.5rem;
             font-weight: 700;
-            color: #ffcc00;
+            color: var(--accent-gold);
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
         
-        /* Donation Section */
+        /* Progress Bar */
+        .progress-container {
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+        
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .progress {
+            height: 12px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: var(--gradient-secondary);
+            border-radius: 6px;
+            transition: width 1s ease;
+        }
+        
+        /* Donation Cards */
         .donation-section {
-            padding: 100px 0;
+            padding: 5rem 0;
             background: white;
         }
         
         .section-title {
             text-align: center;
-            margin-bottom: 60px;
-            position: relative;
+            margin-bottom: 3rem;
         }
         
         .section-title h2 {
-            font-size: 2.8rem;
-            color: var(--neutral-dark);
-            margin-bottom: 15px;
+            font-size: 2.5rem;
+            color: var(--dark-bg);
+            margin-bottom: 1rem;
             position: relative;
             display: inline-block;
         }
@@ -411,41 +313,39 @@
             transform: translateX(-50%);
             width: 80px;
             height: 4px;
-            background: var(--gradient-accent);
+            background: var(--gradient-gold);
             border-radius: 2px;
         }
         
         .donation-card {
             border: none;
             border-radius: 20px;
-            box-shadow: var(--shadow-soft);
-            transition: all 0.4s ease;
-            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
             overflow: hidden;
-            position: relative;
+            height: 100%;
             background: white;
         }
         
         .donation-card:hover {
-            transform: translateY(-15px);
-            box-shadow: var(--shadow-hard);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
         
         .donation-card.premium {
             border-top: 5px solid var(--accent-gold);
         }
         
-        .donation-header {
-            padding: 30px 20px;
-            text-align: center;
+        .card-header {
             background: var(--gradient-primary);
             color: white;
+            padding: 2rem 1rem;
+            text-align: center;
         }
         
-        .donation-amount {
-            font-size: 3rem;
+        .pi-amount {
+            font-size: 2.5rem;
             font-weight: 700;
-            margin-bottom: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -453,23 +353,23 @@
         
         .pi-symbol {
             font-size: 2rem;
-            margin-right: 8px;
+            margin-right: 0.5rem;
             opacity: 0.9;
         }
         
-        .donation-body {
-            padding: 30px 20px;
+        .card-body {
+            padding: 2rem;
+            text-align: center;
         }
         
         .donate-btn {
             background: var(--gradient-secondary);
             border: none;
-            padding: 15px 40px;
-            font-weight: 600;
-            border-radius: 50px;
-            transition: all 0.3s ease;
             color: white;
-            font-size: 1.1rem;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
             width: 100%;
             box-shadow: 0 5px 15px rgba(38, 162, 105, 0.3);
         }
@@ -477,127 +377,52 @@
         .donate-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 25px rgba(38, 162, 105, 0.4);
-            color: white;
-        }
-        
-        .donate-btn:active {
-            transform: translateY(-1px);
         }
         
         /* Wallet Section */
         .wallet-section {
-            background: linear-gradient(135deg, #f6f5f4, #ffffff);
-            padding: 80px 0;
+            background: linear-gradient(135deg, #f1f5f9, #ffffff);
+            padding: 4rem 0;
             border-radius: 30px;
-            margin: 50px 0;
-            box-shadow: var(--shadow-soft);
+            margin: 3rem 0;
+        }
+        
+        .wallet-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 2px solid #e2e8f0;
         }
         
         .wallet-address {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            border: 2px dashed var(--primary-light);
-            margin-bottom: 20px;
-            position: relative;
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 1rem;
+            border: 1px dashed #cbd5e1;
+            margin-bottom: 1rem;
         }
         
-        .wallet-label {
-            font-size: 0.9rem;
-            color: var(--neutral-gray);
-            margin-bottom: 10px;
-            display: block;
-        }
-        
-        .address-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        
-        .wallet-address-text {
+        .address-text {
             font-family: monospace;
             font-size: 1.1rem;
-            color: var(--neutral-dark);
             word-break: break-all;
+            color: var(--dark-bg);
         }
         
         .copy-btn {
             background: var(--gradient-primary);
             border: none;
             color: white;
-            padding: 10px 20px;
+            padding: 0.6rem 1.5rem;
             border-radius: 8px;
             font-weight: 600;
             transition: all 0.3s ease;
-            white-space: nowrap;
-            margin-left: 15px;
         }
         
         .copy-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(26, 95, 180, 0.3);
-        }
-        
-        /* Footer */
-        .footer {
-            background: var(--neutral-dark);
-            color: white;
-            padding: 80px 0 30px;
-            position: relative;
-        }
-        
-        .footer-logo {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: white;
-        }
-        
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            display: block;
-            margin-bottom: 10px;
-            transition: all 0.3s ease;
-        }
-        
-        .footer-links a:hover {
-            color: white;
-            padding-left: 5px;
-        }
-        
-        .social-icons {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .social-icon {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        .social-icon:hover {
-            background: var(--primary-blue);
-            transform: translateY(-5px);
-        }
-        
-        .copyright {
-            text-align: center;
-            padding-top: 30px;
-            margin-top: 50px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
         }
         
         /* Language Selector */
@@ -611,139 +436,144 @@
         }
         
         .lang-btn {
-            width: 55px;
-            height: 55px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             background: var(--primary-blue);
             color: white;
             border: none;
             font-weight: bold;
-            font-size: 0.9rem;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(26, 95, 180, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
         
-        .lang-btn:hover {
-            background: var(--accent-orange);
-            transform: translateY(-5px) scale(1.1);
-        }
-        
-        .lang-btn.active {
+        .lang-btn:hover, .lang-btn.active {
             background: var(--accent-orange);
             transform: scale(1.1);
         }
         
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .hero-title {
-                font-size: 3.2rem;
-            }
-            
-            .bucket {
-                width: 240px;
-                height: 300px;
-            }
+        /* Footer */
+        .footer {
+            background: var(--dark-bg);
+            color: white;
+            padding: 4rem 0 2rem;
         }
         
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 1rem;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background: var(--primary-blue);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .hero-section {
-                padding: 140px 0 80px;
-            }
-            
             .hero-title {
                 font-size: 2.5rem;
             }
             
-            .bucket {
-                width: 200px;
-                height: 250px;
+            .bucket-wrapper {
+                width: 220px;
+                height: 280px;
             }
             
             .section-title h2 {
-                font-size: 2.2rem;
+                font-size: 2rem;
             }
             
-            .address-container {
-                flex-direction: column;
-                align-items: flex-start;
+            .language-selector {
+                bottom: 20px;
+                right: 20px;
             }
             
-            .copy-btn {
-                margin-left: 0;
-                margin-top: 15px;
-                width: 100%;
+            .lang-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 0.9rem;
             }
         }
         
-        /* Loading Animation */
-        .loading-dots {
-            display: inline-block;
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 1s ease;
         }
         
-        .loading-dots span {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--primary-blue);
-            margin: 0 3px;
-            animation: loading 1.4s infinite ease-in-out both;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
-        .loading-dots span:nth-child(1) { animation-delay: -0.32s; }
-        .loading-dots span:nth-child(2) { animation-delay: -0.16s; }
-        
-        @keyframes loading {
-            0%, 80%, 100% { transform: scale(0); }
-            40% { transform: scale(1); }
+        /* Floating Animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
         }
         
-        /* Progress Bar */
-        .progress-container {
-            margin: 40px 0;
-        }
-        
-        .progress-label {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-        
-        .progress {
-            height: 12px;
-            border-radius: 6px;
-            background: rgba(26, 95, 180, 0.1);
-            overflow: hidden;
-        }
-        
-        .progress-bar {
-            height: 100%;
-            background: var(--gradient-primary);
-            border-radius: 6px;
-            transition: width 1.5s ease;
+        .floating {
+            animation: float 3s ease-in-out infinite;
         }
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="logo-bar" id="navbar">
+    <nav class="navbar" id="navbar">
         <div class="container">
-            <div class="logo-container">
-                <a href="#" class="main-logo">
-                    <i class="fas fa-hands-helping logo-icon"></i>
-                    <div class="logo-text">
-                        <div class="logo-main">AyasofyaCharity</div>
-                        <div class="logo-sub">Global Giving with Pi Network</div>
-                    </div>
-                </a>
-                <div class="d-none d-md-block">
-                    <button class="btn btn-outline-primary me-2" onclick="scrollToSection('donate')">Bağış Yap</button>
-                    <button class="btn btn-primary" onclick="scrollToSection('transparency')">Şeffaflık</button>
+            <a class="navbar-brand" href="#">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Hagia_Sophia_logo.svg/1200px-Hagia_Sophia_logo.svg.png" alt="AyasofyaCharity" class="logo-img">
+                <div>
+                    <div class="brand-name">AyasofyaCharity</div>
+                    <div class="brand-tagline">Global Giving with Pi Network</div>
                 </div>
+            </a>
+            <div class="d-none d-md-block">
+                <button class="btn btn-outline-primary me-2" onclick="scrollToSection('donate')">Bağış Yap</button>
+                <button class="btn btn-primary" onclick="scrollToSection('transparency')">Şeffaflık</button>
             </div>
         </div>
     </nav>
@@ -757,48 +587,40 @@
 
     <!-- Hero Section -->
     <section class="hero-section" id="home">
-        <div class="floating-elements">
-            <div class="floating-element"></div>
-            <div class="floating-element"></div>
-            <div class="floating-element"></div>
-        </div>
-        
         <div class="container">
-            <div class="hero-content">
+            <div class="hero-content fade-in">
                 <div class="connection-status">
                     <div class="status-dot"></div>
-                    <span id="connection-text">Pi Network Bağlantısı: <span class="fw-bold">Aktif</span></span>
+                    <span id="connection-text">Pi Network Bağlantısı: <strong>Aktif</strong></span>
                 </div>
                 
                 <h1 class="hero-title">AYASOFYA CHARITY</h1>
-                <p class="hero-subtitle">Tarihi mirasımız Ayasofya'nın ruhuyla, blockchain teknolojisi kullanarak dünya çapında ihtiyaç sahiplerine şeffaf ve güvenli yardım ulaştırıyoruz.</p>
+                <p class="hero-subtitle">
+                    Tarihi mirasımız Ayasofya'nın ruhuyla, blockchain teknolojisi kullanarak dünya çapında ihtiyaç sahiplerine 
+                    şeffaf ve güvenli yardım ulaştırıyoruz. Pi Network ile her bağışınız takip edilebilir ve %100 şeffaf.
+                </p>
                 
                 <!-- Donation Bucket -->
-                <div class="bucket-container">
-                    <div class="bucket">
-                        <div class="bucket-handle"></div>
-                        <div class="bucket-fill" id="bucketFill">
-                            <div class="water-wave"></div>
-                            <div class="water-wave"></div>
-                        </div>
-                        <div class="bucket-coins">
-                            <div class="coin"></div>
-                            <div class="coin"></div>
-                            <div class="coin"></div>
-                            <div class="coin"></div>
-                            <div class="coin"></div>
+                <div class="bucket-container floating">
+                    <div class="bucket-wrapper">
+                        <div class="bucket">
+                            <div class="bucket-handle"></div>
+                            <div class="bucket-fill" id="bucketFill">
+                                <div class="water-wave"></div>
+                                <div class="water-wave"></div>
+                            </div>
                         </div>
                     </div>
                     <div class="bucket-stats">
-                        <div class="bucket-amount" id="totalAmount">18,750 PI</div>
+                        <div class="bucket-amount" id="totalAmount">18,750 π</div>
                         <div class="text-white-50">Toplam Bağış</div>
                     </div>
                 </div>
                 
                 <!-- Progress Bar -->
-                <div class="container mt-4" style="max-width: 600px;">
+                <div class="progress-container">
                     <div class="progress-label">
-                        <span>Hedef: <span class="text-warning">50,000 PI</span></span>
+                        <span>Hedef: <span class="text-warning">50,000 π</span></span>
                         <span id="progressPercentage">37.5%</span>
                     </div>
                     <div class="progress">
@@ -806,8 +628,8 @@
                     </div>
                 </div>
                 
-                <div class="mt-5">
-                    <button class="btn btn-warning btn-lg px-5 py-3 fw-bold" onclick="scrollToSection('donate')" style="font-size: 1.2rem;">
+                <div class="text-center mt-5">
+                    <button class="btn btn-warning btn-lg px-5 py-3 fw-bold" onclick="scrollToSection('donate')">
                         <i class="fas fa-heart me-2"></i>Hemen Bağış Yap
                     </button>
                 </div>
@@ -818,74 +640,75 @@
     <!-- Donation Section -->
     <section class="donation-section" id="donate">
         <div class="container">
-            <div class="section-title">
+            <div class="section-title" data-aos="fade-up">
                 <h2>Bağış Seçenekleri</h2>
                 <p class="text-muted">Aşağıdaki seçeneklerden birini seçerek ihtiyaç sahiplerine yardım edebilirsiniz</p>
             </div>
             
-            <div class="row">
-                <div class="col-lg-3 col-md-6 mb-4">
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
                     <div class="donation-card h-100">
-                        <div class="donation-header">
-                            <div class="donation-amount">
+                        <div class="card-header">
+                            <div class="pi-amount">
                                 <span class="pi-symbol">π</span>1
                             </div>
-                            <div>Başlangıç Bağış</div>
+                            <div>Başlangıç Bağışı</div>
                         </div>
-                        <div class="donation-body text-center">
-                            <p class="mb-4">Küçük bir bağışla başlayın ve fark yaratın</p>
-                            <button class="btn donate-btn" data-amount="1" onclick="openDonationModal(1)">
+                        <div class="card-body">
+                            <p class="mb-3">Küçük bir bağışla büyük fark yaratın</p>
+                            <button class="btn donate-btn" onclick="openDonationModal(1)">
                                 <i class="fas fa-gift me-2"></i>Bağış Yap
                             </button>
                         </div>
                     </div>
                 </div>
                 
-                <div class="col-lg-3 col-md-6 mb-4">
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
                     <div class="donation-card h-100">
-                        <div class="donation-header">
-                            <div class="donation-amount">
+                        <div class="card-header">
+                            <div class="pi-amount">
                                 <span class="pi-symbol">π</span>5
                             </div>
                             <div>Orta Ölçekli</div>
                         </div>
-                        <div class="donation-body text-center">
-                            <p class="mb-4">Daha fazla insana ulaşmak için ideal bağış</p>
-                            <button class="btn donate-btn" data-amount="5" onclick="openDonationModal(5)">
+                        <div class="card-body">
+                            <p class="mb-3">Daha fazla insana ulaşmak için ideal</p>
+                            <button class="btn donate-btn" onclick="openDonationModal(5)">
                                 <i class="fas fa-star me-2"></i>Bağış Yap
                             </button>
                         </div>
                     </div>
                 </div>
                 
-                <div class="col-lg-3 col-md-6 mb-4">
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
                     <div class="donation-card h-100 premium">
-                        <div class="donation-header">
-                            <div class="donation-amount">
+                        <div class="card-header">
+                            <div class="pi-amount">
                                 <span class="pi-symbol">π</span>10
                             </div>
                             <div>Premium Bağış</div>
                         </div>
-                        <div class="donation-body text-center">
-                            <p class="mb-4">Maksimum etki için premium bağışçı olun</p>
-                            <button class="btn donate-btn" data-amount="10" onclick="openDonationModal(10)">
+                        <div class="card-body">
+                            <p class="mb-3">Maksimum etki için premium bağışçı olun</p>
+                            <button class="btn donate-btn" onclick="openDonationModal(10)">
                                 <i class="fas fa-crown me-2"></i>Bağış Yap
                             </button>
                         </div>
                     </div>
                 </div>
                 
-                <div class="col-lg-3 col-md-6 mb-4">
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
                     <div class="donation-card h-100">
-                        <div class="donation-header">
-                            <div class="donation-amount">
+                        <div class="card-header">
+                            <div class="pi-amount">
                                 <span class="pi-symbol">π</span>?
                             </div>
                             <div>Özel Miktar</div>
                         </div>
-                        <div class="donation-body text-center">
-                            <div class="mb-4">
-                                <input type="number" class="form-control text-center" id="customAmount" placeholder="PI Miktarı" min="1" max="1000" style="font-size: 1.2rem;">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <input type="number" class="form-control text-center" id="customAmount" 
+                                       placeholder="PI Miktarı" min="1" max="1000" style="font-size: 1.2rem;">
                             </div>
                             <button class="btn donate-btn" onclick="donateCustom()">
                                 <i class="fas fa-edit me-2"></i>Özel Bağış Yap
@@ -900,35 +723,45 @@
     <!-- Wallet Section -->
     <section class="wallet-section" id="wallet">
         <div class="container">
-            <div class="section-title">
-                <h2>Manuel Pi Transferi</h2>
-                <p class="text-muted">Aşağıdaki cüzdan adresine Pi göndererek de bağış yapabilirsiniz</p>
-            </div>
-            
             <div class="row justify-content-center">
-                <div class="col-md-10 col-lg-8">
-                    <div class="wallet-address">
-                        <span class="wallet-label">AyasofyaCharity Resmi Pi Cüzdan Adresi:</span>
-                        <div class="address-container">
-                            <div class="wallet-address-text" id="walletAddress">
-                                GCXK5Y2J7EXAMPLEPIWALLETADDRESS123456789
+                <div class="col-lg-8">
+                    <div class="wallet-card" data-aos="fade-up">
+                        <h3 class="text-center mb-4">Manuel Pi Transferi</h3>
+                        <p class="text-center mb-4 text-muted">
+                            Aşağıdaki cüzdan adresine Pi göndererek de bağış yapabilirsiniz. 
+                            Tüm bağışlar blockchain üzerinde şeffaf şekilde görülebilir.
+                        </p>
+                        
+                        <div class="mb-4">
+                            <label class="form-label text-dark fw-bold">AyasofyaCharity Resmi Pi Cüzdan Adresi:</label>
+                            <div class="wallet-address">
+                                <div class="address-text" id="walletAddress">
+                                    GCXK5Y2J7EXAMPLEPIWALLETADDRESS123456789
+                                </div>
                             </div>
-                            <button class="copy-btn" onclick="copyWalletAddress()">
-                                <i class="fas fa-copy me-2"></i>Kopyala
-                            </button>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <small class="text-muted">
+                                    <i class="fas fa-info-circle me-1"></i>
+                                    Bu adres sadece Pi Network token'ları için kullanılır
+                                </small>
+                                <button class="btn copy-btn" onclick="copyWalletAddress()">
+                                    <i class="fas fa-copy me-2"></i>Adresi Kopyala
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="alert alert-info">
-                        <i class="fas fa-info-circle me-2"></i>
-                        <strong>Not:</strong> Bu adres sadece Pi Network token'ları için kullanılır. Bağışlarınız blockchain üzerinde şeffaf şekilde görülebilir.
-                    </div>
-                    <div class="text-center mt-4">
-                        <div class="loading-dots d-inline-block me-2">
-                            <span></span>
-                            <span></span>
-                            <span></span>
+                        
+                        <div class="alert alert-info">
+                            <div class="d-flex">
+                                <i class="fas fa-shield-alt fa-2x me-3 text-primary"></i>
+                                <div>
+                                    <h6 class="alert-heading">%100 Güvenli ve Şeffaf</h6>
+                                    <p class="mb-0">
+                                        Tüm bağışlar Pi Network blockchain'ine kaydedilir. 
+                                        İşlem hash'ini kullanarak bağışınızın nereye gittiğini takip edebilirsiniz.
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                        <small class="text-muted">Son bağış: 10 PI - 5 dakika önce</small>
                     </div>
                 </div>
             </div>
@@ -938,102 +771,103 @@
     <!-- Footer -->
     <footer class="footer" id="footer">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-4 mb-4">
+            <div class="row g-4">
+                <div class="col-lg-4">
                     <div class="footer-logo">AyasofyaCharity</div>
-                    <p>Tarihi mirasımız Ayasofya'nın ruhuyla, blockchain teknolojisi kullanarak dünya çapında ihtiyaç sahiplerine şeffaf ve güvenli yardım ulaştırıyoruz.</p>
+                    <p class="mb-4">
+                        Tarihi mirasımız Ayasofya'nın ruhuyla, blockchain teknolojisi kullanarak 
+                        dünya çapında ihtiyaç sahiplerine şeffaf ve güvenli yardım ulaştırıyoruz.
+                    </p>
                     <div class="social-icons">
                         <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
                         <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
                         <a href="#" class="social-icon"><i class="fab fa-telegram"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
                 
-                <div class="col-lg-2 col-md-6 mb-4">
+                <div class="col-lg-2 col-md-6">
                     <h5 class="mb-4">Bağlantılar</h5>
                     <div class="footer-links">
                         <a href="#home">Ana Sayfa</a>
                         <a href="#donate">Bağış Yap</a>
                         <a href="#wallet">Cüzdan Adresi</a>
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">Gizlilik Politikası</a>
+                        <a href="#" onclick="showPrivacyPolicy()">Gizlilik Politikası</a>
+                        <a href="#" onclick="showTerms()">Kullanım Şartları</a>
                     </div>
                 </div>
                 
-                <div class="col-lg-3 col-md-6 mb-4">
+                <div class="col-lg-3 col-md-6">
                     <h5 class="mb-4">İletişim</h5>
                     <div class="footer-links">
-                        <a href="mailto:info@ayasofyacharity.org"><i class="fas fa-envelope me-2"></i>info@ayasofyacharity.org</a>
-                        <a href="#"><i class="fas fa-globe me-2"></i>www.ayasofyacharity.org</a>
-                        <a href="#"><i class="fas fa-map-marker-alt me-2"></i>İstanbul, Türkiye</a>
+                        <a href="mailto:info@ayasofyacharity.org">
+                            <i class="fas fa-envelope me-2"></i>info@ayasofyacharity.org
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-globe me-2"></i>www.ayasofyacharity.org
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-map-marker-alt me-2"></i>İstanbul, Türkiye
+                        </a>
                     </div>
                 </div>
                 
-                <div class="col-lg-3 mb-4">
+                <div class="col-lg-3">
                     <h5 class="mb-4">Pi Network</h5>
-                    <p>Pi Network, merkezi olmayan bir kripto para projesidir. Mobil madencilik ile herkesin dijital varlıklara erişimini kolaylaştırmayı amaçlar.</p>
+                    <p class="mb-3">
+                        Pi Network, merkezi olmayan bir kripto para projesidir. 
+                        Mobil madencilik ile herkesin dijital varlıklara erişimini kolaylaştırmayı amaçlar.
+                    </p>
                     <div class="mt-3">
-                        <span class="badge bg-primary me-2">Blockchain</span>
-                        <span class="badge bg-success me-2">Şeffaf</span>
-                        <span class="badge bg-warning">Güvenli</span>
+                        <span class="badge bg-primary me-2 mb-2">Blockchain</span>
+                        <span class="badge bg-success me-2 mb-2">Şeffaflık</span>
+                        <span class="badge bg-warning me-2 mb-2">Güvenlik</span>
+                        <span class="badge bg-info mb-2">DApp</span>
                     </div>
                 </div>
             </div>
             
             <div class="copyright">
-                © 2023 AyasofyaCharity. Tüm hakları saklıdır. Bu site Pi Network topluluğu için hayır amaçlı geliştirilmiştir.
+                © 2023 AyasofyaCharity. Tüm hakları saklıdır. 
+                Bu site Pi Network topluluğu için hayır amaçlı geliştirilmiştir.
             </div>
         </div>
     </footer>
 
-    <!-- Modals -->
-    <div class="modal fade" id="donationModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Bağış Onayı</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <p id="modalMessage"></p>
-                    <div class="alert alert-warning">
-                        <i class="fas fa-exclamation-triangle me-2"></i>
-                        Bu işlem Pi Wallet uygulamasına yönlendirebilir. Bağışınız blockchain üzerinde kaydedilecektir.
-                    </div>
-                    <div class="form-check mb-3">
-                        <input class="form-check-input" type="checkbox" id="anonymousDonation">
-                        <label class="form-check-label" for="anonymousDonation">
-                            İsteğe bağlı: Bağışımı anonim olarak göster
-                        </label>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
-                    <button type="button" class="btn btn-success" id="confirmDonationBtn">Bağış Yap</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Animation -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     
     <script>
-        // Uygulama verileri
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // App Data
         const appData = {
             totalDonations: 18750,
             goal: 50000,
             walletAddress: "GCXK5Y2J7EXAMPLEPIWALLETADDRESS123456789",
-            connectionStatus: "active"
+            connectionStatus: "active",
+            lastDonation: {
+                amount: 10,
+                time: "5 dakika önce"
+            }
         };
 
-        // Sayfa yüklendiğinde
+        // Initialize on load
         document.addEventListener('DOMContentLoaded', function() {
-            // Scroll animasyonu
+            // Update bucket animation
+            updateBucketAnimation();
+            
+            // Handle scroll
             window.addEventListener('scroll', handleScroll);
             
-            // Dil butonları
+            // Language buttons
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
@@ -1042,21 +876,19 @@
                 });
             });
             
-            // Bağış animasyonunu güncelle
-            updateBucketAnimation();
-            
-            // Modal butonu
-            document.getElementById('confirmDonationBtn').addEventListener('click', processDonation);
-            
-            // Özel bağış input'u
+            // Custom donation input
             document.getElementById('customAmount').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    donateCustom();
-                }
+                if (e.key === 'Enter') donateCustom();
+            });
+            
+            // Initialize tooltips
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
             });
         });
 
-        // Scroll handler
+        // Handle scroll
         function handleScroll() {
             const navbar = document.getElementById('navbar');
             if (window.scrollY > 50) {
@@ -1064,14 +896,9 @@
             } else {
                 navbar.classList.remove('scrolled');
             }
-            
-            // Parallax efekti
-            const scrolled = window.pageYOffset;
-            const hero = document.querySelector('.hero-section');
-            hero.style.backgroundPosition = `center ${scrolled * 0.5}px`;
         }
 
-        // Kova animasyonunu güncelle
+        // Update bucket animation
         function updateBucketAnimation() {
             const percentage = (appData.totalDonations / appData.goal) * 100;
             const fillHeight = Math.min(percentage, 100);
@@ -1081,78 +908,106 @@
             const progressPercentage = document.getElementById('progressPercentage');
             const totalAmount = document.getElementById('totalAmount');
             
-            // Yeni değerleri ayarla
+            // Animate bucket fill
             bucketFill.style.height = `${fillHeight}%`;
+            
+            // Update progress
             progressBar.style.width = `${fillHeight}%`;
             progressPercentage.textContent = `${fillHeight.toFixed(1)}%`;
-            totalAmount.textContent = `${appData.totalDonations.toLocaleString()} PI`;
+            totalAmount.textContent = `${appData.totalDonations.toLocaleString()} π`;
         }
 
-        // Bağış modalını aç
+        // Open donation modal
         function openDonationModal(amount) {
-            const modalMessage = document.getElementById('modalMessage');
-            modalMessage.textContent = `${amount} PI bağış yapmak üzeresiniz. Bu işlem onaylandıktan sonra geri alınamaz. Devam etmek istiyor musunuz?`;
+            const modal = new bootstrap.Modal(document.getElementById('donationModal'), {
+                keyboard: false
+            });
             
-            // Modal verisini sakla
-            document.getElementById('donationModal').dataset.amount = amount;
-            
-            // Modal'ı göster
-            const modal = new bootstrap.Modal(document.getElementById('donationModal'));
+            document.getElementById('modalAmount').textContent = amount;
             modal.show();
         }
 
-        // Özel bağış
+        // Custom donation
         function donateCustom() {
             const amount = parseInt(document.getElementById('customAmount').value);
             if (amount && amount > 0 && amount <= 1000) {
                 openDonationModal(amount);
             } else {
-                alert('Lütfen 1-1000 PI arasında geçerli bir miktar girin.');
+                alert('Lütfen 1-1000 π arasında geçerli bir miktar girin.');
             }
         }
 
-        // Bağış işlemini işle
-        function processDonation() {
-            const modal = bootstrap.Modal.getInstance(document.getElementById('donationModal'));
-            const amount = parseInt(document.getElementById('donationModal').dataset.amount);
-            const isAnonymous = document.getElementById('anonymousDonation').checked;
-            
-            // Bağışı simüle et
-            appData.totalDonations += amount;
-            
-            // Animasyonları güncelle
-            updateBucketAnimation();
-            
-            // Başarı mesajı
-            alert(`✅ ${amount} PI bağışınız başarıyla tamamlandı! ${isAnonymous ? 'Anonim olarak' : ''} Teşekkür ederiz.`);
-            
-            // Modal'ı kapat
-            modal.hide();
-            
-            // Formu sıfırla
-            document.getElementById('anonymousDonation').checked = false;
-            document.getElementById('customAmount').value = '';
+        // Process donation
+        function processDonation(amount) {
+            // Simulate API call
+            setTimeout(() => {
+                appData.totalDonations += amount;
+                appData.lastDonation = {
+                    amount: amount,
+                    time: 'Az önce'
+                };
+                
+                updateBucketAnimation();
+                
+                // Show success message
+                showNotification(`${amount} π bağışınız başarıyla tamamlandı! Teşekkür ederiz.`, 'success');
+                
+                // Reset custom amount
+                document.getElementById('customAmount').value = '';
+            }, 1000);
         }
 
-        // Cüzdan adresini kopyala
+        // Copy wallet address
         function copyWalletAddress() {
             const address = appData.walletAddress;
             navigator.clipboard.writeText(address).then(() => {
                 const btn = document.querySelector('.copy-btn');
                 const originalText = btn.innerHTML;
+                
                 btn.innerHTML = '<i class="fas fa-check me-2"></i>Kopyalandı!';
                 btn.classList.add('btn-success');
                 btn.classList.remove('btn-primary');
+                
+                showNotification('Cüzdan adresi panoya kopyalandı!', 'success');
                 
                 setTimeout(() => {
                     btn.innerHTML = originalText;
                     btn.classList.remove('btn-success');
                     btn.classList.add('btn-primary');
                 }, 2000);
+            }).catch(err => {
+                showNotification('Kopyalama başarısız: ' + err, 'error');
             });
         }
 
-        // Bölüme kaydır
+        // Show notification
+        function showNotification(message, type = 'info') {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+            notification.style.cssText = `
+                top: 20px;
+                right: 20px;
+                z-index: 9999;
+                min-width: 300px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            `;
+            notification.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.remove();
+                }
+            }, 5000);
+        }
+
+        // Scroll to section
         function scrollToSection(sectionId) {
             const section = document.getElementById(sectionId);
             if (section) {
@@ -1163,7 +1018,7 @@
             }
         }
 
-        // Dil değiştirme (temel örnek)
+        // Change language
         function changeLanguage(lang) {
             const translations = {
                 tr: {
@@ -1171,41 +1026,104 @@
                     donateBtn: "Bağış Yap",
                     transparencyBtn: "Şeffaflık",
                     walletNote: "Bu adres sadece Pi Network token'ları için kullanılır.",
-                    lastDonation: "Son bağış: 10 PI - 5 dakika önce"
+                    lastDonation: "Son bağış: " + appData.lastDonation.amount + " π - " + appData.lastDonation.time
                 },
                 en: {
                     connection: "Pi Network Connection: Active",
                     donateBtn: "Donate",
                     transparencyBtn: "Transparency",
                     walletNote: "This address is used only for Pi Network tokens.",
-                    lastDonation: "Last donation: 10 PI - 5 minutes ago"
+                    lastDonation: "Last donation: " + appData.lastDonation.amount + " π - " + appData.lastDonation.time
                 },
                 zh: {
                     connection: "Pi 网络连接：活跃",
                     donateBtn: "捐款",
                     transparencyBtn: "透明度",
                     walletNote: "此地址仅用于 Pi 网络代币。",
-                    lastDonation: "上次捐款：10 PI - 5分钟前"
+                    lastDonation: "上次捐款：" + appData.lastDonation.amount + " π - " + appData.lastDonation.time
                 }
             };
             
             const trans = translations[lang] || translations.tr;
             
-            // Metinleri güncelle
-            document.getElementById('connection-text').innerHTML = `<div class="status-dot"></div> ${trans.connection}`;
-            
-            // Butonları güncelle
-            document.querySelectorAll('button').forEach(btn => {
-                if (btn.textContent.includes('Bağış Yap') || btn.textContent.includes('Donate') || btn.textContent.includes('捐款')) {
-                    btn.textContent = trans.donateBtn;
-                }
-            });
+            // Update texts
+            document.getElementById('connection-text').innerHTML = 
+                `<div class="status-dot"></div> ${trans.connection}`;
         }
 
-        // Cüzdan adresi açıklaması:
-        // "GCXK5Y2J7EXAMPLEPIWALLETADDRESS123456789" - Bu bir örnek cüzdan adresidir.
-        // Gerçek uygulamada bu adres AyasofyaCharity'nin resmi Pi cüzdan adresi ile değiştirilmelidir.
-        // Bu adres sadece Pi Network token'larını kabul eder ve tüm bağışlar blockchain üzerinde şeffaf şekilde görülebilir.
+        // Show privacy policy
+        function showPrivacyPolicy() {
+            const modal = new bootstrap.Modal(document.getElementById('privacyModal'), {
+                keyboard: false
+            });
+            modal.show();
+        }
+
+        // Show terms
+        function showTerms() {
+            alert('Kullanım Şartları sayfası yakında eklenecek...');
+        }
+
+        // Wallet Address Note:
+        // "GCXK5Y2J7EXAMPLEPIWALLETADDRESS123456789" is a placeholder address.
+        // For production, replace with AyasofyaCharity's official Pi wallet address.
+        // This address accepts only Pi Network tokens and all transactions are visible on the blockchain.
     </script>
+
+    <!-- Donation Modal -->
+    <div class="modal fade" id="donationModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Bağış Onayı</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p><span id="modalAmount">0</span> π bağış yapmak üzeresiniz. Devam etmek istiyor musunuz?</p>
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        Bu işlem Pi Wallet uygulamasına yönlendirebilir. Bağışınız blockchain üzerinde kaydedilecektir.
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="anonymousCheck">
+                        <label class="form-check-label" for="anonymousCheck">
+                            Bağışımı anonim olarak göster
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+                    <button type="button" class="btn btn-success" onclick="processDonation(parseInt(document.getElementById('modalAmount').textContent))">
+                        Bağış Yap
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Privacy Policy Modal -->
+    <div class="modal fade" id="privacyModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Gizlilik Politikası</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <h6>1. Veri Toplama</h6>
+                    <p>Bağış yaparken, sadece işlemi tamamlamak için gerekli minimum bilgileri topluyoruz.</p>
+                    
+                    <h6>2. Blockchain Şeffaflığı</h6>
+                    <p>Tüm bağışlar Pi Network blockchain'ine kaydedilir. İşlemler herkese açıktır ancak kişisel bilgileriniz korunur.</p>
+                    
+                    <h6>3. Veri Kullanımı</h6>
+                    <p>Topladığımız bilgiler sadece bağış işlemlerinizi gerçekleştirmek ve şeffaflığı sağlamak amacıyla kullanılır.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Anladım</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
