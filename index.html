@@ -1,76 +1,32 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ayasofya Charity</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-</head>
-<body>
-    <header class="header">
-        <div class="logo-container">
-            <img src="images/logo.png" alt="Ayasofya Filigran Logo" class="logo">
-        </div>
-        <h1 id="title">Ayasofya Charity</h1>
-        <div class="heart"></div>
-        <div class="language-selector">
-            <button onclick="setLanguage('tr')">TR</button>
-            <button onclick="setLanguage('en')">EN</button>
-        </div>
-    </header>
+<div class="wallet">
+<h2 class="testnet">🧪 Test Paneli – 10 Transaction Hedefi</h2>
+<p id="status">Wallet: Bağlı değil | Test Pi: 0</p>
+<button class="btn" onclick="connectWallet()">1. Wallet Bağla</button>
+<button class="btn" onclick="getBalance()">2. Bakiye Kontrol</button>
+<button class="btn" onclick="sendTestPi()">3. Test Transfer (0.1 Pi)</button>
+<div id="tx-history"></div>
+</div>
 
-    <main>
-        <section class="card">
-            <h2 id="donation-title">Bağış Paneli</h2>
-            <p id="donation-text">Pi Blockchain üzerinde güvenli bağış göndermek için bir miktar seçin:</p>
-            <div class="buttons">
-                <button class="donate-btn" onclick="donate(1)">1 π</button>
-                <button class="donate-btn" onclick="donate(50)">50 π</button>
-            </div>
-            <div class="donation-status">
-                <p id="total-pi-text">Toplam Bağış: <span id="total-pi">0</span> π</p>
-                <p id="donor-count-text">Bağış Yapan Kişi Sayısı: <span id="donor-count">0</span></p>
-                <p id="goal-text">Hedef: <span id="goal-pi">500</span> π</p>
-            </div>
-        </section>
-
-        <section class="info-card">
-            <h2 id="info-title">Ayasofya Hakkında</h2>
-            <p id="info-text">Ayasofya, İstanbul’un simgesi ve dünya çapında tarihi bir yapıdır. Bu projeyle hem kültürel mirasa sahip çıkıyor hem de yardım topluyoruz.</p>
-        </section>
-
-        <section class="donation-info">
-            <div class="info-block">
-                <h3 id="why-title">Neden Bağış Yapmalıyım?</h3>
-                <p id="why-text">Bağışlarınızla hem tarihi mirasın korunmasına katkıda bulunuyor hem de ihtiyaç sahiplerine destek oluyorsunuz.</p>
-            </div>
-            <div class="info-block">
-                <h3 id="secure-title">Güvenli İşlem</h3>
-                <p id="secure-text">Pi Blockchain altyapısı sayesinde işlemleriniz güvenle gerçekleşir, tüm bağışlar şeffaf şekilde izlenebilir.</p>
-            </div>
-        </section>
-
-        <section class="social-media">
-            <h3 id="follow-title">Bizi Takip Edin</h3>
-            <a href="#" target="_blank">Facebook</a>
-            <a href="#" target="_blank">Twitter</a>
-            <a href="#" target="_blank">Instagram</a>
-        </section>
-
-        <section class="links">
-            <a href="privacy.html" id="privacy-link">Gizlilik Politikası</a>
-            <a href="terms.html" id="terms-link">Kullanım Şartları</a>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <p>© 2025 Ayasofya Charity. Tüm hakları saklıdır.</p>
-        <p>Developed with ❤️ by Ayasofya Charity Team</p>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-</html>
+<script src="https://testnet.sdk.minepi.com/pi-sdk.js"></script>
+<script>
+let piAuth = null;
+async function connectWallet() {
+  try {
+    piAuth = await pi.authenticate(['username','payments'], onIncompletePaymentFound);
+    document.getElementById('status').innerText = `Wallet: ${piAuth.user.username} | Bağlandı ✅`;
+  } catch(e) { alert('Pi Browser Testnet aç!'); }
+}
+async function getBalance() {
+  if(!piAuth) return alert('Önce wallet bağla!');
+  const balance = await pi.getAppBalance(piAuth);
+  document.getElementById('status').innerText += ` | Bakiye: ${balance.amount} Test Pi`;
+}
+async function sendTestPi() {
+  if(!piAuth) return alert('Wallet bağla!');
+  const payment = await pi.createPayment({
+    amount: 0.1, memo: 'Ayasofya Test Tx #' + Date.now()
+  }, {amount: {currency: 'PI', value: '0.1'}});
+  await pi.sendPayment(payment.id, piAuth);
+  document.getElementById('tx-history').innerHTML += `<p>✅ Tx Başarılı: ${payment.id.slice(-8)}</p>`;
+}
+</script>
