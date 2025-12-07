@@ -1,281 +1,865 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Ayasofya Charity Testnet</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-<style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  font-family: "Poppins", sans-serif;
-  background: radial-gradient(circle at top, #f7f4ff 0, #eceaf8 40%, #e1e1f0 100%);
-  color: #222;
-  min-height: 100vh;
-}
-
-/* Üst bar */
-.header {
-  padding: 16px 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.header-title {
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  color: #4b2ca0;
-}
-.header-badge {
-  font-size: 12px;
-  padding: 4px 10px;
-  border-radius: 999px;
-  background: #f5c24233;
-  color: #4b2c20;
-}
-
-/* Logo */
-.logo-box {
-  width: 220px;
-  margin: 10px auto 0 auto;
-}
-.logo-box img {
-  width: 100%;
-  height: auto;
-}
-
-/* Ana alan */
-.main {
-  max-width: 1100px;
-  margin: 10px auto 40px auto;
-  padding: 0 16px 40px 16px;
-  display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 1.5fr);
-  gap: 24px;
-}
-@media (max-width: 900px) {
-  .main { grid-template-columns: 1fr; }
-}
-
-/* Kart genel stil */
-.card {
-  background: rgba(255,255,255,0.85);
-  border-radius: 20px;
-  box-shadow: 0 18px 45px rgba(15,15,40,0.18);
-  padding: 22px 20px;
-  position: relative;
-  overflow: hidden;
-}
-.card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at top right, #f5c24233, transparent 50%);
-  z-index: 0;
-}
-.card-content { position: relative; z-index: 1; }
-
-/* Sol kart (bağış) */
-.card-title {
-  font-size: 20px;
-  font-weight: 700;
-  color: #4b2ca0;
-  margin-bottom: 6px;
-}
-.card-subtitle {
-  font-size: 13px;
-  color: #666;
-  margin-bottom: 16px;
-}
-
-.status-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 14px;
-  font-size: 13px;
-}
-.status-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: #26c56b;
-}
-.status-text-strong { font-weight: 600; color: #26a154; }
-
-/* Bağış tutar butonları */
-.amount-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 12px;
-}
-.amount-btn {
-  border-radius: 999px;
-  border: 1px solid #d5cafe;
-  background: #f8f6ff;
-  padding: 10px 18px;
-  font-size: 14px;
-  font-weight: 600;
-  color: #4b2ca0;
-  cursor: pointer;
-  transition: all 0.18s ease;
-}
-.amount-btn:hover {
-  background: #ede6ff;
-}
-.amount-btn.active {
-  background: #4b2ca0;
-  color: #fff;
-  border-color: #4b2ca0;
-}
-
-/* Gönder butonu */
-.primary-btn {
-  margin-top: 8px;
-  width: 100%;
-  border: none;
-  border-radius: 14px;
-  padding: 13px 16px;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  color: #fff;
-  background: linear-gradient(135deg,#4b2ca0,#7b4bff);
-  box-shadow: 0 12px 28px rgba(75,44,160,0.45);
-  transition: all 0.18s ease;
-}
-.primary-btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-  box-shadow: none;
-}
-.primary-btn:not(:disabled):hover {
-  transform: translateY(-2px);
-}
-
-/* Progress */
-.progress-wrap {
-  margin-top: 18px;
-}
-.progress-top {
-  display:flex;
-  justify-content: space-between;
-  font-size: 12px;
-  color:#555;
-  margin-bottom: 6px;
-}
-.progress-bar {
-  width: 100%;
-  height: 9px;
-  border-radius: 999px;
-  background: #ece8ff;
-  overflow: hidden;
-}
-.progress-fill {
-  height: 100%;
-  width: 0%;
-  border-radius: 999px;
-  background: linear-gradient(90deg,#f5c242,#f39c12);
-  transition: width 0.35s ease;
-}
-
-/* Bağış geçmişi */
-.history-title {
-  margin-top: 18px;
-  font-size: 13px;
-  font-weight: 600;
-  color: #555;
-}
-.history-list {
-  margin-top: 6px;
-  max-height: 180px;
-  overflow-y: auto;
-  font-size: 13px;
-}
-.history-item {
-  padding: 6px 8px;
-  margin-bottom: 4px;
-  border-radius: 10px;
-  background: #f5f3ff;
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-}
-.history-empty {
-  font-size: 13px;
-  font-style: italic;
-  color: #888;
-}
-
-/* Sağ kartlar */
-.info-title {
-  font-size: 15px;
-  font-weight: 600;
-  color: #4b2ca0;
-  margin-bottom: 8px;
-}
-.info-text {
-  font-size: 13px;
-  color: #555;
-  line-height: 1.5;
-}
-
-/* Güvenlik listesi */
-.bullet-list {
-  font-size: 13px;
-  color: #555;
-  margin-left: 14px;
-  margin-top: 6px;
-}
-.bullet-list li { margin-bottom: 4px; }
-
-/* Alt */
-.footer {
-  text-align: center;
-  font-size: 12px;
-  color: #777;
-  padding: 10px 16px 18px 16px;
-  border-top: 1px solid #ddd;
-}
-.footer a {
-  color: #4b2ca0;
-  text-decoration: none;
-}
-.footer a:hover { text-decoration: underline; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayasofya Charity - Pi Network Bağış Platformu</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #1a5fb4;
+            --secondary-color: #26a269;
+            --accent-color: #c64600;
+            --light-color: #f6f5f4;
+            --dark-color: #241f31;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--primary-color) !important;
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1541414778236-f051d974d61c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 0;
+            text-align: center;
+        }
+        
+        .donation-options {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .donation-card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 30px;
+            height: 100%;
+        }
+        
+        .donation-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .donation-card.premium {
+            border-top: 5px solid var(--accent-color);
+        }
+        
+        .pi-icon {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .donate-btn {
+            background-color: var(--secondary-color);
+            border: none;
+            padding: 12px 30px;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        
+        .donate-btn:hover {
+            background-color: #1c8c4a;
+            transform: scale(1.05);
+        }
+        
+        .connection-status {
+            display: inline-flex;
+            align-items: center;
+            background-color: #e7f7e7;
+            color: #1c8c4a;
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            background-color: #1c8c4a;
+            border-radius: 50%;
+            margin-right: 10px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+        
+        .language-selector {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .lang-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            font-weight: bold;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .lang-btn:hover {
+            background-color: var(--accent-color);
+            transform: scale(1.1);
+        }
+        
+        .footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .privacy-link {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .privacy-link:hover {
+            text-decoration: underline;
+        }
+        
+        .section-title {
+            position: relative;
+            padding-bottom: 15px;
+            margin-bottom: 40px;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 70px;
+            height: 4px;
+            background-color: var(--secondary-color);
+        }
+        
+        .center-title:after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* Pi Network renk teması */
+        .pi-theme {
+            color: var(--primary-color);
+        }
+        
+        .badge-pi {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .progress {
+            height: 10px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        
+        .progress-bar {
+            background-color: var(--secondary-color);
+        }
+        
+        .donation-goal {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
+    <!-- Dil Seçici -->
+    <div class="language-selector">
+        <button class="lang-btn" data-lang="tr">TR</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="zh">中文</button>
+    </div>
 
-<header class="header">
-  <div class="header-left">
-    <div class="header-title">AYASOFYA CHARITY</div>
-    <div class="header-badge">Pi Network Testnet</div>
-  </div>
-  <div style="font-size: 12px; color:#666;">Test amaçlıdır – gerçek para içermez.</div>
-</header>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-hands-helping me-2"></i>Ayasofya Charity
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about" data-translate="menu_about">Hakkında</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#donate" data-translate="menu_donate">Bağış Yap</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact" data-translate="menu_contact">İletişim</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link privacy-link" href="#privacy" data-translate="menu_privacy">Gizlilik Politikası</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-<div class="logo-box">
-  <img src="images/ayasofya-charity-logo.png" alt="Ayasofya Charity Logo">
-</div>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="connection-status">
+                <div class="status-dot"></div>
+                <span id="connection-text" data-translate="connection_status">Pi Ağı Bağlantısı: Aktif</span>
+            </div>
+            <h1 id="hero-title" data-translate="hero_title">Ayasofya Charity için Pi Bağışı Yapın</h1>
+            <p id="hero-subtitle" class="lead mt-3" data-translate="hero_subtitle">
+                Tarihi mirası korumak ve topluma katkıda bulunmak için Pi Network üzerinden bağış yapabilirsiniz.
+            </p>
+            <a href="#donate" class="btn donate-btn btn-lg mt-4" data-translate="hero_button">Hemen Bağış Yap</a>
+        </div>
+    </section>
 
-<main class="main">
-  <!-- SOL: Bağış kartı -->
-  <section class="card">
-    <div class="card-content">
-      <h2 class="card-title">Bağış Yap (Test Pi)</h2>
-      <p class="card-subtitle">Pi Network Testnet üzerinde Ayasofya için şeffaf bağış simülasyonu.</p>
+    <!-- Bağış Seçenekleri -->
+    <section id="donate" class="donation-options">
+        <div class="container">
+            <h2 class="section-title center-title text-center" id="donation-title" data-translate="donation_title">Bağış Seçenekleri</h2>
+            <p class="text-center mb-5" id="donation-subtitle" data-translate="donation_subtitle">
+                Aşağıdaki seçeneklerden birini seçerek Ayasofya Charity'ye Pi bağışında bulunabilirsiniz.
+            </p>
+            
+            <!-- Bağış Hedefi -->
+            <div class="row justify-content-center mb-5">
+                <div class="col-md-8">
+                    <div class="donation-goal text-center">
+                        <span id="goal-text" data-translate="goal_text">Hedef: 50,000 PI</span>
+                        <span class="pi-theme"> / </span>
+                        <span id="collected-amount">18,750 PI</span>
+                        <span id="collected-text" data-translate="collected_text">toplandı</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 37.5%" aria-valuenow="37.5" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bağış Kartları -->
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="card donation-card h-100 text-center p-4">
+                        <i class="fas fa-gem pi-icon"></i>
+                        <h3>1 PI</h3>
+                        <p id="donation1_desc" data-translate="donation1_desc">
+                            Küçük bir bağış bile büyük fark yaratabilir.
+                        </p>
+                        <button class="btn donate-btn w-100" data-amount="1" data-translate="donate_button">Bağış Yap</button>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="card donation-card h-100 text-center p-4">
+                        <i class="fas fa-star pi-icon"></i>
+                        <h3>5 PI</h3>
+                        <p id="donation5_desc" data-translate="donation5_desc">
+                            Orta ölçekli bağış ile daha fazla katkı sağlayın.
+                        </p>
+                        <button class="btn donate-btn w-100" data-amount="5" data-translate="donate_button">Bağış Yap</button>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="card donation-card h-100 text-center p-4 premium">
+                        <i class="fas fa-crown pi-icon"></i>
+                        <h3>10 PI</h3>
+                        <p id="donation10_desc" data-translate="donation10_desc">
+                            Premium bağışçı olun ve özel teşekkür alın.
+                        </p>
+                        <button class="btn donate-btn w-100" data-amount="10" data-translate="donate_button">Bağış Yap</button>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="card donation-card h-100 text-center p-4">
+                        <i class="fas fa-edit pi-icon"></i>
+                        <h3 id="custom_title" data-translate="custom_title">Özel Miktar</h3>
+                        <div class="mb-3">
+                            <input type="number" class="form-control text-center" id="customAmount" placeholder="PI" min="1" max="1000">
+                        </div>
+                        <button class="btn donate-btn w-100" id="customDonateBtn" data-translate="donate_button">Bağış Yap</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pi Cüzdan Adresi -->
+            <div class="row mt-5">
+                <div class="col-md-8 mx-auto">
+                    <div class="card border-0 bg-light p-4">
+                        <h4 class="text-center mb-3" data-translate="wallet_title">Manuel Pi Transferi</h4>
+                        <p class="text-center" data-translate="wallet_desc">
+                            Aşağıdaki cüzdan adresine istediğiniz miktarda PI gönderebilirsiniz:
+                        </p>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" id="piWalletAddress" value="GCXK5Y2J7EXAMPLEPIWALLETADDRESS123456789" readonly>
+                            <button class="btn btn-outline-secondary" type="button" id="copyWalletBtn" data-translate="copy_button">Kopyala</button>
+                        </div>
+                        <p class="text-center small text-muted" data-translate="wallet_note">
+                            * Lütfen sadece Pi Network token'larını bu adrese gönderin.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-      <div class="status-row">
-        <div class="status-dot"></div>
-        <div class="status-text-strong" id="statusText">Valide bağlantı bekleniyor…</div>
-      </div>
+    <!-- Hakkında Section -->
+    <section id="about" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title" id="about_title" data-translate="about_title">Ayasofya Charity Hakkında</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <p id="about_text1" data-translate="about_text1">
+                        Ayasofya Charity, tarihi Ayasofya'nın korunması, restorasyonu ve bu muhteşem mirasın gelecek nesillere aktarılması için çalışan bir hayır kurumudur. Pi Network ile işbirliği yaparak, blockchain teknolojisini kullanarak şeffaf ve güvenli bağış sistemi sunuyoruz.
+                    </p>
+                    <p id="about_text2" data-translate="about_text2">
+                        Yaptığınız her bağış, Ayasofya'nın bakımı, tarihi eserlerin korunması ve kültürel etkinliklerin düzenlenmesi için kullanılacaktır. Pi Network'ün yenilikçi teknolojisi sayesinde bağışlarınızın nasıl kullanıldığını takip edebilirsiniz.
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <div class="card border-0">
+                        <div class="card-body">
+                            <h5 class="card-title" data-translate="mission_title">Misyonumuz</h5>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item bg-transparent" data-translate="mission1">Tarihi mirası korumak ve gelecek nesillere aktarmak</li>
+                                <li class="list-group-item bg-transparent" data-translate="mission2">Blockchain teknolojisi ile şeffaf bağış sistemi oluşturmak</li>
+                                <li class="list-group-item bg-transparent" data-translate="mission3">Kültürel etkinlikler ve eğitim programları düzenlemek</li>
+                                <li class="list-group-item bg-transparent" data-translate="mission4">Toplumu tarihi miras konusunda bilinçlendirmek</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-      <p style="font-size: 12px; color:#777; margin
+    <!-- İletişim ve Sosyal Medya -->
+    <section id="contact" class="py-5">
+        <div class="container">
+            <h2 class="section-title center-title text-center" data-translate="contact_title">Bize Ulaşın</h2>
+            <p class="text-center mb-5" data-translate="contact_subtitle">
+                Sosyal medya hesaplarımızdan bizi takip edebilir veya iletişim formu üzerinden mesaj gönderebilirsiniz.
+            </p>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class="mb-4" data-translate="social_media">Sosyal Medya Hesaplarımız</h5>
+                    <div class="social-icons mb-5">
+                        <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://t.me" target="_blank"><i class="fab fa-telegram-plane"></i></a>
+                        <a href="https://discord.com" target="_blank"><i class="fab fa-discord"></i></a>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5 data-translate="email_title">E-posta</h5>
+                        <p>info@ayasofyacharity.org</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <h5 class="mb-4" data-translate="contact_form_title">Mesaj Gönderin</h5>
+                    <form id="contactForm">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="name" placeholder="Adınız" data-translate="name_placeholder">
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" id="email" placeholder="E-posta Adresiniz" data-translate="email_placeholder">
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control" id="message" rows="4" placeholder="Mesajınız" data-translate="message_placeholder"></textarea>
+                        </div>
+                        <button type="submit" class="btn donate-btn" data-translate="send_button">Gönder</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gizlilik Politikası -->
+    <section id="privacy" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title" data-translate="privacy_title">Gizlilik Politikası</h2>
+            <div class="card border-0 p-4">
+                <div class="card-body">
+                    <p id="privacy_text1" data-translate="privacy_text1">
+                        Ayasofya Charity olarak, gizliliğinize saygı duyuyoruz. Bu gizlilik politikası, Pi Network bağış platformumuzu kullanırken kişisel bilgilerinizin nasıl toplandığını, kullanıldığını ve korunduğunu açıklar.
+                    </p>
+                    
+                    <h5 class="mt-4" data-translate="data_collection_title">Veri Toplama</h5>
+                    <p id="privacy_text2" data-translate="privacy_text2">
+                        Bağış yaparken, işlemi tamamlamak için gerekli olan minimum kişisel bilgileri topluyoruz. Bu bilgiler Pi cüzdan adresiniz ve isteğe bağlı olarak iletişim bilgilerinizi içerebilir. Hiçbir zaman finansal bilgileriniz (kredi kartı, banka hesabı vb.) talep edilmez veya saklanmaz.
+                    </p>
+                    
+                    <h5 class="mt-4" data-translate="data_usage_title">Veri Kullanımı</h5>
+                    <p id="privacy_text3" data-translate="privacy_text3">
+                        Topladığımız bilgiler sadece bağış işlemlerinizi gerçekleştirmek, bağış takibinizi sağlamak ve yasal yükümlülüklerimizi yerine getirmek amacıyla kullanılır. Bilgileriniz asla üçüncü taraflarla satılmaz veya paylaşılmaz.
+                    </p>
+                    
+                    <h5 class="mt-4" data-translate="blockchain_title">Blockchain ve Şeffaflık</h5>
+                    <p id="privacy_text4" data-translate="privacy_text4">
+                        Pi Network blockchain teknolojisini kullanarak, bağışlarınızın şeffaf ve izlenebilir olmasını sağlıyoruz. Ancak, blockchain üzerindeki işlemler herkese açık olduğundan, cüzdan adresiniz ve bağış miktarınız herkese görünebilir. Kişisel kimliğiniz bu bilgilerle ilişkilendirilmez.
+                    </p>
+                    
+                    <p class="mt-4" data-translate="privacy_contact">
+                        Gizlilik politikamız hakkında sorularınız için lütfen bizimle iletişime geçin: privacy@ayasofyacharity.org
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h4 class="mb-4">Ayasofya Charity</h4>
+                    <p data-translate="footer_description">
+                        Tarihi mirası korumak için Pi Network teknolojisiyle şeffaf bağış platformu.
+                    </p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-4" data-translate="quick_links">Hızlı Bağlantılar</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#about" class="text-light text-decoration-none" data-translate="menu_about">Hakkında</a></li>
+                        <li><a href="#donate" class="text-light text-decoration-none mt-2 d-block" data-translate="menu_donate">Bağış Yap</a></li>
+                        <li><a href="#contact" class="text-light text-decoration-none mt-2 d-block" data-translate="menu_contact">İletişim</a></li>
+                        <li><a href="#privacy" class="text-light text-decoration-none mt-2 d-block" data-translate="menu_privacy">Gizlilik Politikası</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-4" data-translate="pi_network">Pi Network</h5>
+                    <p data-translate="pi_description">
+                        Pi Network, merkezi olmayan bir kripto para projesidir. Mobil madencilik ile herkesin dijital varlıklara erişimini kolaylaştırmayı amaçlar.
+                    </p>
+                    <div class="mt-3">
+                        <span class="badge badge-pi p-2">PI Network</span>
+                        <span class="badge bg-secondary p-2 ms-2">DApp</span>
+                        <span class="badge bg-success p-2 ms-2">Charity</span>
+                    </div>
+                </div>
+            </div>
+            <hr class="bg-light">
+            <div class="row">
+                <div class="col-md-6">
+                    <p data-translate="copyright">© 2023 Ayasofya Charity. Tüm hakları saklıdır.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p data-translate="disclaimer">
+                        Bu site Pi Network topluluğu için hayır amaçlı geliştirilmiştir.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bağış Modal -->
+    <div class="modal fade" id="donationModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle" data-translate="modal_title">PI Bağışı Onayı</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="modalText">1 PI bağış yapmak üzeresiniz. İşlemi onaylıyor musunuz?</p>
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <span id="modalInfo" data-translate="modal_info">Bu işlem Pi Wallet uygulamasına yönlendirebilir.</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-translate="modal_cancel">İptal</button>
+                    <button type="button" class="btn donate-btn" id="confirmDonation" data-translate="modal_confirm">Bağış Yap</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS ve Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Çoklu Dil Desteği ve Ana Uygulama JS -->
+    <script>
+        // Dil çeviri verileri
+        const translations = {
+            tr: {
+                // Menü
+                menu_about: "Hakkında",
+                menu_donate: "Bağış Yap",
+                menu_contact: "İletişim",
+                menu_privacy: "Gizlilik Politikası",
+                
+                // Bağlantı durumu
+                connection_status: "Pi Ağı Bağlantısı: Aktif",
+                
+                // Hero bölümü
+                hero_title: "Ayasofya Charity için Pi Bağışı Yapın",
+                hero_subtitle: "Tarihi mirası korumak ve topluma katkıda bulunmak için Pi Network üzerinden bağış yapabilirsiniz.",
+                hero_button: "Hemen Bağış Yap",
+                
+                // Bağış bölümü
+                donation_title: "Bağış Seçenekleri",
+                donation_subtitle: "Aşağıdaki seçeneklerden birini seçerek Ayasofya Charity'ye Pi bağışında bulunabilirsiniz.",
+                goal_text: "Hedef: 50,000 PI",
+                collected_text: "toplandı",
+                donation1_desc: "Küçük bir bağış bile büyük fark yaratabilir.",
+                donation5_desc: "Orta ölçekli bağış ile daha fazla katkı sağlayın.",
+                donation10_desc: "Premium bağışçı olun ve özel teşekkür alın.",
+                custom_title: "Özel Miktar",
+                donate_button: "Bağış Yap",
+                wallet_title: "Manuel Pi Transferi",
+                wallet_desc: "Aşağıdaki cüzdan adresine istediğiniz miktarda PI gönderebilirsiniz:",
+                copy_button: "Kopyala",
+                wallet_note: "* Lütfen sadece Pi Network token'larını bu adrese gönderin.",
+                
+                // Hakkında bölümü
+                about_title: "Ayasofya Charity Hakkında",
+                about_text1: "Ayasofya Charity, tarihi Ayasofya'nın korunması, restorasyonu ve bu muhteşem mirasın gelecek nesillere aktarılması için çalışan bir hayır kurumudur. Pi Network ile işbirliği yaparak, blockchain teknolojisini kullanarak şeffaf ve güvenli bağış sistemi sunuyoruz.",
+                about_text2: "Yaptığınız her bağış, Ayasofya'nın bakımı, tarihi eserlerin korunması ve kültürel etkinliklerin düzenlenmesi için kullanılacaktır. Pi Network'ün yenilikçi teknolojisi sayesinde bağışlarınızın nasıl kullanıldığını takip edebilirsiniz.",
+                mission_title: "Misyonumuz",
+                mission1: "Tarihi mirası korumak ve gelecek nesillere aktarmak",
+                mission2: "Blockchain teknolojisi ile şeffaf bağış sistemi oluşturmak",
+                mission3: "Kültürel etkinlikler ve eğitim programları düzenlemek",
+                mission4: "Toplumu tarihi miras konusunda bilinçlendirmek",
+                
+                // İletişim bölümü
+                contact_title: "Bize Ulaşın",
+                contact_subtitle: "Sosyal medya hesaplarımızdan bizi takip edebilir veya iletişim formu üzerinden mesaj gönderin.",
+                social_media: "Sosyal Medya Hesaplarımız",
+                email_title: "E-posta",
+                contact_form_title: "Mesaj Gönderin",
+                name_placeholder: "Adınız",
+                email_placeholder: "E-posta Adresiniz",
+                message_placeholder: "Mesajınız",
+                send_button: "Gönder",
+                
+                // Gizlilik politikası
+                privacy_title: "Gizlilik Politikası",
+                privacy_text1: "Ayasofya Charity olarak, gizliliğinize saygı duyuyoruz. Bu gizlilik politikası, Pi Network bağış platformumuzu kullanırken kişisel bilgilerinizin nasıl toplandığını, kullanıldığını ve korunduğunu açıklar.",
+                data_collection_title: "Veri Toplama",
+                privacy_text2: "Bağış yaparken, işlemi tamamlamak için gerekli olan minimum kişisel bilgileri topluyoruz. Bu bilgiler Pi cüzdan adresiniz ve isteğe bağlı olarak iletişim bilgilerinizi içerebilir. Hiçbir zaman finansal bilgileriniz (kredi kartı, banka kartı vb.) talep edilmez veya saklanmaz.",
+                data_usage_title: "Veri Kullanımı",
+                privacy_text3: "Topladığımız bilgiler sadece bağış işlemlerinizi gerçekleştirmek, bağış takibinizi sağlamak ve yasal yükümlülüklerimizi yerine getirmek amacıyla kullanılır. Bilgileriniz asla üçüncü taraflarla satılmaz veya paylaşılmaz.",
+                blockchain_title: "Blockchain ve Şeffaflık",
+                privacy_text4: "Pi Network blockchain teknolojisini kullanarak, bağışlarınızın şeffaf ve izlenebilir olmasını sağlıyoruz. Ancak, blockchain üzerindeki işlemler herkese açık olduğundan, cüzdan adresiniz ve bağış miktarınız herkese görünebilir. Kişisel kimliğiniz bu bilgilerle ilişkilendirilmez.",
+                privacy_contact: "Gizlilik politikamız hakkında sorularınız için lütfen bizimle iletişime geçin: privacy@ayasofyacharity.org",
+                
+                // Footer
+                footer_description: "Tarihi mirası korumak için Pi Network teknolojisiyle şeffaf bağış platformu.",
+                quick_links: "Hızlı Bağlantılar",
+                pi_network: "Pi Network",
+                pi_description: "Pi Network, merkezi olmayan bir kripto para projesidir. Mobil madencilik ile herkesin dijital varlıklara erişimini kolaylaştırmayı amaçlar.",
+                copyright: "© 2023 Ayasofya Charity. Tüm hakları saklıdır.",
+                disclaimer: "Bu site Pi Network topluluğu için hayır amaçlı geliştirilmiştir.",
+                
+                // Modal
+                modal_title: "PI Bağışı Onayı",
+                modal_info: "Bu işlem Pi Wallet uygulamasına yönlendirebilir.",
+                modal_cancel: "İptal",
+                modal_confirm: "Bağış Yap",
+                success_message: "Bağış işleminiz başarıyla tamamlandı! Teşekkür ederiz.",
+                copy_success: "Cüzdan adresi panoya kopyalandı!"
+            },
+            en: {
+                menu_about: "About",
+                menu_donate: "Donate",
+                menu_contact: "Contact",
+                menu_privacy: "Privacy Policy",
+                connection_status: "Pi Network Connection: Active",
+                hero_title: "Donate Pi for Ayasofya Charity",
+                hero_subtitle: "You can donate via Pi Network to preserve historical heritage and contribute to society.",
+                hero_button: "Donate Now",
+                donation_title: "Donation Options",
+                donation_subtitle: "You can donate PI to Ayasofya Charity by selecting one of the options below.",
+                goal_text: "Goal: 50,000 PI",
+                collected_text: "collected",
+                donation1_desc: "Even a small donation can make a big difference.",
+                donation5_desc: "Contribute more with a medium-sized donation.",
+                donation10_desc: "Become a premium donor and receive special thanks.",
+                custom_title: "Custom Amount",
+                donate_button: "Donate",
+                wallet_title: "Manual Pi Transfer",
+                wallet_desc: "You can send any amount of PI to the following wallet address:",
+                copy_button: "Copy",
+                wallet_note: "* Please send only Pi Network tokens to this address.",
+                about_title: "About Ayasofya Charity",
+                about_text1: "Ayasofya Charity is a charitable organization working to preserve, restore and pass on the magnificent heritage of Hagia Sophia to future generations. By collaborating with Pi Network, we offer a transparent and secure donation system using blockchain technology.",
+                about_text2: "Every donation you make will be used for the maintenance of Hagia Sophia, the preservation of historical artifacts and the organization of cultural events. Thanks to Pi Network's innovative technology, you can track how your donations are used.",
+                mission_title: "Our Mission",
+                mission1: "Preserve historical heritage and pass it on to future generations",
+                mission2: "Create a transparent donation system with blockchain technology",
+                mission3: "Organize cultural events and educational programs",
+                mission4: "Raise public awareness about historical heritage",
+                contact_title: "Contact Us",
+                contact_subtitle: "You can follow us on our social media accounts or send a message via the contact form.",
+                social_media: "Our Social Media Accounts",
+                email_title: "Email",
+                contact_form_title: "Send Message",
+                name_placeholder: "Your Name",
+                email_placeholder: "Your Email Address",
+                message_placeholder: "Your Message",
+                send_button: "Send",
+                privacy_title: "Privacy Policy",
+                privacy_text1: "At Ayasofya Charity, we respect your privacy. This privacy policy explains how your personal information is collected, used and protected when using our Pi Network donation platform.",
+                data_collection_title: "Data Collection",
+                privacy_text2: "When donating, we collect the minimum personal information necessary to complete the transaction. This information may include your Pi wallet address and optionally your contact information. Your financial information (credit card, bank account, etc.) is never requested or stored.",
+                data_usage_title: "Data Usage",
+                privacy_text3: "The information we collect is used only to process your donation transactions, provide donation tracking, and fulfill our legal obligations. Your information is never sold or shared with third parties.",
+                blockchain_title: "Blockchain and Transparency",
+                privacy_text4: "Using Pi Network blockchain technology, we ensure that your donations are transparent and traceable. However, since transactions on the blockchain are public, your wallet address and donation amount may be visible to everyone. Your personal identity is not associated with this information.",
+                privacy_contact: "For questions about our privacy policy, please contact us: privacy@ayasofyacharity.org",
+                footer_description: "Transparent donation platform with Pi Network technology to preserve historical heritage.",
+                quick_links: "Quick Links",
+                pi_network: "Pi Network",
+                pi_description: "Pi Network is a decentralized cryptocurrency project. It aims to make digital assets accessible to everyone through mobile mining.",
+                copyright: "© 2023 Ayasofya Charity. All rights reserved.",
+                disclaimer: "This site is developed for charitable purposes for the Pi Network community.",
+                modal_title: "PI Donation Confirmation",
+                modal_info: "This transaction may redirect to the Pi Wallet app.",
+                modal_cancel: "Cancel",
+                modal_confirm: "Donate",
+                success_message: "Your donation has been successfully completed! Thank you.",
+                copy_success: "Wallet address copied to clipboard!"
+            },
+            zh: {
+                menu_about: "关于我们",
+                menu_donate: "捐款",
+                menu_contact: "联系我们",
+                menu_privacy: "隐私政策",
+                connection_status: "Pi网络连接：活跃",
+                hero_title: "为圣索菲亚慈善机构捐赠Pi币",
+                hero_subtitle: "您可以通过Pi网络捐款，保护历史遗产并为社会做出贡献。",
+                hero_button: "立即捐款",
+                donation_title: "捐款选项",
+                donation_subtitle: "您可以通过选择以下选项之一向圣索菲亚慈善机构捐赠PI币。",
+                goal_text: "目标：50,000 PI",
+                collected_text: "已筹集",
+                donation1_desc: "即使是一小笔捐款也能产生巨大的影响。",
+                donation5_desc: "通过中等规模的捐款做出更多贡献。",
+                donation10_desc: "成为高级捐赠者并获得特别感谢。",
+                custom_title: "自定义金额",
+                donate_button: "捐款",
+                wallet_title: "手动Pi转账",
+                wallet_desc: "您可以向以下钱包地址发送任意数量的PI币：",
+                copy_button: "复制",
+                wallet_note: "* 请仅向此地址发送Pi Network代币。",
+                about_title: "关于圣索菲亚慈善机构",
+                about_text1: "圣索菲亚慈善机构是一个慈善组织，致力于保护、修复圣索菲亚大教堂这一宏伟遗产，并将其传承给后代。通过与Pi Network合作，我们利用区块链技术提供透明安全的捐赠系统。",
+                about_text2: "您的每一笔捐款都将用于圣索菲亚大教堂的维护、历史文物的保护以及文化活动的组织。借助Pi Network的创新技术，您可以跟踪捐款的使用情况。",
+                mission_title: "我们的使命",
+                mission1: "保护历史遗产并将其传承给后代",
+                mission2: "利用区块链技术创建透明的捐赠系统",
+                mission3: "组织文化活动和教育项目",
+                mission4: "提高公众对历史遗产的认识",
+                contact_title: "联系我们",
+                contact_subtitle: "您可以在社交媒体上关注我们，或通过联系表发送消息。",
+                social_media: "我们的社交媒体账户",
+                email_title: "电子邮件",
+                contact_form_title: "发送消息",
+                name_placeholder: "您的姓名",
+                email_placeholder: "您的电子邮件地址",
+                message_placeholder: "您的消息",
+                send_button: "发送",
+                privacy_title: "隐私政策",
+                privacy_text1: "在圣索菲亚慈善机构，我们尊重您的隐私。本隐私政策解释了在使用我们的Pi Network捐赠平台时，您的个人信息如何被收集、使用和保护。",
+                data_collection_title: "数据收集",
+                privacy_text2: "捐款时，我们收集完成交易所需的最少个人信息。此信息可能包括您的Pi钱包地址以及可选的联系信息。我们从不要求或存储您的财务信息（信用卡、银行账户等）。",
+                data_usage_title: "数据使用",
+                privacy_text3: "我们收集的信息仅用于处理您的捐款交易、提供捐款跟踪以及履行我们的法律义务。您的信息绝不会出售或与第三方共享。",
+                blockchain_title: "区块链与透明度",
+                privacy_text4: "利用Pi Network区块链技术，我们确保您的捐款透明可追溯。但是，由于区块链上的交易是公开的，您的钱包地址和捐款金额可能对所有人可见。您的个人身份不会与此信息关联。",
+                privacy_contact: "有关我们隐私政策的问题，请联系我们：privacy@ayasofyacharity.org",
+                footer_description: "利用Pi Network技术保护历史遗产的透明捐赠平台。",
+                quick_links: "快速链接",
+                pi_network: "Pi网络",
+                pi_description: "Pi Network是一个去中心化的加密货币项目。它旨在通过移动挖矿让每个人都能访问数字资产。",
+                copyright: "© 2023 圣索菲亚慈善机构。保留所有权利。",
+                disclaimer: "本网站是为Pi Network社区慈善目的而开发的。",
+                modal_title: "PI捐款确认",
+                modal_info: "此交易可能会重定向到Pi钱包应用程序。",
+                modal_cancel: "取消",
+                modal_confirm: "捐款",
+                success_message: "您的捐款已成功完成！谢谢。",
+                copy_success: "钱包地址已复制到剪贴板！"
+            }
+        };
+
+        // Varsayılan dil
+        let currentLang = 'tr';
+
+        // Sayfa yüklendiğinde
+        document.addEventListener('DOMContentLoaded', function() {
+            // Dil değiştiricileri ayarla
+            document.querySelectorAll('.lang-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    currentLang = this.getAttribute('data-lang');
+                    changeLanguage(currentLang);
+                    
+                    // Aktif dili göstermek için butonları güncelle
+                    document.querySelectorAll('.lang-btn').forEach(btn => {
+                        btn.style.backgroundColor = btn.getAttribute('data-lang') === currentLang ? 
+                            '#c64600' : '#1a5fb4';
+                    });
+                });
+            });
+
+            // Bağış butonları için olay dinleyicileri
+            document.querySelectorAll('.donate-btn[data-amount]').forEach(button => {
+                button.addEventListener('click', function() {
+                    const amount = this.getAttribute('data-amount');
+                    openDonationModal(amount);
+                });
+            });
+
+            // Özel bağış butonu
+            document.getElementById('customDonateBtn').addEventListener('click', function() {
+                const customAmount = document.getElementById('customAmount').value;
+                if (customAmount && customAmount > 0) {
+                    openDonationModal(customAmount);
+                } else {
+                    alert('Lütfen geçerli bir miktar girin.');
+                }
+            });
+
+            // Cüzdan adresini kopyala butonu
+            document.getElementById('copyWalletBtn').addEventListener('click', function() {
+                const walletAddress = document.getElementById('piWalletAddress');
+                walletAddress.select();
+                walletAddress.setSelectionRange(0, 99999); // Mobil cihazlar için
+                navigator.clipboard.writeText(walletAddress.value);
+                
+                // Kopyalandı mesajı göster
+                const originalText = this.textContent;
+                this.textContent = translations[currentLang].copy_success || 'Copied!';
+                this.classList.remove('btn-outline-secondary');
+                this.classList.add('btn-success');
+                
+                setTimeout(() => {
+                    this.textContent = originalText;
+                    this.classList.remove('btn-success');
+                    this.classList.add('btn-outline-secondary');
+                }, 2000);
+            });
+
+            // İletişim formu
+            document.getElementById('contactForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert(translations[currentLang].send_button + ' ' + translations[currentLang].success_message);
+                this.reset();
+            });
+
+            // Modal onay butonu
+            document.getElementById('confirmDonation').addEventListener('click', function() {
+                const modal = bootstrap.Modal.getInstance(document.getElementById('donationModal'));
+                modal.hide();
+                
+                // Başarı mesajı göster
+                alert(translations[currentLang].success_message);
+            });
+
+            // Varsayılan dili ayarla
+            changeLanguage(currentLang);
+        });
+
+        // Dil değiştirme fonksiyonu
+        function changeLanguage(lang) {
+            // Tüm çeviri öğelerini güncelle
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.placeholder = translations[lang][key];
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
+                }
+            });
+            
+            // Modal metnini güncelle (eğer açıksa)
+            const modalTitle = document.getElementById('modalTitle');
+            const modalInfo = document.getElementById('modalInfo');
+            const modalCancel = document.querySelector('#donationModal button[data-translate="modal_cancel"]');
+            const modalConfirm = document.getElementById('confirmDonation');
+            
+            if (modalTitle && translations[lang].modal_title) modalTitle.textContent = translations[lang].modal_title;
+            if (modalInfo && translations[lang].modal_info) modalInfo.textContent = translations[lang].modal_info;
+            if (modalCancel && translations[lang].modal_cancel) modalCancel.textContent = translations[lang].modal_cancel;
+            if (modalConfirm && translations[lang].modal_confirm) modalConfirm.textContent = translations[lang].modal_confirm;
+        }
+
+        // Bağış modalını açma fonksiyonu
+        function openDonationModal(amount) {
+            const modalText = document.querySelector('#modalText');
+            modalText.textContent = amount + ' PI ' + 
+                (currentLang === 'tr' ? 'bağış yapmak üzeresiniz. İşlemi onaylıyor musunuz?' : 
+                 currentLang === 'en' ? 'donation is about to be made. Do you confirm the transaction?' : 
+                 '捐款即将进行。您确认此交易吗？');
+            
+            const modal = new bootstrap.Modal(document.getElementById('donationModal'));
+            modal.show();
+        }
+    </script>
+</body>
+</html>
