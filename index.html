@@ -3,1212 +3,1209 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Şeffaf Yardım DApp - İhtiyaç Sahipleri için Pi Bağış Platformu</title>
+    <title>AyasofyaCharity | Global Giving with Pi Network</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --primary-color: #1a5fb4;
-            --secondary-color: #26a269;
-            --accent-color: #c64600;
-            --light-color: #f6f5f4;
-            --dark-color: #241f31;
+            --primary-blue: #1a5fb4;
+            --primary-light: #62a0ea;
+            --primary-dark: #1c71d8;
+            --secondary-green: #26a269;
+            --secondary-light: #8ff0a4;
+            --accent-orange: #ff7800;
+            --accent-gold: #f5c211;
+            --neutral-light: #f6f5f4;
+            --neutral-dark: #241f31;
+            --neutral-gray: #c0bfbc;
+            --gradient-primary: linear-gradient(135deg, #1a5fb4, #1c71d8);
+            --gradient-secondary: linear-gradient(135deg, #26a269, #8ff0a4);
+            --gradient-accent: linear-gradient(135deg, #ff7800, #f5c211);
+            --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --shadow-medium: 0 15px 40px rgba(0, 0, 0, 0.12);
+            --shadow-hard: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
         
         body {
-            font-family: 'Open Sans', sans-serif;
+            font-family: 'Poppins', sans-serif;
             background-color: #f8f9fa;
             color: #333;
             line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
         }
         
-        h1, h2, h3, h4, h5 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
         }
         
-        .navbar-brand {
-            font-weight: 700;
-            font-size: 1.8rem;
-            color: var(--primary-color) !important;
+        /* Logo Bar */
+        .logo-bar {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 0;
+            box-shadow: var(--shadow-soft);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .logo-bar.scrolled {
+            padding: 10px 0;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
         }
         
         .logo-container {
             display: flex;
             align-items: center;
+            justify-content: space-between;
+        }
+        
+        .main-logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+        
+        .main-logo:hover {
+            transform: scale(1.05);
         }
         
         .logo-icon {
-            font-size: 2rem;
-            margin-right: 10px;
-            color: var(--primary-color);
+            font-size: 2.8rem;
+            color: var(--primary-blue);
+            margin-right: 15px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
         
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo-main {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            letter-spacing: -0.5px;
+        }
+        
+        .logo-sub {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            color: var(--secondary-green);
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-top: 3px;
+        }
+        
+        /* Hero Section */
         .hero-section {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1541414778236-f051d974d61c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80');
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1541414778236-f051d974d61c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80');
             background-size: cover;
             background-position: center;
             color: white;
-            padding: 100px 0;
-            text-align: center;
+            padding: 160px 0 100px;
             position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
         }
         
-        .ayasofya-logo {
-            max-width: 300px;
-            margin-bottom: 30px;
-            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
-        }
-        
-        @media (max-width: 768px) {
-            .ayasofya-logo {
-                max-width: 200px;
-            }
-        }
-        
-        .donation-options {
-            padding: 80px 0;
-            background-color: white;
-        }
-        
-        .donation-card {
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            margin-bottom: 30px;
-            height: 100%;
-        }
-        
-        .donation-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-        }
-        
-        .donation-card.premium {
-            border-top: 5px solid var(--accent-color);
-        }
-        
-        .pi-icon {
-            color: var(--primary-color);
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-        
-        .donate-btn {
-            background-color: var(--secondary-color);
-            border: none;
-            padding: 12px 30px;
-            font-weight: 600;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-        }
-        
-        .donate-btn:hover {
-            background-color: #1c8c4a;
-            transform: scale(1.05);
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
         }
         
         .connection-status {
             display: inline-flex;
             align-items: center;
-            background-color: #e7f7e7;
-            color: #1c8c4a;
-            padding: 8px 15px;
+            background: rgba(38, 162, 105, 0.2);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 12px 24px;
             border-radius: 50px;
             font-weight: 600;
-            margin-bottom: 20px;
-        }
-        
-        .status-dot {
-            width: 10px;
-            height: 10px;
-            background-color: #1c8c4a;
-            border-radius: 50%;
-            margin-right: 10px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
             animation: pulse 2s infinite;
         }
         
         @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
+            0% { 
+                box-shadow: 0 0 0 0 rgba(38, 162, 105, 0.7);
+                transform: scale(1);
+            }
+            70% { 
+                box-shadow: 0 0 0 15px rgba(38, 162, 105, 0);
+                transform: scale(1.02);
+            }
+            100% { 
+                box-shadow: 0 0 0 0 rgba(38, 162, 105, 0);
+                transform: scale(1);
+            }
         }
         
-        .social-icons a {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            background-color: var(--primary-color);
-            color: white;
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            background-color: var(--secondary-green);
             border-radius: 50%;
-            text-align: center;
-            line-height: 40px;
             margin-right: 10px;
-            transition: all 0.3s ease;
+            animation: blink 2s infinite;
         }
         
-        .social-icons a:hover {
-            background-color: var(--accent-color);
-            transform: translateY(-5px);
+        @keyframes blink {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
         }
         
-        .language-selector {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-        }
-        
-        .lang-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            font-weight: bold;
-            margin: 5px;
-            transition: all 0.3s ease;
-        }
-        
-        .lang-btn:hover {
-            background-color: var(--accent-color);
-            transform: scale(1.1);
-        }
-        
-        .footer {
-            background-color: var(--dark-color);
-            color: white;
-            padding: 50px 0 20px;
-        }
-        
-        .privacy-link {
-            color: var(--secondary-color);
-            text-decoration: none;
-            font-weight: 600;
-        }
-        
-        .privacy-link:hover {
-            text-decoration: underline;
-        }
-        
-        .section-title {
-            position: relative;
-            padding-bottom: 15px;
-            margin-bottom: 40px;
-        }
-        
-        .section-title:after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 70px;
-            height: 4px;
-            background-color: var(--secondary-color);
-        }
-        
-        .center-title:after {
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        
-        /* Pi Network renk teması */
-        .pi-theme {
-            color: var(--primary-color);
-        }
-        
-        .badge-pi {
-            background-color: var(--primary-color);
-            color: white;
-        }
-        
-        .progress {
-            height: 10px;
-            border-radius: 5px;
-            margin-bottom: 30px;
-        }
-        
-        .progress-bar {
-            background-color: var(--secondary-color);
-        }
-        
-        .donation-goal {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-        
-        .transparency-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, #1a5fb4, #26a269);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            box-shadow: 0 5px 15px rgba(38, 162, 105, 0.2);
-        }
-        
-        .help-categories {
-            margin-top: 30px;
-        }
-        
-        .category-badge {
-            display: inline-block;
-            background-color: #f0f7ff;
-            color: var(--primary-color);
-            padding: 8px 16px;
-            border-radius: 50px;
-            margin: 5px;
-            font-size: 0.9rem;
-            border: 1px solid #d0e2ff;
-        }
-        
-        .testimonial-card {
-            background-color: #f8f9fa;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 30px;
-            border-left: 5px solid var(--secondary-color);
-        }
-        
-        .testimonial-author {
-            font-weight: 600;
-            margin-top: 15px;
-            color: var(--primary-color);
-        }
-        
-        .ayasofya-watermark {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            font-size: 1.5rem;
-            color: rgba(255, 255, 255, 0.8);
+        .hero-title {
+            font-size: 4rem;
             font-weight: 700;
+            margin-bottom: 25px;
+            background: linear-gradient(90deg, #ffffff, #ffcc00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            line-height: 1.1;
         }
         
         @media (max-width: 768px) {
-            .ayasofya-watermark {
-                font-size: 1.2rem;
-                top: 10px;
-                left: 10px;
+            .hero-title {
+                font-size: 2.8rem;
             }
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 50px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 300;
+        }
+        
+        /* Floating Elements Animation */
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .floating-element {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+        
+        .floating-element:nth-child(1) {
+            width: 40px;
+            height: 40px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+            background: rgba(255, 204, 0, 0.2);
+        }
+        
+        .floating-element:nth-child(2) {
+            width: 60px;
+            height: 60px;
+            top: 60%;
+            left: 80%;
+            animation-delay: -5s;
+            animation-duration: 25s;
+            background: rgba(38, 162, 105, 0.2);
+        }
+        
+        .floating-element:nth-child(3) {
+            width: 30px;
+            height: 30px;
+            top: 40%;
+            left: 85%;
+            animation-delay: -10s;
+            animation-duration: 18s;
+            background: rgba(26, 95, 180, 0.2);
+        }
+        
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(20px, 50px) rotate(90deg); }
+            50% { transform: translate(40px, 0) rotate(180deg); }
+            75% { transform: translate(20px, -50px) rotate(270deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+        
+        /* Donation Bucket Animation */
+        .bucket-container {
+            margin: 60px auto 40px;
+            max-width: 500px;
+            position: relative;
+        }
+        
+        .bucket {
+            position: relative;
+            width: 280px;
+            height: 350px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 0 0 140px 140px;
+            overflow: hidden;
+            border: 8px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 
+                inset 0 0 40px rgba(0, 0, 0, 0.3),
+                0 25px 60px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
+        }
+        
+        .bucket-fill {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: linear-gradient(to top, var(--primary-dark), var(--primary-light));
+            height: 30%; /* Başlangıç seviyesi */
+            transition: height 2s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border-radius: 0 0 130px 130px;
+            overflow: hidden;
+        }
+        
+        .water-wave {
+            position: absolute;
+            top: -20px;
+            width: 200%;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 40%;
+            animation: wave 5s infinite linear;
+            transform: translateX(-25%);
+        }
+        
+        .water-wave:nth-child(2) {
+            top: -10px;
+            animation: wave 7s infinite linear;
+            opacity: 0.6;
+            animation-delay: -2.5s;
+        }
+        
+        @keyframes wave {
+            0% { transform: translateX(-25%) rotate(0deg); }
+            100% { transform: translateX(-25%) rotate(360deg); }
+        }
+        
+        .bucket-handle {
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 140px;
+            height: 100px;
+            border: 12px solid rgba(255, 255, 255, 0.3);
+            border-top: none;
+            border-radius: 0 0 70px 70px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .bucket-coins {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        .coin {
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(45deg, #f5c211, #ffcc00);
+            border-radius: 50%;
+            animation: coin-spin 4s infinite linear;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .coin:nth-child(2) {
+            animation-delay: -1s;
+            background: linear-gradient(45deg, #c0bfbc, #e0e0e0);
+        }
+        
+        .coin:nth-child(3) {
+            animation-delay: -2s;
+            background: linear-gradient(45deg, #ff7800, #ff9900);
+        }
+        
+        @keyframes coin-spin {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(180deg); }
+            100% { transform: translateY(0) rotate(360deg); }
+        }
+        
+        .bucket-stats {
+            text-align: center;
+            margin-top: 30px;
+            color: white;
+        }
+        
+        .bucket-amount {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffcc00;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Donation Section */
+        .donation-section {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.8rem;
+            color: var(--neutral-dark);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-accent);
+            border-radius: 2px;
+        }
+        
+        .donation-card {
+            border: none;
+            border-radius: 20px;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.4s ease;
+            margin-bottom: 30px;
+            overflow: hidden;
+            position: relative;
+            background: white;
+        }
+        
+        .donation-card:hover {
+            transform: translateY(-15px);
+            box-shadow: var(--shadow-hard);
+        }
+        
+        .donation-card.premium {
+            border-top: 5px solid var(--accent-gold);
+        }
+        
+        .donation-header {
+            padding: 30px 20px;
+            text-align: center;
+            background: var(--gradient-primary);
+            color: white;
+        }
+        
+        .donation-amount {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .pi-symbol {
+            font-size: 2rem;
+            margin-right: 8px;
+            opacity: 0.9;
+        }
+        
+        .donation-body {
+            padding: 30px 20px;
+        }
+        
+        .donate-btn {
+            background: var(--gradient-secondary);
+            border: none;
+            padding: 15px 40px;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            color: white;
+            font-size: 1.1rem;
+            width: 100%;
+            box-shadow: 0 5px 15px rgba(38, 162, 105, 0.3);
+        }
+        
+        .donate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(38, 162, 105, 0.4);
+            color: white;
+        }
+        
+        .donate-btn:active {
+            transform: translateY(-1px);
+        }
+        
+        /* Wallet Section */
+        .wallet-section {
+            background: linear-gradient(135deg, #f6f5f4, #ffffff);
+            padding: 80px 0;
+            border-radius: 30px;
+            margin: 50px 0;
+            box-shadow: var(--shadow-soft);
+        }
+        
+        .wallet-address {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            border: 2px dashed var(--primary-light);
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .wallet-label {
+            font-size: 0.9rem;
+            color: var(--neutral-gray);
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .address-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .wallet-address-text {
+            font-family: monospace;
+            font-size: 1.1rem;
+            color: var(--neutral-dark);
+            word-break: break-all;
+        }
+        
+        .copy-btn {
+            background: var(--gradient-primary);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            margin-left: 15px;
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(26, 95, 180, 0.3);
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--neutral-dark);
+            color: white;
+            padding: 80px 0 30px;
+            position: relative;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background: var(--primary-blue);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 50px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        
+        /* Language Selector */
+        .language-selector {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .lang-btn {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(26, 95, 180, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .lang-btn:hover {
+            background: var(--accent-orange);
+            transform: translateY(-5px) scale(1.1);
+        }
+        
+        .lang-btn.active {
+            background: var(--accent-orange);
+            transform: scale(1.1);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 3.2rem;
+            }
+            
+            .bucket {
+                width: 240px;
+                height: 300px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 140px 0 80px;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .bucket {
+                width: 200px;
+                height: 250px;
+            }
+            
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+            
+            .address-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .copy-btn {
+                margin-left: 0;
+                margin-top: 15px;
+                width: 100%;
+            }
+        }
+        
+        /* Loading Animation */
+        .loading-dots {
+            display: inline-block;
+        }
+        
+        .loading-dots span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--primary-blue);
+            margin: 0 3px;
+            animation: loading 1.4s infinite ease-in-out both;
+        }
+        
+        .loading-dots span:nth-child(1) { animation-delay: -0.32s; }
+        .loading-dots span:nth-child(2) { animation-delay: -0.16s; }
+        
+        @keyframes loading {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+        
+        /* Progress Bar */
+        .progress-container {
+            margin: 40px 0;
+        }
+        
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .progress {
+            height: 12px;
+            border-radius: 6px;
+            background: rgba(26, 95, 180, 0.1);
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: var(--gradient-primary);
+            border-radius: 6px;
+            transition: width 1.5s ease;
         }
     </style>
 </head>
 <body>
-    <!-- Dil Seçici -->
-    <div class="language-selector">
-        <button class="lang-btn" data-lang="tr">TR</button>
-        <button class="lang-btn" data-lang="en">EN</button>
-        <button class="lang-btn" data-lang="zh">中文</button>
-    </div>
-
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <nav class="logo-bar" id="navbar">
         <div class="container">
-            <a class="navbar-brand" href="#">
-                <div class="logo-container">
+            <div class="logo-container">
+                <a href="#" class="main-logo">
                     <i class="fas fa-hands-helping logo-icon"></i>
-                    <span>Şeffaf Yardım DApp</span>
+                    <div class="logo-text">
+                        <div class="logo-main">AyasofyaCharity</div>
+                        <div class="logo-sub">Global Giving with Pi Network</div>
+                    </div>
+                </a>
+                <div class="d-none d-md-block">
+                    <button class="btn btn-outline-primary me-2" onclick="scrollToSection('donate')">Bağış Yap</button>
+                    <button class="btn btn-primary" onclick="scrollToSection('transparency')">Şeffaflık</button>
                 </div>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about" data-translate="menu_about">Hakkında</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#donate" data-translate="menu_donate">Bağış Yap</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#transparency" data-translate="menu_transparency">Şeffaflık</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact" data-translate="menu_contact">İletişim</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link privacy-link" href="#privacy" data-translate="menu_privacy">Gizlilik Politikası</a>
-                    </li>
-                </ul>
             </div>
         </div>
     </nav>
 
+    <!-- Language Selector -->
+    <div class="language-selector">
+        <button class="lang-btn active" data-lang="tr">TR</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="zh">中文</button>
+    </div>
+
     <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="ayasofya-watermark">
-            <i class="fas fa-hands-helping me-2"></i>Şeffaf Yardım
+    <section class="hero-section" id="home">
+        <div class="floating-elements">
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
         </div>
+        
         <div class="container">
-            <!-- Ayasofya Logo -->
-            <div class="logo-display">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Hagia_Sophia_logo.svg/1200px-Hagia_Sophia_logo.svg.png" alt="Ayasofya" class="ayasofya-logo">
-            </div>
-            
-            <div class="connection-status">
-                <div class="status-dot"></div>
-                <span id="connection-text" data-translate="connection_status">Pi Ağı Bağlantısı: Aktif</span>
-            </div>
-            
-            <div class="transparency-badge" data-translate="transparency_badge">
-                <i class="fas fa-shield-alt me-2"></i>%100 Şeffaf Blockchain Bağış
-            </div>
-            
-            <h1 id="hero-title" data-translate="hero_title">İhtiyaç Sahipleri için Şeffaf Yardım Platformu</h1>
-            <p id="hero-subtitle" class="lead mt-3" data-translate="hero_subtitle">
-                Tarihi mirasımız Ayasofya'nın ruhuyla, hangi konuda olursa olsun ihtiyaç sahiplerine 
-                Pi Network ile şeffaf ve güvenli bağış imkanı sunuyoruz.
-            </p>
-            
-            <!-- Yardım Kategorileri -->
-            <div class="help-categories">
-                <span class="category-badge" data-translate="category1">Eğitim</span>
-                <span class="category-badge" data-translate="category2">Sağlık</span>
-                <span class="category-badge" data-translate="category3">Gıda</span>
-                <span class="category-badge" data-translate="category4">Barınma</span>
-                <span class="category-badge" data-translate="category5">Acil Yardım</span>
-                <span class="category-badge" data-translate="category6">Diğer İhtiyaçlar</span>
-            </div>
-            
-            <a href="#donate" class="btn donate-btn btn-lg mt-4" data-translate="hero_button">Hemen Bağış Yap</a>
-        </div>
-    </section>
-
-    <!-- Bağış Seçenekleri -->
-    <section id="donate" class="donation-options">
-        <div class="container">
-            <h2 class="section-title center-title text-center" id="donation-title" data-translate="donation_title">Bağış Seçenekleri</h2>
-            <p class="text-center mb-5" id="donation-subtitle" data-translate="donation_subtitle">
-                Aşağıdaki seçeneklerden birini seçerek ihtiyaç sahiplerine Pi bağışında bulunabilirsiniz.
-                Her bağış blockchain üzerinde kayıt altına alınır ve tamamen şeffaftır.
-            </p>
-            
-            <!-- Bağış Hedefi -->
-            <div class="row justify-content-center mb-5">
-                <div class="col-md-8">
-                    <div class="donation-goal text-center">
-                        <span id="goal-text" data-translate="goal_text">Bu Ayki Hedef: 25,000 PI</span>
-                        <span class="pi-theme"> / </span>
-                        <span id="collected-amount">9,420 PI</span>
-                        <span id="collected-text" data-translate="collected_text">toplandı</span>
-                    </div>
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 37.7%" aria-valuenow="37.7" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
+            <div class="hero-content">
+                <div class="connection-status">
+                    <div class="status-dot"></div>
+                    <span id="connection-text">Pi Network Bağlantısı: <span class="fw-bold">Aktif</span></span>
                 </div>
-            </div>
-            
-            <!-- Bağış Kartları -->
-            <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <div class="card donation-card h-100 text-center p-4">
-                        <i class="fas fa-heart pi-icon"></i>
-                        <h3>1 PI</h3>
-                        <p id="donation1_desc" data-translate="donation1_desc">
-                            Küçük bir bağış bile birinin hayatında büyük değişim yaratabilir.
-                        </p>
-                        <button class="btn donate-btn w-100" data-amount="1" data-translate="donate_button">Bağış Yap</button>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="card donation-card h-100 text-center p-4">
-                        <i class="fas fa-star pi-icon"></i>
-                        <h3>5 PI</h3>
-                        <p id="donation5_desc" data-translate="donation5_desc">
-                            Orta ölçekli bağış ile daha fazla ihtiyaç sahibine ulaşın.
-                        </p>
-                        <button class="btn donate-btn w-100" data-amount="5" data-translate="donate_button">Bağış Yap</button>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="card donation-card h-100 text-center p-4 premium">
-                        <i class="fas fa-crown pi-icon"></i>
-                        <h3>10 PI</h3>
-                        <p id="donation10_desc" data-translate="donation10_desc">
-                            Premium bağışçı olun ve yardım etkisini maksimuma çıkarın.
-                        </p>
-                        <button class="btn donate-btn w-100" data-amount="10" data-translate="donate_button">Bağış Yap</button>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="card donation-card h-100 text-center p-4">
-                        <i class="fas fa-edit pi-icon"></i>
-                        <h3 id="custom_title" data-translate="custom_title">Özel Miktar</h3>
-                        <div class="mb-3">
-                            <input type="number" class="form-control text-center" id="customAmount" placeholder="PI" min="1" max="1000">
+                
+                <h1 class="hero-title">AYASOFYA CHARITY</h1>
+                <p class="hero-subtitle">Tarihi mirasımız Ayasofya'nın ruhuyla, blockchain teknolojisi kullanarak dünya çapında ihtiyaç sahiplerine şeffaf ve güvenli yardım ulaştırıyoruz.</p>
+                
+                <!-- Donation Bucket -->
+                <div class="bucket-container">
+                    <div class="bucket">
+                        <div class="bucket-handle"></div>
+                        <div class="bucket-fill" id="bucketFill">
+                            <div class="water-wave"></div>
+                            <div class="water-wave"></div>
                         </div>
-                        <button class="btn donate-btn w-100" id="customDonateBtn" data-translate="donate_button">Bağış Yap</button>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Pi Cüzdan Adresi -->
-            <div class="row mt-5">
-                <div class="col-md-8 mx-auto">
-                    <div class="card border-0 bg-light p-4">
-                        <h4 class="text-center mb-3" data-translate="wallet_title">Manuel Pi Transferi</h4>
-                        <p class="text-center" data-translate="wallet_desc">
-                            Aşağıdaki cüzdan adresine istediğiniz miktarda PI gönderebilirsiniz.
-                            Tüm bağışlar blockchain üzerinde şeffaf şekilde görülebilir.
-                        </p>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" id="piWalletAddress" value="GCXK5Y2J7EXAMPLEPIWALLETADDRESS123456789" readonly>
-                            <button class="btn btn-outline-secondary" type="button" id="copyWalletBtn" data-translate="copy_button">Kopyala</button>
-                        </div>
-                        <div class="text-center">
-                            <small class="text-muted" data-translate="wallet_note">
-                                * Lütfen sadece Pi Network token'larını bu adrese gönderin.
-                            </small>
-                            <br>
-                            <small class="text-muted" data-translate="wallet_note2">
-                                * İşlem onaylandıktan sonra blockchain kaydı size gönderilecektir.
-                            </small>
+                        <div class="bucket-coins">
+                            <div class="coin"></div>
+                            <div class="coin"></div>
+                            <div class="coin"></div>
+                            <div class="coin"></div>
+                            <div class="coin"></div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Şeffaflık Section -->
-    <section id="transparency" class="py-5 bg-light">
-        <div class="container">
-            <h2 class="section-title text-center" id="transparency_title" data-translate="transparency_title">%100 Şeffaflık</h2>
-            <p class="text-center mb-5" data-translate="transparency_subtitle">
-                Tüm bağışlarınız blockchain üzerinde kayıt altına alınır. 
-                Her bağışın nereye gittiğini ve nasıl kullanıldığını takip edebilirsiniz.
-            </p>
-            
-            <div class="row">
-                <div class="col-md-4 mb-4">
-                    <div class="card border-0 text-center h-100 p-4">
-                        <div class="card-body">
-                            <i class="fas fa-link fa-3x mb-3 pi-theme"></i>
-                            <h5 data-translate="transparency1_title">Blockchain Kaydı</h5>
-                            <p data-translate="transparency1_text">
-                                Her bağış işlemi Pi blockchain'ine kaydedilir. İşlem hash'ini kullanarak bağışınızı takip edebilirsiniz.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="card border-0 text-center h-100 p-4">
-                        <div class="card-body">
-                            <i class="fas fa-chart-line fa-3x mb-3 pi-theme"></i>
-                            <h5 data-translate="transparency2_title">Gerçek Zamanlı Takip</h5>
-                            <p data-translate="transparency2_text">
-                                Bağışların toplandığı ve dağıtıldığı anlık olarak platformumuzdan takip edilebilir.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="card border-0 text-center h-100 p-4">
-                        <div class="card-body">
-                            <i class="fas fa-file-invoice-dollar fa-3x mb-3 pi-theme"></i>
-                            <h5 data-translate="transparency3_title">Detaylı Raporlama</h5>
-                            <p data-translate="transparency3_text">
-                                Aylık ve yıllık detaylı raporlar ile bağışların nasıl kullanıldığını görebilirsiniz.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Bağışçı Görüşleri -->
-            <div class="row mt-5">
-                <div class="col-md-12">
-                    <h4 class="text-center mb-4" data-translate="testimonials_title">Bağışçılarımızın Görüşleri</h4>
-                </div>
-                <div class="col-md-4">
-                    <div class="testimonial-card">
-                        <p data-translate="testimonial1_text">
-                            "İlk kez bağışımın tam olarak nereye gittiğini görebiliyorum. Blockchain şeffaflığı gerçekten güven verici."
-                        </p>
-                        <div class="testimonial-author" data-translate="testimonial1_author">- Ahmet Y., Bağışçı</div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="testimonial-card">
-                        <p data-translate="testimonial2_text">
-                            "Pi Network ile yapılan bağışların bu kadar şeffaf olabileceğini düşünmemiştim. Herkese tavsiye ediyorum."
-                        </p>
-                        <div class="testimonial-author" data-translate="testimonial2_author">- Zeynep K., Gönüllü</div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="testimonial-card">
-                        <p data-translate="testimonial3_text">
-                            "Küçük miktarlarda bile bağış yapabiliyorum ve her işlemin kaydını blockchain'de görebiliyorum. Mükemmel!"
-                        </p>
-                        <div class="testimonial-author" data-translate="testimonial3_author">- Mehmet T., Destekçi</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Hakkında Section -->
-    <section id="about" class="py-5">
-        <div class="container">
-            <h2 class="section-title" id="about_title" data-translate="about_title">Platform Hakkında</h2>
-            <div class="row">
-                <div class="col-md-6">
-                    <p id="about_text1" data-translate="about_text1">
-                        Ayasofya'nın tarihi mirası ve birleştirici ruhundan ilham alarak, hangi konuda olursa olsun tüm ihtiyaç sahiplerine ulaşmayı hedefleyen bir yardım platformu oluşturduk. Amacımız, blockchain teknolojisinin şeffaflığı ile geleneksel yardımlaşma kültürünü birleştirmek.
-                    </p>
-                    <p id="about_text2" data-translate="about_text2">
-                        Pi Network'ün yenilikçi teknolojisini kullanarak, bağışçıların yardımlarının tam olarak nereye ulaştığını ve nasıl kullanıldığını görmelerini sağlıyoruz. Bu sayede güven en üst düzeye çıkarılırken, ihtiyaç sahiplerine en hızlı şekilde ulaşıyoruz.
-                    </p>
-                </div>
-                <div class="col-md-6">
-                    <div class="card border-0 bg-light">
-                        <div class="card-body">
-                            <h5 class="card-title" data-translate="mission_title">Misyonumuz</h5>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item bg-transparent" data-translate="mission1">Tüm ihtiyaç sahiplerine şeffaf ve hızlı yardım ulaştırmak</li>
-                                <li class="list-group-item bg-transparent" data-translate="mission2">Blockchain teknolojisi ile güven ve şeffaflığı sağlamak</li>
-                                <li class="list-group-item bg-transparent" data-translate="mission3">Küçük bağışların bile büyük fark yaratabileceğini göstermek</li>
-                                <li class="list-group-item bg-transparent" data-translate="mission4">Pi Network topluluğunu yardım etmek için birleştirmek</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- İletişim ve Sosyal Medya -->
-    <section id="contact" class="py-5 bg-light">
-        <div class="container">
-            <h2 class="section-title center-title text-center" data-translate="contact_title">Bize Ulaşın</h2>
-            <p class="text-center mb-5" data-translate="contact_subtitle">
-                Sosyal medya hesaplarımızdan bizi takip edebilir, yardım taleplerinizi iletebilir veya sorularınızı sorabilirsiniz.
-            </p>
-            
-            <div class="row">
-                <div class="col-md-6">
-                    <h5 class="mb-4" data-translate="social_media">Sosyal Medya Hesaplarımız</h5>
-                    <div class="social-icons mb-5">
-                        <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
-                        <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-                        <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
-                        <a href="https://t.me" target="_blank"><i class="fab fa-telegram-plane"></i></a>
-                        <a href="https://discord.com" target="_blank"><i class="fab fa-discord"></i></a>
-                    </div>
-                    
-                    <div class="mb-4">
-                        <h5 data-translate="email_title">E-posta</h5>
-                        <p>destek@seffafyardim.org</p>
-                    </div>
-                    
-                    <div class="mb-4">
-                        <h5 data-translate="help_request_title">Yardım Talebi</h5>
-                        <p data-translate="help_request_text">
-                            Yardıma ihtiyacınız varsa veya yardıma ihtiyacı olan birini tanıyorsanız, lütfen bize e-posta gönderin.
-                        </p>
+                    <div class="bucket-stats">
+                        <div class="bucket-amount" id="totalAmount">18,750 PI</div>
+                        <div class="text-white-50">Toplam Bağış</div>
                     </div>
                 </div>
                 
-                <div class="col-md-6">
-                    <h5 class="mb-4" data-translate="contact_form_title">Mesaj Gönderin</h5>
-                    <form id="contactForm">
-                        <div class="mb-3">
-                            <input type="text" class="form-control" id="name" placeholder="Adınız" data-translate="name_placeholder">
-                        </div>
-                        <div class="mb-3">
-                            <input type="email" class="form-control" id="email" placeholder="E-posta Adresiniz" data-translate="email_placeholder">
-                        </div>
-                        <div class="mb-3">
-                            <select class="form-control" id="subject">
-                                <option value="" data-translate="subject_option1">Genel Soru</option>
-                                <option value="" data-translate="subject_option2">Yardım Talebi</option>
-                                <option value="" data-translate="subject_option3">Bağış Sorusu</option>
-                                <option value="" data-translate="subject_option4">İş Birliği Teklifi</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <textarea class="form-control" id="message" rows="4" placeholder="Mesajınız" data-translate="message_placeholder"></textarea>
-                        </div>
-                        <button type="submit" class="btn donate-btn" data-translate="send_button">Gönder</button>
-                    </form>
+                <!-- Progress Bar -->
+                <div class="container mt-4" style="max-width: 600px;">
+                    <div class="progress-label">
+                        <span>Hedef: <span class="text-warning">50,000 PI</span></span>
+                        <span id="progressPercentage">37.5%</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" id="progressBar" style="width: 37.5%"></div>
+                    </div>
+                </div>
+                
+                <div class="mt-5">
+                    <button class="btn btn-warning btn-lg px-5 py-3 fw-bold" onclick="scrollToSection('donate')" style="font-size: 1.2rem;">
+                        <i class="fas fa-heart me-2"></i>Hemen Bağış Yap
+                    </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Gizlilik Politikası -->
-    <section id="privacy" class="py-5">
+    <!-- Donation Section -->
+    <section class="donation-section" id="donate">
         <div class="container">
-            <h2 class="section-title" data-translate="privacy_title">Gizlilik Politikası</h2>
-            <div class="card border-0 p-4 bg-light">
-                <div class="card-body">
-                    <p id="privacy_text1" data-translate="privacy_text1">
-                        Şeffaf Yardım DApp olarak, gizliliğinize saygı duyuyoruz. Bu gizlilik politikası, Pi Network bağış platformumuzu kullanırken kişisel bilgilerinizin nasıl toplandığını, kullanıldığını ve korunduğunu açıklar.
-                    </p>
-                    
-                    <h5 class="mt-4" data-translate="data_collection_title">Veri Toplama</h5>
-                    <p id="privacy_text2" data-translate="privacy_text2">
-                        Bağış yaparken, işlemi tamamlamak için gerekli olan minimum kişisel bilgileri topluyoruz. Bu bilgiler Pi cüzdan adresiniz ve isteğe bağlı olarak iletişim bilgilerinizi içerebilir. Hiçbir zaman finansal bilgileriniz (kredi kartı, banka hesabı vb.) talep edilmez veya saklanmaz.
-                    </p>
-                    
-                    <h5 class="mt-4" data-translate="blockchain_title">Blockchain ve Şeffaflık</h5>
-                    <p id="privacy_text3" data-translate="privacy_text3">
-                        Pi Network blockchain teknolojisini kullanarak, bağışlarınızın şeffaf ve izlenebilir olmasını sağlıyoruz. Ancak, blockchain üzerindeki işlemler herkese açık olduğundan, cüzdan adresiniz ve bağış miktarınız herkese görünebilir. Kişisel kimliğiniz bu bilgilerle ilişkilendirilmez.
-                    </p>
-                    
-                    <h5 class="mt-4" data-translate="data_protection_title">Veri Koruma</h5>
-                    <p id="privacy_text4" data-translate="privacy_text4">
-                        Topladığımız tüm bilgiler güvenli sunucularda saklanır ve yetkisiz erişime karşı korunur. Bağış verileriniz yalnızca yardım dağıtımını takip etmek ve şeffaflığı sağlamak amacıyla kullanılır.
-                    </p>
-                    
-                    <p class="mt-4" data-translate="privacy_contact">
-                        Gizlilik politikamız hakkında sorularınız için lütfen bizimle iletişime geçin: gizlilik@seffafyardim.org
-                    </p>
+            <div class="section-title">
+                <h2>Bağış Seçenekleri</h2>
+                <p class="text-muted">Aşağıdaki seçeneklerden birini seçerek ihtiyaç sahiplerine yardım edebilirsiniz</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="donation-card h-100">
+                        <div class="donation-header">
+                            <div class="donation-amount">
+                                <span class="pi-symbol">π</span>1
+                            </div>
+                            <div>Başlangıç Bağış</div>
+                        </div>
+                        <div class="donation-body text-center">
+                            <p class="mb-4">Küçük bir bağışla başlayın ve fark yaratın</p>
+                            <button class="btn donate-btn" data-amount="1" onclick="openDonationModal(1)">
+                                <i class="fas fa-gift me-2"></i>Bağış Yap
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="donation-card h-100">
+                        <div class="donation-header">
+                            <div class="donation-amount">
+                                <span class="pi-symbol">π</span>5
+                            </div>
+                            <div>Orta Ölçekli</div>
+                        </div>
+                        <div class="donation-body text-center">
+                            <p class="mb-4">Daha fazla insana ulaşmak için ideal bağış</p>
+                            <button class="btn donate-btn" data-amount="5" onclick="openDonationModal(5)">
+                                <i class="fas fa-star me-2"></i>Bağış Yap
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="donation-card h-100 premium">
+                        <div class="donation-header">
+                            <div class="donation-amount">
+                                <span class="pi-symbol">π</span>10
+                            </div>
+                            <div>Premium Bağış</div>
+                        </div>
+                        <div class="donation-body text-center">
+                            <p class="mb-4">Maksimum etki için premium bağışçı olun</p>
+                            <button class="btn donate-btn" data-amount="10" onclick="openDonationModal(10)">
+                                <i class="fas fa-crown me-2"></i>Bağış Yap
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="donation-card h-100">
+                        <div class="donation-header">
+                            <div class="donation-amount">
+                                <span class="pi-symbol">π</span>?
+                            </div>
+                            <div>Özel Miktar</div>
+                        </div>
+                        <div class="donation-body text-center">
+                            <div class="mb-4">
+                                <input type="number" class="form-control text-center" id="customAmount" placeholder="PI Miktarı" min="1" max="1000" style="font-size: 1.2rem;">
+                            </div>
+                            <button class="btn donate-btn" onclick="donateCustom()">
+                                <i class="fas fa-edit me-2"></i>Özel Bağış Yap
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wallet Section -->
+    <section class="wallet-section" id="wallet">
+        <div class="container">
+            <div class="section-title">
+                <h2>Manuel Pi Transferi</h2>
+                <p class="text-muted">Aşağıdaki cüzdan adresine Pi göndererek de bağış yapabilirsiniz</p>
+            </div>
+            
+            <div class="row justify-content-center">
+                <div class="col-md-10 col-lg-8">
+                    <div class="wallet-address">
+                        <span class="wallet-label">AyasofyaCharity Resmi Pi Cüzdan Adresi:</span>
+                        <div class="address-container">
+                            <div class="wallet-address-text" id="walletAddress">
+                                GCXK5Y2J7EXAMPLEPIWALLETADDRESS123456789
+                            </div>
+                            <button class="copy-btn" onclick="copyWalletAddress()">
+                                <i class="fas fa-copy me-2"></i>Kopyala
+                            </button>
+                        </div>
+                    </div>
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <strong>Not:</strong> Bu adres sadece Pi Network token'ları için kullanılır. Bağışlarınız blockchain üzerinde şeffaf şekilde görülebilir.
+                    </div>
+                    <div class="text-center mt-4">
+                        <div class="loading-dots d-inline-block me-2">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <small class="text-muted">Son bağış: 10 PI - 5 dakika önce</small>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer" id="footer">
         <div class="container">
             <div class="row">
-                <div class="col-md-4 mb-4">
-                    <h4 class="mb-4">Şeffaf Yardım DApp</h4>
-                    <p data-translate="footer_description">
-                        Ayasofya'nın birleştirici ruhuyla, tüm ihtiyaç sahiplerine şeffaf yardım ulaştırmak için Pi Network teknolojisini kullanıyoruz.
-                    </p>
-                    <div class="mt-3">
-                        <span class="badge badge-pi p-2">PI Network</span>
-                        <span class="badge bg-secondary p-2 ms-2">DApp</span>
-                        <span class="badge bg-success p-2 ms-2">Şeffaf Yardım</span>
+                <div class="col-lg-4 mb-4">
+                    <div class="footer-logo">AyasofyaCharity</div>
+                    <p>Tarihi mirasımız Ayasofya'nın ruhuyla, blockchain teknolojisi kullanarak dünya çapında ihtiyaç sahiplerine şeffaf ve güvenli yardım ulaştırıyoruz.</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4">
-                    <h5 class="mb-4" data-translate="quick_links">Hızlı Bağlantılar</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#about" class="text-light text-decoration-none" data-translate="menu_about">Hakkında</a></li>
-                        <li><a href="#donate" class="text-light text-decoration-none mt-2 d-block" data-translate="menu_donate">Bağış Yap</a></li>
-                        <li><a href="#transparency" class="text-light text-decoration-none mt-2 d-block" data-translate="menu_transparency">Şeffaflık</a></li>
-                        <li><a href="#contact" class="text-light text-decoration-none mt-2 d-block" data-translate="menu_contact">İletişim</a></li>
-                        <li><a href="#privacy" class="text-light text-decoration-none mt-2 d-block" data-translate="menu_privacy">Gizlilik Politikası</a></li>
-                    </ul>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5 class="mb-4">Bağlantılar</h5>
+                    <div class="footer-links">
+                        <a href="#home">Ana Sayfa</a>
+                        <a href="#donate">Bağış Yap</a>
+                        <a href="#wallet">Cüzdan Adresi</a>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">Gizlilik Politikası</a>
+                    </div>
                 </div>
-                <div class="col-md-4 mb-4">
-                    <h5 class="mb-4" data-translate="pi_network">Pi Network</h5>
-                    <p data-translate="pi_description">
-                        Pi Network, merkezi olmayan bir kripto para projesidir. Mobil madencilik ile herkesin dijital varlıklara erişimini kolaylaştırmayı amaçlar.
-                    </p>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="mb-4">İletişim</h5>
+                    <div class="footer-links">
+                        <a href="mailto:info@ayasofyacharity.org"><i class="fas fa-envelope me-2"></i>info@ayasofyacharity.org</a>
+                        <a href="#"><i class="fas fa-globe me-2"></i>www.ayasofyacharity.org</a>
+                        <a href="#"><i class="fas fa-map-marker-alt me-2"></i>İstanbul, Türkiye</a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 mb-4">
+                    <h5 class="mb-4">Pi Network</h5>
+                    <p>Pi Network, merkezi olmayan bir kripto para projesidir. Mobil madencilik ile herkesin dijital varlıklara erişimini kolaylaştırmayı amaçlar.</p>
                     <div class="mt-3">
-                        <a href="#" class="text-light me-3"><i class="fab fa-github"></i></a>
-                        <a href="#" class="text-light me-3"><i class="fab fa-medium"></i></a>
-                        <a href="#" class="text-light"><i class="fab fa-reddit"></i></a>
+                        <span class="badge bg-primary me-2">Blockchain</span>
+                        <span class="badge bg-success me-2">Şeffaf</span>
+                        <span class="badge bg-warning">Güvenli</span>
                     </div>
                 </div>
             </div>
-            <hr class="bg-light">
-            <div class="row">
-                <div class="col-md-6">
-                    <p data-translate="copyright">© 2023 Şeffaf Yardım DApp. Tüm hakları saklıdır.</p>
-                </div>
-                <div class="col-md-6 text-md-end">
-                    <p data-translate="disclaimer">
-                        Bu site Pi Network topluluğu için şeffaf yardım amaçlı geliştirilmiştir.
-                    </p>
-                </div>
+            
+            <div class="copyright">
+                © 2023 AyasofyaCharity. Tüm hakları saklıdır. Bu site Pi Network topluluğu için hayır amaçlı geliştirilmiştir.
             </div>
         </div>
     </footer>
 
-    <!-- Bağış Modal -->
+    <!-- Modals -->
     <div class="modal fade" id="donationModal" tabindex="-1">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalTitle" data-translate="modal_title">PI Bağışı Onayı</h5>
+                    <h5 class="modal-title">Bağış Onayı</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <p id="modalText">1 PI bağış yapmak üzeresiniz. İşlemi onaylıyor musunuz?</p>
-                    <div class="alert alert-info">
-                        <i class="fas fa-info-circle me-2"></i>
-                        <span id="modalInfo" data-translate="modal_info">Bu işlem Pi Wallet uygulamasına yönlendirebilir. Bağışınız blockchain'e kaydedilecek ve herkese açık şekilde görülebilecektir.</span>
+                    <p id="modalMessage"></p>
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        Bu işlem Pi Wallet uygulamasına yönlendirebilir. Bağışınız blockchain üzerinde kaydedilecektir.
                     </div>
                     <div class="form-check mb-3">
-                        <input class="form-check-input" type="checkbox" id="anonymousCheck">
-                        <label class="form-check-label" for="anonymousCheck" data-translate="anonymous_label">
+                        <input class="form-check-input" type="checkbox" id="anonymousDonation">
+                        <label class="form-check-label" for="anonymousDonation">
                             İsteğe bağlı: Bağışımı anonim olarak göster
                         </label>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-translate="modal_cancel">İptal</button>
-                    <button type="button" class="btn donate-btn" id="confirmDonation" data-translate="modal_confirm">Bağış Yap</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+                    <button type="button" class="btn btn-success" id="confirmDonationBtn">Bağış Yap</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Bootstrap JS ve Popper.js -->
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     
-    <!-- Çoklu Dil Desteği ve Ana Uygulama JS -->
     <script>
-        // Dil çeviri verileri
-        const translations = {
-            tr: {
-                // Menü
-                menu_about: "Hakkında",
-                menu_donate: "Bağış Yap",
-                menu_transparency: "Şeffaflık",
-                menu_contact: "İletişim",
-                menu_privacy: "Gizlilik Politikası",
-                
-                // Bağlantı durumu
-                connection_status: "Pi Ağı Bağlantısı: Aktif",
-                transparency_badge: "%100 Şeffaf Blockchain Bağış",
-                
-                // Hero bölümü
-                hero_title: "İhtiyaç Sahipleri için Şeffaf Yardım Platformu",
-                hero_subtitle: "Tarihi mirasımız Ayasofya'nın ruhuyla, hangi konuda olursa olsun ihtiyaç sahiplerine Pi Network ile şeffaf ve güvenli bağış imkanı sunuyoruz.",
-                hero_button: "Hemen Bağış Yap",
-                
-                // Kategoriler
-                category1: "Eğitim",
-                category2: "Sağlık",
-                category3: "Gıda",
-                category4: "Barınma",
-                category5: "Acil Yardım",
-                category6: "Diğer İhtiyaçlar",
-                
-                // Bağış bölümü
-                donation_title: "Bağış Seçenekleri",
-                donation_subtitle: "Aşağıdaki seçeneklerden birini seçerek ihtiyaç sahiplerine Pi bağışında bulunabilirsiniz. Her bağış blockchain üzerinde kayıt altına alınır ve tamamen şeffaftır.",
-                goal_text: "Bu Ayki Hedef: 25,000 PI",
-                collected_text: "toplandı",
-                donation1_desc: "Küçük bir bağış bile birinin hayatında büyük değişim yaratabilir.",
-                donation5_desc: "Orta ölçekli bağış ile daha fazla ihtiyaç sahibine ulaşın.",
-                donation10_desc: "Premium bağışçı olun ve yardım etkisini maksimuma çıkarın.",
-                custom_title: "Özel Miktar",
-                donate_button: "Bağış Yap",
-                wallet_title: "Manuel Pi Transferi",
-                wallet_desc: "Aşağıdaki cüzdan adresine istediğiniz miktarda PI gönderebilirsiniz. Tüm bağışlar blockchain üzerinde şeffaf şekilde görülebilir.",
-                copy_button: "Kopyala",
-                wallet_note: "* Lütfen sadece Pi Network token'larını bu adrese gönderin.",
-                wallet_note2: "* İşlem onaylandıktan sonra blockchain kaydı size gönderilecektir.",
-                
-                // Şeffaflık bölümü
-                transparency_title: "%100 Şeffaflık",
-                transparency_subtitle: "Tüm bağışlarınız blockchain üzerinde kayıt altına alınır. Her bağışın nereye gittiğini ve nasıl kullanıldığını takip edebilirsiniz.",
-                transparency1_title: "Blockchain Kaydı",
-                transparency1_text: "Her bağış işlemi Pi blockchain'ine kaydedilir. İşlem hash'ini kullanarak bağışınızı takip edebilirsiniz.",
-                transparency2_title: "Gerçek Zamanlı Takip",
-                transparency2_text: "Bağışların toplandığı ve dağıtıldığı anlık olarak platformumuzdan takip edilebilir.",
-                transparency3_title: "Detaylı Raporlama",
-                transparency3_text: "Aylık ve yıllık detaylı raporlar ile bağışların nasıl kullanıldığını görebilirsiniz.",
-                testimonials_title: "Bağışçılarımızın Görüşleri",
-                testimonial1_text: "\"İlk kez bağışımın tam olarak nereye gittiğini görebiliyorum. Blockchain şeffaflığı gerçekten güven verici.\"",
-                testimonial1_author: "- Ahmet Y., Bağışçı",
-                testimonial2_text: "\"Pi Network ile yapılan bağışların bu kadar şeffaf olabileceğini düşünmemiştim. Herkese tavsiye ediyorum.\"",
-                testimonial2_author: "- Zeynep K., Gönüllü",
-                testimonial3_text: "\"Küçük miktarlarda bile bağış yapabiliyorum ve her işlemin kaydını blockchain'de görebiliyorum. Mükemmel!\"",
-                testimonial3_author: "- Mehmet T., Destekçi",
-                
-                // Hakkında bölümü
-                about_title: "Platform Hakkında",
-                about_text1: "Ayasofya'nın tarihi mirası ve birleştirici ruhundan ilham alarak, hangi konuda olursa olsun tüm ihtiyaç sahiplerine ulaşmayı hedefleyen bir yardım platformu oluşturduk. Amacımız, blockchain teknolojisinin şeffaflığı ile geleneksel yardımlaşma kültürünü birleştirmek.",
-                about_text2: "Pi Network'ün yenilikçi teknolojisini kullanarak, bağışçıların yardımlarının tam olarak nereye ulaştığını ve nasıl kullanıldığını görmelerini sağlıyoruz. Bu sayede güven en üst düzeye çıkarılırken, ihtiyaç sahiplerine en hızlı şekilde ulaşıyoruz.",
-                mission_title: "Misyonumuz",
-                mission1: "Tüm ihtiyaç sahiplerine şeffaf ve hızlı yardım ulaştırmak",
-                mission2: "Blockchain teknolojisi ile güven ve şeffaflığı sağlamak",
-                mission3: "Küçük bağışların bile büyük fark yaratabileceğini göstermek",
-                mission4: "Pi Network topluluğunu yardım etmek için birleştirmek",
-                
-                // İletişim bölümü
-                contact_title: "Bize Ulaşın",
-                contact_subtitle: "Sosyal medya hesaplarımızdan bizi takip edebilir, yardım taleplerinizi iletebilir veya sorularınızı sorabilirsiniz.",
-                social_media: "Sosyal Medya Hesaplarımız",
-                email_title: "E-posta",
-                help_request_title: "Yardım Talebi",
-                help_request_text: "Yardıma ihtiyacınız varsa veya yardıma ihtiyacı olan birini tanıyorsanız, lütfen bize e-posta gönderin.",
-                contact_form_title: "Mesaj Gönderin",
-                name_placeholder: "Adınız",
-                email_placeholder: "E-posta Adresiniz",
-                subject_option1: "Genel Soru",
-                subject_option2: "Yardım Talebi",
-                subject_option3: "Bağış Sorusu",
-                subject_option4: "İş Birliği Teklifi",
-                message_placeholder: "Mesajınız",
-                send_button: "Gönder",
-                
-                // Gizlilik politikası
-                privacy_title: "Gizlilik Politikası",
-                privacy_text1: "Şeffaf Yardım DApp olarak, gizliliğinize saygı duyuyoruz. Bu gizlilik politikası, Pi Network bağış platformumuzu kullanırken kişisel bilgilerinizin nasıl toplandığını, kullanıldığını ve korunduğunu açıklar.",
-                data_collection_title: "Veri Toplama",
-                privacy_text2: "Bağış yaparken, işlemi tamamlamak için gerekli olan minimum kişisel bilgileri topluyoruz. Bu bilgiler Pi cüzdan adresiniz ve isteğe bağlı olarak iletişim bilgilerinizi içerebilir. Hiçbir zaman finansal bilgileriniz (kredi kartı, banka hesabı vb.) talep edilmez veya saklanmaz.",
-                blockchain_title: "Blockchain ve Şeffaflık",
-                privacy_text3: "Pi Network blockchain teknolojisini kullanarak, bağışlarınızın şeffaf ve izlenebilir olmasını sağlıyoruz. Ancak, blockchain üzerindeki işlemler herkese açık olduğundan, cüzdan adresiniz ve bağış miktarınız herkese görünebilir. Kişisel kimliğiniz bu bilgilerle ilişkilendirilmez.",
-                data_protection_title: "Veri Koruma",
-                privacy_text4: "Topladığımız tüm bilgiler güvenli sunucularda saklanır ve yetkisiz erişime karşı korunur. Bağış verileriniz yalnızca yardım dağıtımını takip etmek ve şeffaflığı sağlamak amacıyla kullanılır.",
-                privacy_contact: "Gizlilik politikamız hakkında sorularınız için lütfen bizimle iletişime geçin: gizlilik@seffafyardim.org",
-                
-                // Footer
-                footer_description: "Ayasofya'nın birleştirici ruhuyla, tüm ihtiyaç sahiplerine şeffaf yardım ulaştırmak için Pi Network teknolojisini kullanıyoruz.",
-                quick_links: "Hızlı Bağlantılar",
-                pi_network: "Pi Network",
-                pi_description: "Pi Network, merkezi olmayan bir kripto para projesidir. Mobil madencilik ile herkesin dijital varlıklara erişimini kolaylaştırmayı amaçlar.",
-                copyright: "© 2023 Şeffaf Yardım DApp. Tüm hakları saklıdır.",
-                disclaimer: "Bu site Pi Network topluluğu için şeffaf yardım amaçlı geliştirilmiştir.",
-                
-                // Modal
-                modal_title: "PI Bağışı Onayı",
-                modal_info: "Bu işlem Pi Wallet uygulamasına yönlendirebilir. Bağışınız blockchain'e kaydedilecek ve herkese açık şekilde görülebilecektir.",
-                anonymous_label: "İsteğe bağlı: Bağışımı anonim olarak göster",
-                modal_cancel: "İptal",
-                modal_confirm: "Bağış Yap",
-                success_message: "Bağış işleminiz başarıyla tamamlandı! Teşekkür ederiz.",
-                copy_success: "Cüzdan adresi panoya kopyalandı!"
-            },
-            en: {
-                menu_about: "About",
-                menu_donate: "Donate",
-                menu_transparency: "Transparency",
-                menu_contact: "Contact",
-                menu_privacy: "Privacy Policy",
-                connection_status: "Pi Network Connection: Active",
-                transparency_badge: "100% Transparent Blockchain Donation",
-                hero_title: "Transparent Aid Platform for Those in Need",
-                hero_subtitle: "With the spirit of our historical heritage Hagia Sophia, we offer transparent and secure donation opportunities via Pi Network to those in need, regardless of the issue.",
-                hero_button: "Donate Now",
-                category1: "Education",
-                category2: "Health",
-                category3: "Food",
-                category4: "Shelter",
-                category5: "Emergency Aid",
-                category6: "Other Needs",
-                donation_title: "Donation Options",
-                donation_subtitle: "You can donate PI to those in need by selecting one of the options below. Every donation is recorded on the blockchain and completely transparent.",
-                goal_text: "This Month's Goal: 25,000 PI",
-                collected_text: "collected",
-                donation1_desc: "Even a small donation can make a big difference in someone's life.",
-                donation5_desc: "Reach more people in need with a medium-sized donation.",
-                donation10_desc: "Become a premium donor and maximize the impact of your aid.",
-                custom_title: "Custom Amount",
-                donate_button: "Donate",
-                wallet_title: "Manual Pi Transfer",
-                wallet_desc: "You can send any amount of PI to the following wallet address. All donations can be viewed transparently on the blockchain.",
-                copy_button: "Copy",
-                wallet_note: "* Please send only Pi Network tokens to this address.",
-                wallet_note2: "* Blockchain record will be sent to you after the transaction is confirmed.",
-                transparency_title: "100% Transparency",
-                transparency_subtitle: "All your donations are recorded on the blockchain. You can track where each donation goes and how it is used.",
-                transparency1_title: "Blockchain Record",
-                transparency1_text: "Every donation transaction is recorded on the Pi blockchain. You can track your donation using the transaction hash.",
-                transparency2_title: "Real-time Tracking",
-                transparency2_text: "The collection and distribution of donations can be tracked instantly through our platform.",
-                transparency3_title: "Detailed Reporting",
-                transparency3_text: "See how donations are used with monthly and annual detailed reports.",
-                testimonials_title: "Our Donors' Opinions",
-                testimonial1_text: "\"For the first time, I can see exactly where my donation goes. Blockchain transparency is truly reassuring.\"",
-                testimonial1_author: "- Ahmet Y., Donor",
-                testimonial2_text: "\"I didn't think donations made with Pi Network could be this transparent. I recommend it to everyone.\"",
-                testimonial2_author: "- Zeynep K., Volunteer",
-                testimonial3_text: "\"I can donate even small amounts and see the record of every transaction on the blockchain. Perfect!\"",
-                testimonial3_author: "- Mehmet T., Supporter",
-                about_title: "About the Platform",
-                about_text1: "Inspired by the historical heritage and unifying spirit of Hagia Sophia, we have created an aid platform that aims to reach all those in need, regardless of the issue. Our goal is to combine the transparency of blockchain technology with traditional solidarity culture.",
-                about_text2: "Using Pi Network's innovative technology, we enable donors to see exactly where their aid reaches and how it is used. This way, while trust is maximized, we reach those in need as quickly as possible.",
-                mission_title: "Our Mission",
-                mission1: "Deliver transparent and fast aid to all those in need",
-                mission2: "Ensure trust and transparency with blockchain technology",
-                mission3: "Show that even small donations can make a big difference",
-                mission4: "Unite the Pi Network community to help",
-                contact_title: "Contact Us",
-                contact_subtitle: "You can follow us on our social media accounts, submit aid requests, or ask questions.",
-                social_media: "Our Social Media Accounts",
-                email_title: "Email",
-                help_request_title: "Aid Request",
-                help_request_text: "If you need help or know someone who needs help, please email us.",
-                contact_form_title: "Send Message",
-                name_placeholder: "Your Name",
-                email_placeholder: "Your Email Address",
-                subject_option1: "General Question",
-                subject_option2: "Aid Request",
-                subject_option3: "Donation Question",
-                subject_option4: "Cooperation Offer",
-                message_placeholder: "Your Message",
-                send_button: "Send",
-                privacy_title: "Privacy Policy",
-                privacy_text1: "As Transparent Aid DApp, we respect your privacy. This privacy policy explains how your personal information is collected, used and protected when using our Pi Network donation platform.",
-                data_collection_title: "Data Collection",
-                privacy_text2: "When donating, we collect the minimum personal information necessary to complete the transaction. This information may include your Pi wallet address and optionally your contact information. Your financial information (credit card, bank account, etc.) is never requested or stored.",
-                blockchain_title: "Blockchain and Transparency",
-                privacy_text3: "Using Pi Network blockchain technology, we ensure that your donations are transparent and traceable. However, since transactions on the blockchain are public, your wallet address and donation amount may be visible to everyone. Your personal identity is not associated with this information.",
-                data_protection_title: "Data Protection",
-                privacy_text4: "All information we collect is stored on secure servers and protected against unauthorized access. Your donation data is used only to track aid distribution and ensure transparency.",
-                privacy_contact: "For questions about our privacy policy, please contact us: privacy@transparentaid.org",
-                footer_description: "Using Pi Network technology with the unifying spirit of Hagia Sophia, we deliver transparent aid to all those in need.",
-                quick_links: "Quick Links",
-                pi_network: "Pi Network",
-                pi_description: "Pi Network is a decentralized cryptocurrency project. It aims to make digital assets accessible to everyone through mobile mining.",
-                copyright: "© 2023 Transparent Aid DApp. All rights reserved.",
-                disclaimer: "This site is developed for transparent aid purposes for the Pi Network community.",
-                modal_title: "PI Donation Confirmation",
-                modal_info: "This transaction may redirect to the Pi Wallet app. Your donation will be recorded on the blockchain and publicly visible.",
-                anonymous_label: "Optional: Show my donation anonymously",
-                modal_cancel: "Cancel",
-                modal_confirm: "Donate",
-                success_message: "Your donation has been successfully completed! Thank you.",
-                copy_success: "Wallet address copied to clipboard!"
-            },
-            zh: {
-                menu_about: "关于我们",
-                menu_donate: "捐款",
-                menu_transparency: "透明度",
-                menu_contact: "联系我们",
-                menu_privacy: "隐私政策",
-                connection_status: "Pi网络连接：活跃",
-                transparency_badge: "100%透明的区块链捐款",
-                hero_title: "为有需要的人提供透明援助平台",
-                hero_subtitle: "秉承我们历史遗产圣索菲亚的精神，我们通过Pi Network为有需要的人提供透明安全的捐款机会，无论问题如何。",
-                hero_button: "立即捐款",
-                category1: "教育",
-                category2: "健康",
-                category3: "食物",
-                category4: "住所",
-                category5: "紧急援助",
-                category6: "其他需求",
-                donation_title: "捐款选项",
-                donation_subtitle: "您可以通过选择以下选项之一向有需要的人捐赠PI币。每笔捐款都记录在区块链上，完全透明。",
-                goal_text: "本月目标：25,000 PI",
-                collected_text: "已筹集",
-                donation1_desc: "即使是一小笔捐款也能改变一个人的生活。",
-                donation5_desc: "通过中等规模的捐款帮助更多有需要的人。",
-                donation10_desc: "成为高级捐赠者，最大限度地发挥您的援助影响力。",
-                custom_title: "自定义金额",
-                donate_button: "捐款",
-                wallet_title: "手动Pi转账",
-                wallet_desc: "您可以向以下钱包地址发送任意数量的PI币。所有捐款都可以在区块链上透明查看。",
-                copy_button: "复制",
-                wallet_note: "* 请仅向此地址发送Pi Network代币。",
-                wallet_note2: "* 交易确认后，区块链记录将发送给您。",
-                transparency_title: "100%透明度",
-                transparency_subtitle: "您的所有捐款都记录在区块链上。您可以跟踪每笔捐款的去向和使用方式。",
-                transparency1_title: "区块链记录",
-                transparency1_text: "每笔捐款交易都记录在Pi区块链上。您可以使用交易哈希跟踪您的捐款。",
-                transparency2_title: "实时跟踪",
-                transparency2_text: "可以通过我们的平台即时跟踪捐款的收集和分配情况。",
-                transparency3_title: "详细报告",
-                transparency3_text: "通过月度、年度详细报告查看捐款使用情况。",
-                testimonials_title: "捐款人意见",
-                testimonial1_text: "\"我第一次能够确切地看到我的捐款去向。区块链透明度确实令人放心。\"",
-                testimonial1_author: "- Ahmet Y., 捐款人",
-                testimonial2_text: "\"我没想到通过Pi Network进行的捐款可以如此透明。我向大家推荐。\"",
-                testimonial2_author: "- Zeynep K., 志愿者",
-                testimonial3_text: "\"即使金额很小，我也可以捐款，并且在区块链上查看每笔交易的记录。完美！\"",
-                testimonial3_author: "- Mehmet T., 支持者",
-                about_title: "关于平台",
-                about_text1: "受圣索菲亚历史遗产和团结精神的启发，我们创建了一个援助平台，旨在帮助所有有需要的人，无论问题如何。我们的目标是将区块链技术的透明度与传统团结文化相结合。",
-                about_text2: "利用Pi Network的创新技术，我们使捐赠者能够确切地看到他们的援助到达何处以及如何使用。这样，在最大限度提高信任度的同时，我们能够尽快帮助有需要的人。",
-                mission_title: "我们的使命",
-                mission1: "向所有有需要的人提供透明快速的援助",
-                mission2: "通过区块链技术确保信任和透明度",
-                mission3: "展示即使小额捐款也能产生巨大影响",
-                mission4: "团结Pi Network社区进行援助",
-                contact_title: "联系我们",
-                contact_subtitle: "您可以在社交媒体上关注我们，提交援助请求或提出问题。",
-                social_media: "我们的社交媒体账户",
-                email_title: "电子邮件",
-                help_request_title: "援助请求",
-                help_request_text: "如果您需要帮助或认识需要帮助的人，请给我们发送电子邮件。",
-                contact_form_title: "发送消息",
-                name_placeholder: "您的姓名",
-                email_placeholder: "您的电子邮件地址",
-                subject_option1: "一般问题",
-                subject_option2: "援助请求",
-                subject_option3: "捐款问题",
-                subject_option4: "合作提议",
-                message_placeholder: "您的消息",
-                send_button: "发送",
-                privacy_title: "隐私政策",
-                privacy_text1: "作为透明援助DApp，我们尊重您的隐私。本隐私政策解释了在使用我们的Pi Network捐赠平台时，您的个人信息如何被收集、使用和保护。",
-                data_collection_title: "数据收集",
-                privacy_text2: "捐款时，我们收集完成交易所需的最少个人信息。此信息可能包括您的Pi钱包地址以及可选的联系信息。我们从不要求或存储您的财务信息（信用卡、银行账户等）。",
-                blockchain_title: "区块链与透明度",
-                privacy_text3: "利用Pi Network区块链技术，我们确保您的捐款透明可追溯。但是，由于区块链上的交易是公开的，您的钱包地址和捐款金额可能对所有人可见。您的个人身份不会与此信息关联。",
-                data_protection_title: "数据保护",
-                privacy_text4: "我们收集的所有信息都存储在安全服务器上，并防止未经授权的访问。您的捐款数据仅用于跟踪援助分发和确保透明度。",
-                privacy_contact: "有关我们隐私政策的问题，请联系我们：privacy@transparentaid.org",
-                footer_description: "秉承圣索菲亚的团结精神，利用Pi Network技术，为所有有需要的人提供透明援助。",
-                quick_links: "快速链接",
-                pi_network: "Pi网络",
-                pi_description: "Pi Network是一个去中心化的加密货币项目。它旨在通过移动挖矿让每个人都能访问数字资产。",
-                copyright: "© 2023 透明援助DApp。保留所有权利。",
-                disclaimer: "本网站是为Pi Network社区透明援助目的而开发的。",
-                modal_title: "PI捐款确认",
-                modal_info: "此交易可能会重定向到Pi钱包应用程序。您的捐款将记录在区块链上并公开可见。",
-                anonymous_label: "可选：匿名显示我的捐款",
-                modal_cancel: "取消",
-                modal_confirm: "捐款",
-                success_message: "您的捐款已成功完成！谢谢。",
-                copy_success: "钱包地址已复制到剪贴板！"
-            }
+        // Uygulama verileri
+        const appData = {
+            totalDonations: 18750,
+            goal: 50000,
+            walletAddress: "GCXK5Y2J7EXAMPLEPIWALLETADDRESS123456789",
+            connectionStatus: "active"
         };
-
-        // Varsayılan dil
-        let currentLang = 'tr';
 
         // Sayfa yüklendiğinde
         document.addEventListener('DOMContentLoaded', function() {
-            // Dil değiştiricileri ayarla
-            document.querySelectorAll('.lang-btn').forEach(button => {
-                button.addEventListener('click', function() {
-                    currentLang = this.getAttribute('data-lang');
-                    changeLanguage(currentLang);
-                    
-                    // Aktif dili göstermek için butonları güncelle
-                    document.querySelectorAll('.lang-btn').forEach(btn => {
-                        btn.style.backgroundColor = btn.getAttribute('data-lang') === currentLang ? 
-                            '#c64600' : '#1a5fb4';
-                    });
+            // Scroll animasyonu
+            window.addEventListener('scroll', handleScroll);
+            
+            // Dil butonları
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    changeLanguage(this.dataset.lang);
                 });
             });
-
-            // Bağış butonları için olay dinleyicileri
-            document.querySelectorAll('.donate-btn[data-amount]').forEach(button => {
-                button.addEventListener('click', function() {
-                    const amount = this.getAttribute('data-amount');
-                    openDonationModal(amount);
-                });
-            });
-
-            // Özel bağış butonu
-            document.getElementById('customDonateBtn').addEventListener('click', function() {
-                const customAmount = document.getElementById('customAmount').value;
-                if (customAmount && customAmount > 0) {
-                    openDonationModal(customAmount);
-                } else {
-                    alert(currentLang === 'tr' ? 'Lütfen geçerli bir miktar girin.' : 
-                          currentLang === 'en' ? 'Please enter a valid amount.' : 
-                          '请输入有效金额。');
+            
+            // Bağış animasyonunu güncelle
+            updateBucketAnimation();
+            
+            // Modal butonu
+            document.getElementById('confirmDonationBtn').addEventListener('click', processDonation);
+            
+            // Özel bağış input'u
+            document.getElementById('customAmount').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    donateCustom();
                 }
             });
-
-            // Cüzdan adresini kopyala butonu
-            document.getElementById('copyWalletBtn').addEventListener('click', function() {
-                const walletAddress = document.getElementById('piWalletAddress');
-                walletAddress.select();
-                walletAddress.setSelectionRange(0, 99999); // Mobil cihazlar için
-                navigator.clipboard.writeText(walletAddress.value);
-                
-                // Kopyalandı mesajı göster
-                const originalText = this.textContent;
-                this.textContent = translations[currentLang].copy_success || 'Copied!';
-                this.classList.remove('btn-outline-secondary');
-                this.classList.add('btn-success');
-                
-                setTimeout(() => {
-                    this.textContent = originalText;
-                    this.classList.remove('btn-success');
-                    this.classList.add('btn-outline-secondary');
-                }, 2000);
-            });
-
-            // İletişim formu
-            document.getElementById('contactForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                alert(translations[currentLang].send_button + ' ' + translations[currentLang].success_message);
-                this.reset();
-            });
-
-            // Modal onay butonu
-            document.getElementById('confirmDonation').addEventListener('click', function() {
-                const modal = bootstrap.Modal.getInstance(document.getElementById('donationModal'));
-                modal.hide();
-                
-                // Başarı mesajı göster
-                alert(translations[currentLang].success_message);
-                
-                // Bağış miktarını toplam tutara ekle (simülasyon)
-                const currentAmount = parseInt(document.getElementById('collected-amount').textContent.replace(/,/g, ''));
-                const donationAmount = parseInt(document.querySelector('#modalText').textContent.match(/\d+/)[0]);
-                const newAmount = currentAmount + donationAmount;
-                document.getElementById('collected-amount').textContent = newAmount.toLocaleString() + ' PI';
-                
-                // İlerleme çubuğunu güncelle
-                const percentage = Math.min((newAmount / 25000) * 100, 100);
-                document.querySelector('.progress-bar').style.width = percentage + '%';
-            });
-
-            // Varsayılan dili ayarla
-            changeLanguage(currentLang);
         });
 
-        // Dil değiştirme fonksiyonu
-        function changeLanguage(lang) {
-            // Tüm çeviri öğelerini güncelle
-            document.querySelectorAll('[data-translate]').forEach(element => {
-                const key = element.getAttribute('data-translate');
-                if (translations[lang] && translations[lang][key]) {
-                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-                        element.placeholder = translations[lang][key];
-                    } else if (element.tagName === 'SELECT') {
-                        // Select elementinin option'larını güncelle
-                        const options = element.querySelectorAll('option');
-                        options.forEach((option, index) => {
-                            const optionKey = `subject_option${index + 1}`;
-                            if (translations[lang][optionKey]) {
-                                option.textContent = translations[lang][optionKey];
-                            }
-                        });
-                    } else {
-                        element.textContent = translations[lang][key];
-                    }
-                }
-            });
-            
-            // Modal metnini güncelle (eğer açıksa)
-            const modalTitle = document.getElementById('modalTitle');
-            const modalInfo = document.getElementById('modalInfo');
-            const anonymousLabel = document.querySelector('label[for="anonymousCheck"]');
-            const modalCancel = document.querySelector('#donationModal button[data-translate="modal_cancel"]');
-            const modalConfirm = document.getElementById('confirmDonation');
-            
-            if (modalTitle && translations[lang].modal_title) modalTitle.textContent = translations[lang].modal_title;
-            if (modalInfo && translations[lang].modal_info) modalInfo.textContent = translations[lang].modal_info;
-            if (anonymousLabel && translations[lang].anonymous_label) anonymousLabel.textContent = translations[lang].anonymous_label;
-            if (modalCancel && translations[lang].modal_cancel) modalCancel.textContent = translations[lang].modal_cancel;
-            if (modalConfirm && translations[lang].modal_confirm) modalConfirm.textContent = translations[lang].modal_confirm;
-        }
-
-        // Bağış modalını açma fonksiyonu
-        function openDonationModal(amount) {
-            const modalText = document.querySelector('#modalText');
-            
-            if (currentLang === 'tr') {
-                modalText.textContent = amount + ' PI bağış yapmak üzeresiniz. İşlemi onaylıyor musunuz?';
-            } else if (currentLang === 'en') {
-                modalText.textContent = 'You are about to donate ' + amount + ' PI. Do you confirm the transaction?';
+        // Scroll handler
+        function handleScroll() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
             } else {
-                modalText.textContent = '您即将捐赠 ' + amount + ' PI。您确认此交易吗？';
+                navbar.classList.remove('scrolled');
             }
             
+            // Parallax efekti
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero-section');
+            hero.style.backgroundPosition = `center ${scrolled * 0.5}px`;
+        }
+
+        // Kova animasyonunu güncelle
+        function updateBucketAnimation() {
+            const percentage = (appData.totalDonations / appData.goal) * 100;
+            const fillHeight = Math.min(percentage, 100);
+            
+            const bucketFill = document.getElementById('bucketFill');
+            const progressBar = document.getElementById('progressBar');
+            const progressPercentage = document.getElementById('progressPercentage');
+            const totalAmount = document.getElementById('totalAmount');
+            
+            // Yeni değerleri ayarla
+            bucketFill.style.height = `${fillHeight}%`;
+            progressBar.style.width = `${fillHeight}%`;
+            progressPercentage.textContent = `${fillHeight.toFixed(1)}%`;
+            totalAmount.textContent = `${appData.totalDonations.toLocaleString()} PI`;
+        }
+
+        // Bağış modalını aç
+        function openDonationModal(amount) {
+            const modalMessage = document.getElementById('modalMessage');
+            modalMessage.textContent = `${amount} PI bağış yapmak üzeresiniz. Bu işlem onaylandıktan sonra geri alınamaz. Devam etmek istiyor musunuz?`;
+            
+            // Modal verisini sakla
+            document.getElementById('donationModal').dataset.amount = amount;
+            
+            // Modal'ı göster
             const modal = new bootstrap.Modal(document.getElementById('donationModal'));
             modal.show();
         }
+
+        // Özel bağış
+        function donateCustom() {
+            const amount = parseInt(document.getElementById('customAmount').value);
+            if (amount && amount > 0 && amount <= 1000) {
+                openDonationModal(amount);
+            } else {
+                alert('Lütfen 1-1000 PI arasında geçerli bir miktar girin.');
+            }
+        }
+
+        // Bağış işlemini işle
+        function processDonation() {
+            const modal = bootstrap.Modal.getInstance(document.getElementById('donationModal'));
+            const amount = parseInt(document.getElementById('donationModal').dataset.amount);
+            const isAnonymous = document.getElementById('anonymousDonation').checked;
+            
+            // Bağışı simüle et
+            appData.totalDonations += amount;
+            
+            // Animasyonları güncelle
+            updateBucketAnimation();
+            
+            // Başarı mesajı
+            alert(`✅ ${amount} PI bağışınız başarıyla tamamlandı! ${isAnonymous ? 'Anonim olarak' : ''} Teşekkür ederiz.`);
+            
+            // Modal'ı kapat
+            modal.hide();
+            
+            // Formu sıfırla
+            document.getElementById('anonymousDonation').checked = false;
+            document.getElementById('customAmount').value = '';
+        }
+
+        // Cüzdan adresini kopyala
+        function copyWalletAddress() {
+            const address = appData.walletAddress;
+            navigator.clipboard.writeText(address).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check me-2"></i>Kopyalandı!';
+                btn.classList.add('btn-success');
+                btn.classList.remove('btn-primary');
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.classList.remove('btn-success');
+                    btn.classList.add('btn-primary');
+                }, 2000);
+            });
+        }
+
+        // Bölüme kaydır
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                window.scrollTo({
+                    top: section.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Dil değiştirme (temel örnek)
+        function changeLanguage(lang) {
+            const translations = {
+                tr: {
+                    connection: "Pi Network Bağlantısı: Aktif",
+                    donateBtn: "Bağış Yap",
+                    transparencyBtn: "Şeffaflık",
+                    walletNote: "Bu adres sadece Pi Network token'ları için kullanılır.",
+                    lastDonation: "Son bağış: 10 PI - 5 dakika önce"
+                },
+                en: {
+                    connection: "Pi Network Connection: Active",
+                    donateBtn: "Donate",
+                    transparencyBtn: "Transparency",
+                    walletNote: "This address is used only for Pi Network tokens.",
+                    lastDonation: "Last donation: 10 PI - 5 minutes ago"
+                },
+                zh: {
+                    connection: "Pi 网络连接：活跃",
+                    donateBtn: "捐款",
+                    transparencyBtn: "透明度",
+                    walletNote: "此地址仅用于 Pi 网络代币。",
+                    lastDonation: "上次捐款：10 PI - 5分钟前"
+                }
+            };
+            
+            const trans = translations[lang] || translations.tr;
+            
+            // Metinleri güncelle
+            document.getElementById('connection-text').innerHTML = `<div class="status-dot"></div> ${trans.connection}`;
+            
+            // Butonları güncelle
+            document.querySelectorAll('button').forEach(btn => {
+                if (btn.textContent.includes('Bağış Yap') || btn.textContent.includes('Donate') || btn.textContent.includes('捐款')) {
+                    btn.textContent = trans.donateBtn;
+                }
+            });
+        }
+
+        // Cüzdan adresi açıklaması:
+        // "GCXK5Y2J7EXAMPLEPIWALLETADDRESS123456789" - Bu bir örnek cüzdan adresidir.
+        // Gerçek uygulamada bu adres AyasofyaCharity'nin resmi Pi cüzdan adresi ile değiştirilmelidir.
+        // Bu adres sadece Pi Network token'larını kabul eder ve tüm bağışlar blockchain üzerinde şeffaf şekilde görülebilir.
     </script>
 </body>
 </html>
