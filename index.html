@@ -1,32 +1,95 @@
-<div class="wallet">
-<h2 class="testnet">🧪 Test Paneli – 10 Transaction Hedefi</h2>
-<p id="status">Wallet: Bağlı değil | Test Pi: 0</p>
-<button class="btn" onclick="connectWallet()">1. Wallet Bağla</button>
-<button class="btn" onclick="getBalance()">2. Bakiye Kontrol</button>
-<button class="btn" onclick="sendTestPi()">3. Test Transfer (0.1 Pi)</button>
-<div id="tx-history"></div>
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ayasofya Charity Testnet</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+<style>
+body {
+    margin: 0; padding: 0; font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to bottom right, #f9f7ff, #eceaf5); text-align: center; color: #222;
+    position: relative;
+}
+.ayasofya-watermark {
+    position: fixed; top: 50%; left: 50%; width: 90%; height: 90%;
+    background: url('images/ayasofya-real-photo.jpg') no-repeat center/contain; opacity: 0.06;
+    transform: translate(-50%, -50%); z-index: 0; pointer-events: none;
+}
+.page-wrap { position: relative; z-index: 2; padding: 20px; }
+.logo-box { width: 180px; margin: 0 auto 20px auto; padding: 18px; border-radius: 22px;
+    background: rgba(255,255,255,0.7); backdrop-filter: blur(10px); box-shadow: 0 6px 22px rgba(0,0,0,0.12); }
+h1 { font-size: 26px; font-weight: 700; color: #6b3bff; margin-bottom: 5px; }
+.card { margin: 25px auto; max-width: 420px; background: rgba(255,255,255,0.35);
+    backdrop-filter: blur(16px); border-radius: 20px; box-shadow: 0 10px 32px rgba(0,0,0,0.15); padding: 25px; }
+.donation-buttons button, .test-btn { background: linear-gradient(135deg, #8f5dff, #6b3bff); color: white;
+    border: none; border-radius: 14px; padding: 12px 22px; margin: 8px; font-size: 17px; cursor: pointer; transition: 0.25s; }
+.donation-buttons button:hover, .test-btn:hover { transform: scale(1.08); }
+.send-btn { margin-top: 15px; background: #7b4bff; padding: 13px 26px; border-radius: 14px;
+    font-size: 17px; color: white; border: none; cursor: pointer; transition: 0.25s; }
+.send-btn:hover, .testnet-badge { transform: scale(1.08); }
+.progress { margin-top: 20px; width: 100%; height: 12px; background: rgba(123,75,255,0.25); border-radius: 10px; }
+.progress-fill { height: 100%; width: 0%; background: #7b4bff; border-radius: 10px; transition: width 0.5s; }
+.history-box { margin-top: 15px; font-size: 15px; text-align: left; color: #444; }
+.testnet-badge { background: linear-gradient(135deg, #ffd700, #ffed4a); color: #333; padding: 10px 20px;
+    border-radius: 25px; font-weight: 600; margin: 15px auto; display: inline-block; box-shadow: 0 4px 15px rgba(255,215,0,0.4); }
+.footer-link { text-align: center; padding: 20px; font-size: 15px; color: #6b3bff; font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="ayasofya-watermark"></div>
+<div class="page-wrap">
+    <div class="logo-box">
+        <img src="images/logo.png" width="150" onerror="this.style.display='none'" />
+    </div>
+    <h1>🕌 Ayasofya Charity Testnet</h1>
+    <p>Pi Network Testnet – Checklist 10. Adım ✓</p>
+    
+    <span class="testnet-badge">✅ Testnet v23 Aktif | Wallet Connect Ready</span>
+
+    <div class="card">
+        <h2>Testnet Bağlantı</h2>
+        <p style="color:green; font-weight:600">✔ Testnet bağlantı hazır!</p>
+        
+        <button class="test-btn" onclick="connectWallet()">🔗 Pi Testnet Wallet Bağla</button>
+        <button class="test-btn" onclick="testPayment()">💸 0.1 Test Pi Gönder</button>
+        <a href="https://testnet.minepi.com/faucet" class="test-btn" target="_blank">💧 Test Pi Faucet</a>
+
+        <div class="progress">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <p>Status: <span id="status">Bağlı değil</span> | Toplam: <span id="total">0</span> Test Pi</p>
+
+        <div class="history-box" id="history">
+            <b>Transaction Geçmişi:</b><br><i>Wallet bağlanmadı.</i>
+        </div>
+    </div>
+
+    <div class="footer-link">
+        nemes08.github.io/ayasofya-charity-testnet | Pi Developer Checklist ✓
+    </div>
 </div>
 
 <script src="https://testnet.sdk.minepi.com/pi-sdk.js"></script>
 <script>
-let piAuth = null;
+let piAuth = null; let txCount = 0;
 async function connectWallet() {
-  try {
-    piAuth = await pi.authenticate(['username','payments'], onIncompletePaymentFound);
-    document.getElementById('status').innerText = `Wallet: ${piAuth.user.username} | Bağlandı ✅`;
-  } catch(e) { alert('Pi Browser Testnet aç!'); }
+    try {
+        piAuth = await pi.authenticate(['username','payments'], onIncompletePaymentFound);
+        document.getElementById('status').innerText = `${piAuth.user.username} ✅`;
+        document.getElementById('history').innerHTML = '<b>Transaction Geçmişi:</b><br>✅ Wallet bağlandı!';
+    } catch(e) { alert('Pi Browser Testnet açın!'); }
 }
-async function getBalance() {
-  if(!piAuth) return alert('Önce wallet bağla!');
-  const balance = await pi.getAppBalance(piAuth);
-  document.getElementById('status').innerText += ` | Bakiye: ${balance.amount} Test Pi`;
-}
-async function sendTestPi() {
-  if(!piAuth) return alert('Wallet bağla!');
-  const payment = await pi.createPayment({
-    amount: 0.1, memo: 'Ayasofya Test Tx #' + Date.now()
-  }, {amount: {currency: 'PI', value: '0.1'}});
-  await pi.sendPayment(payment.id, piAuth);
-  document.getElementById('tx-history').innerHTML += `<p>✅ Tx Başarılı: ${payment.id.slice(-8)}</p>`;
+async function testPayment() {
+    if(!piAuth) return alert('Önce wallet bağla!');
+    try {
+        const payment = await pi.createPayment({amount: 0.1, memo: 'Ayasofya Test Tx '+Date.now()});
+        await pi.sendPayment(payment.id, piAuth);
+        txCount++; document.getElementById('total').innerText = txCount*0.1;
+        document.getElementById('history').innerHTML += `<br>✅ Tx ${txCount}: ${payment.id.slice(-8)}`;
+        alert('✅ Test transfer başarılı! Checklist tamamlandı.');
+    } catch(e) { alert('Hata: '+e.message); }
 }
 </script>
+</body>
+</html>
