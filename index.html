@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AyasofyaCharity | Pi Network Bağış Platformu</title>
+    <title>🤲 AyasofyaCharity | Pi Network ile Şeffaf Bağış</title>
+    
+    <!-- Meta Tags -->
+    <meta name="description" content="AyasofyaCharity - Pi Network blockchain ile %100 şeffaf bağış platformu">
+    <meta name="keywords" content="Ayasofya, Bağış, Pi Network, Blockchain, Şeffaf Yardım">
     
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -12,10 +16,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
-        /* TEMEL STİLLER */
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #7209b7;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --warning: #ff9e00;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --gradient-primary: linear-gradient(135deg, #4361ee, #3a56d4);
+            --gradient-secondary: linear-gradient(135deg, #7209b7, #560bad);
+            --gradient-accent: linear-gradient(135deg, #f72585, #b5179e);
+            --gradient-success: linear-gradient(135deg, #4cc9f0, #4895ef);
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -24,389 +45,201 @@
         
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            overflow-x: hidden;
             min-height: 100vh;
-            color: #333;
         }
         
-        /* NAVBAR */
+        /* Navigation */
         .navbar {
             background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 15px 0;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-        }
-        
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #1a5fb4;
-            text-decoration: none;
-        }
-        
-        .logo span {
-            color: #26a269;
-        }
-        
-        /* HERO SECTION */
-        .hero-section {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
-                        url('https://images.unsplash.com/photo-1541414778236-f051d974d61c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            padding: 100px 0;
-            text-align: center;
-        }
-        
-        .hero-title {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-        
-        .hero-subtitle {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto 30px;
-            opacity: 0.9;
-        }
-        
-        /* DONATION CARDS */
-        .donation-card {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
+            backdrop-filter: blur(20px);
+            padding: 20px 0;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-            height: 100%;
-            border: 2px solid transparent;
-        }
-        
-        .donation-card:hover {
-            transform: translateY(-10px);
-            border-color: #1a5fb4;
-        }
-        
-        .donation-card.premium {
-            border-color: #ffb300;
-        }
-        
-        .pi-amount {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #1a5fb4;
-            margin: 20px 0;
-        }
-        
-        .donate-btn {
-            background: linear-gradient(135deg, #26a269, #2ecc71);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-weight: 600;
+            position: fixed;
+            top: 0;
             width: 100%;
+            z-index: 1000;
+            border-bottom: 2px solid var(--primary);
+        }
+        
+        .navbar-brand {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 2rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-link {
+            font-weight: 600;
+            color: var(--dark) !important;
+            margin: 0 10px;
+            padding: 10px 20px !important;
+            border-radius: 50px;
             transition: all 0.3s ease;
         }
         
-        .donate-btn:hover {
+        .nav-link:hover {
+            background: var(--gradient-primary);
+            color: white !important;
             transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(38,162,105,0.4);
         }
         
-        /* WALLET SECTION */
-        .wallet-section {
-            background: #f8f9fa;
-            padding: 80px 0;
+        .btn-donate-nav {
+            background: var(--gradient-accent);
+            color: white !important;
+            border-radius: 50px;
+            padding: 12px 30px !important;
+            font-weight: 600;
+            box-shadow: 0 5px 20px rgba(247, 37, 133, 0.3);
         }
         
-        .wallet-card {
-            background: white;
-            border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        .btn-donate-nav:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(247, 37, 133, 0.4);
         }
         
-        .wallet-address {
-            background: #f8f9fa;
-            border: 2px dashed #dee2e6;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px 0;
-            font-family: monospace;
-            word-break: break-all;
+        /* Hero Section */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.95)),
+                        url('https://images.unsplash.com/photo-1541414778236-f051d974d61c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+            overflow: hidden;
         }
         
-        /* FOOTER */
-        .footer {
-            background: #1a1a2e;
-            color: white;
-            padding: 60px 0 30px;
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(67, 97, 238, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(114, 9, 183, 0.3) 0%, transparent 50%);
+            animation: pulse 10s infinite alternate;
         }
         
-        .social-icons a {
-            color: white;
-            font-size: 1.2rem;
-            margin-right: 15px;
-            transition: color 0.3s ease;
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.6; }
         }
         
-        .social-icons a:hover {
-            color: #26a269;
+        .hero-content {
+            position: relative;
+            z-index: 2;
         }
         
-        /* RESPONSIVE */
+        .hero-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #fff, var(--success));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
         @media (max-width: 768px) {
             .hero-title {
-                font-size: 2.2rem;
-            }
-            
-            .hero-subtitle {
-                font-size: 1rem;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-        <div class="container">
-            <a class="logo" href="#">
-                <i class="fas fa-hands-helping me-2"></i>
-                Ayasofya<span>Charity</span>
-            </a>
-            
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#home">Ana Sayfa</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#donate">Bağış Yap</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#wallet">Cüzdan</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">Hakkımızda</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero-section" id="home">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <h1 class="hero-title">AYASOFYA CHARITY</h1>
-                    <p class="hero-subtitle">
-                        Tarihi mirasımız Ayasofya'nın ruhuyla, Pi Network blockchain teknolojisi ile 
-                        ihtiyaç sahiplerine %100 şeffaf ve güvenli yardım ulaştırıyoruz.
-                    </p>
-                    
-                    <div class="connection-status alert alert-success d-inline-flex align-items-center">
-                        <i class="fas fa-check-circle me-2"></i>
-                        Pi Network Bağlantısı: Aktif
-                    </div>
-                    
-                    <div class="mt-4">
-                        <button class="btn btn-warning btn-lg px-4" onclick="scrollToDonate()">
-                            <i class="fas fa-heart me-2"></i>Hemen Bağış Yap
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Donation Section -->
-    <section class="py-5" id="donate">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="display-5 fw-bold">Bağış Seçenekleri</h2>
-                <p class="text-muted">Aşağıdaki seçeneklerden birini seçerek bağış yapabilirsiniz</p>
-            </div>
-            
-            <div class="row g-4">
-                <div class="col-lg-3 col-md-6">
-                    <div class="donation-card text-center">
-                        <i class="fas fa-gem fa-3x text-primary mb-3"></i>
-                        <div class="pi-amount">1 π</div>
-                        <p class="mb-4">Temel bağış ile başlayın</p>
-                        <button class="btn donate-btn" onclick="donate(1)">
-                            <i class="fas fa-gift me-2"></i>Bağış Yap
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="col-lg-3 col-md-6">
-                    <div class="donation-card text-center">
-                        <i class="fas fa-star fa-3x text-warning mb-3"></i>
-                        <div class="pi-amount">5 π</div>
-                        <p class="mb-4">Orta ölçekli bağış</p>
-                        <button class="btn donate-btn" onclick="donate(5)">
-                            <i class="fas fa-star me-2"></i>Bağış Yap
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="col-lg-3 col-md-6">
-                    <div class="donation-card premium text-center">
-                        <i class="fas fa-crown fa-3x text-warning mb-3"></i>
-                        <div class="pi-amount">10 π</div>
-                        <p class="mb-4">Premium bağışçı olun</p>
-                        <button class="btn donate-btn" onclick="donate(10)">
-                            <i class="fas fa-crown me-2"></i>Bağış Yap
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="col-lg-3 col-md-6">
-                    <div class="donation-card text-center">
-                        <i class="fas fa-edit fa-3x text-info mb-3"></i>
-                        <div class="pi-amount">? π</div>
-                        <div class="mb-3">
-                            <input type="number" class="form-control text-center" id="customAmount" placeholder="Miktar">
-                        </div>
-                        <button class="btn donate-btn" onclick="donateCustom()">
-                            <i class="fas fa-edit me-2"></i>Özel Bağış
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Wallet Section -->
-    <section class="wallet-section" id="wallet">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="wallet-card">
-                        <h2 class="text-center mb-4">
-                            <i class="fas fa-wallet me-2"></i>
-                            Manuel Pi Transferi
-                        </h2>
-                        
-                        <p class="text-center text-muted mb-4">
-                            Aşağıdaki cüzdan adresine Pi göndererek de bağış yapabilirsiniz.
-                        </p>
-                        
-                        <div class="mb-4">
-                            <label class="form-label fw-bold">AyasofyaCharity Resmi Cüzdan Adresi:</label>
-                            <div class="wallet-address">
-                                GCXK5Y2J7EXAMPLEPIWALLETADDRESS123456789
-                            </div>
-                        </div>
-                        
-                        <div class="text-center">
-                            <button class="btn btn-primary px-4" onclick="copyAddress()">
-                                <i class="fas fa-copy me-2"></i>Adresi Kopyala
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer" id="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 mb-4">
-                    <h3 class="mb-3">AyasofyaCharity</h3>
-                    <p>
-                        Blockchain teknolojisi ile şeffaf bağış platformu.
-                        Tüm bağışlar Pi Network üzerinde kayıt altında.
-                    </p>
-                    <div class="social-icons mt-3">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-tiktok"></i></a>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 mb-4">
-                    <h5 class="mb-3">Hızlı Bağlantılar</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#home" class="text-light">Ana Sayfa</a></li>
-                        <li><a href="#donate" class="text-light">Bağış Yap</a></li>
-                        <li><a href="#wallet" class="text-light">Cüzdan Adresi</a></li>
-                        <li><a href="privacy.html" class="text-light">Gizlilik Politikası</a></li>
-                    </ul>
-                </div>
-                
-                <div class="col-lg-4 mb-4">
-                    <h5 class="mb-3">İletişim</h5>
-                    <p>
-                        <i class="fas fa-envelope me-2"></i>
-                        info@ayasofyacharity.org
-                    </p>
-                    <p>
-                        <i class="fas fa-map-marker-alt me-2"></i>
-                        İstanbul, Türkiye
-                    </p>
-                </div>
-            </div>
-            
-            <hr class="bg-light">
-            
-            <div class="text-center pt-3">
-                <p class="mb-0">
-                    &copy; 2024 AyasofyaCharity. Tüm hakları saklıdır.
-                </p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Simple JavaScript -->
-    <script>
-        // Basit scroll fonksiyonu
-        function scrollToDonate() {
-            document.getElementById('donate').scrollIntoView({ 
-                behavior: 'smooth' 
-            });
-        }
-        
-        // Bağış fonksiyonu
-        function donate(amount) {
-            alert(amount + ' π bağış yapmak üzeresiniz.\nPi Wallet uygulaması açılacak.');
-            // Burada Pi SDK entegrasyonu olacak
-        }
-        
-        function donateCustom() {
-            const amount = document.getElementById('customAmount').value;
-            if (amount && amount > 0) {
-                donate(amount);
-            } else {
-                alert('Lütfen geçerli bir miktar girin.');
+                font-size: 2.8rem;
             }
         }
         
-        // Adres kopyalama
-        function copyAddress() {
-            const address = 'GCXK5Y2J7EXAMPLEPIWALLETADDRESS123456789';
-            navigator.clipboard.writeText(address).then(() => {
-                alert('Cüzdan adresi kopyalandı!');
-            });
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
         }
         
-        // Sayfa yüklendiğinde
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('AyasofyaCharity DApp yüklendi');
-        });
-    </script>
-</body>
-</html>
+        /* Connection Status */
+        .connection-status {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(76, 201, 240, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            border: 2px solid rgba(76, 201, 240, 0.3);
+            animation: glow 2s infinite alternate;
+        }
+        
+        @keyframes glow {
+            0% { box-shadow: 0 0 10px rgba(76, 201, 240, 0.5); }
+            100% { box-shadow: 0 0 20px rgba(76, 201, 240, 0.8); }
+        }
+        
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            background: var(--success);
+            border-radius: 50%;
+            margin-right: 10px;
+            animation: blink 1.5s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        /* Hero Stats */
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            min-width: 180px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient-success);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* CTA Buttons */
+        .cta-buttons {
+            display: flex;
+            gap
