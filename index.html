@@ -3,781 +3,410 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🤲 AyasofyaCharity | Pi Network ile Şeffaf Bağış Platformu</title>
+    <title>AyasofyaCharity | Pi Network Bağış Platformu</title>
     
-    <!-- Critical Meta Tags -->
-    <meta name="description" content="AyasofyaCharity - Pi Network blockchain teknolojisi ile %100 şeffaf bağış platformu. İhtiyaç sahiplerine güvenli yardım.">
-    <meta name="keywords" content="Ayasofya, Bağış, Pi Network, Blockchain, Şeffaf Yardım, Kripto Bağış, DApp, Türkiye, İstanbul">
-    <meta name="author" content="AyasofyaCharity Vakfı">
-    <meta name="theme-color" content="#1a5fb4">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="🤲 AyasofyaCharity | Pi Network ile Şeffaf Bağış">
-    <meta property="og:description" content="Blockchain teknolojisi ile %100 şeffaf bağış platformu">
-    <meta property="og:image" content="https://nemes08.github.io/ayasofya-charity-testnet/images/hero-banner.jpg">
-    <meta property="og:url" content="https://nemes08.github.io/ayasofya-charity-testnet/">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="AyasofyaCharity">
-    
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="🤲 AyasofyaCharity | Pi Network ile Şeffaf Bağış">
-    <meta name="twitter:description" content="Blockchain teknolojisi ile %100 şeffaf bağış platformu">
-    <meta name="twitter:image" content="https://nemes08.github.io/ayasofya-charity-testnet/images/twitter-card.jpg">
-    
-    <!-- PWA -->
-    <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
-    
-    <!-- Preload Critical Assets -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&display=swap" as="style">
-    <link rel="preload" href="style.css" as="style">
-    
-    <!-- Bootstrap 5.3 -->
+    <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
-    <!-- Font Awesome 6.4 -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- AOS Animation -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
-    
-    <!-- Pi SDK -->
-    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
-    
-    <!-- JSON-LD Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "NGO",
-        "name": "AyasofyaCharity",
-        "description": "Blockchain teknolojisi ile şeffaf bağış platformu",
-        "url": "https://nemes08.github.io/ayasofya-charity-testnet/",
-        "logo": "https://nemes08.github.io/ayasofya-charity-testnet/images/logo.png",
-        "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "İstanbul",
-            "addressCountry": "TR"
-        },
-        "contactPoint": {
-            "@type": "ContactPoint",
-            "email": "info@ayasofyacharity.org",
-            "contactType": "customer service"
-        },
-        "sameAs": [
-            "https://facebook.com/AyasofyaCharity",
-            "https://twitter.com/AyasofyaCharity",
-            "https://instagram.com/AyasofyaCharity",
-            "https://tiktok.com/@AyasofyaCharity"
-        ]
-    }
-    </script>
+    <style>
+        /* TEMEL STİLLER */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        /* NAVBAR */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1a5fb4;
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: #26a269;
+        }
+        
+        /* HERO SECTION */
+        .hero-section {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1541414778236-f051d974d61c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+        
+        /* DONATION CARDS */
+        .donation-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            height: 100%;
+            border: 2px solid transparent;
+        }
+        
+        .donation-card:hover {
+            transform: translateY(-10px);
+            border-color: #1a5fb4;
+        }
+        
+        .donation-card.premium {
+            border-color: #ffb300;
+        }
+        
+        .pi-amount {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a5fb4;
+            margin: 20px 0;
+        }
+        
+        .donate-btn {
+            background: linear-gradient(135deg, #26a269, #2ecc71);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .donate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(38,162,105,0.4);
+        }
+        
+        /* WALLET SECTION */
+        .wallet-section {
+            background: #f8f9fa;
+            padding: 80px 0;
+        }
+        
+        .wallet-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .wallet-address {
+            background: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: monospace;
+            word-break: break-all;
+        }
+        
+        /* FOOTER */
+        .footer {
+            background: #1a1a2e;
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .social-icons a {
+            color: white;
+            font-size: 1.2rem;
+            margin-right: 15px;
+            transition: color 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            color: #26a269;
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- VIP Trust Banner -->
-    <div class="vip-trust-banner">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
-            <div class="trust-content">
-                <div class="trust-badges">
-                    <span class="trust-badge vip"><i class="fas fa-shield-check"></i> VIP Güvenilir</span>
-                    <span class="trust-badge"><i class="fas fa-lock"></i> SSL Şifreli</span>
-                    <span class="trust-badge"><i class="fas fa-bolt"></i> Anında İşlem</span>
-                    <span class="trust-badge"><i class="fas fa-globe"></i> 7/24 Aktif</span>
-                    <span class="trust-badge"><i class="fas fa-award"></i> Onaylı Platform</span>
-                </div>
-                <div class="live-stats">
-                    <span class="live-stat"><i class="fas fa-users"></i> <span id="liveUsers">1,247</span> Online</span>
-                    <span class="live-stat"><i class="fas fa-heart"></i> <span id="todayDonations">342</span> Bağış Bugün</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Premium Navigation -->
-    <nav class="premium-navbar">
-        <div class="container">
-            <!-- Mega Logo -->
-            <a class="mega-logo" href="#hero">
-                <div class="logo-container">
-                    <div class="logo-icon">
-                        <i class="fas fa-hands-holding-circle"></i>
-                    </div>
-                    <div class="logo-text">
-                        <h1 class="logo-title">AYASOFYA<span class="logo-highlight">CHARITY</span></h1>
-                        <p class="logo-tagline">Blockchain ile Şeffaf Yardım</p>
-                    </div>
-                </div>
+            <a class="logo" href="#">
+                <i class="fas fa-hands-helping me-2"></i>
+                Ayasofya<span>Charity</span>
             </a>
-
-            <!-- Main Navigation -->
-            <div class="nav-main">
-                <a href="#hero" class="nav-link active"><i class="fas fa-home"></i> Ana Sayfa</a>
-                <a href="#donate" class="nav-link"><i class="fas fa-heart"></i> Bağış Yap</a>
-                <a href="#impact" class="nav-link"><i class="fasfa-chart-line"></i> Etki Raporu</a>
-                <a href="#transparency" class="nav-link"><i class="fas fa-eye"></i> Şeffaflık</a>
-                <a href="#about" class="nav-link"><i class="fas fa-info-circle"></i> Hakkımızda</a>
-            </div>
-
-            <!-- Action Buttons -->
-            <div class="nav-actions">
-                <button class="btn-wallet-connect" id="connectWalletBtn">
-                    <i class="fas fa-wallet"></i>
-                    <span>Cüzdan Bağla</span>
-                </button>
-                <button class="btn-donate-cta" onclick="scrollToSection('donate')">
-                    <i class="fas fa-gift"></i>
-                    <span>Hemen Bağış Yap</span>
-                </button>
-                
-                <!-- Language Selector -->
-                <div class="language-selector">
-                    <button class="lang-btn active" onclick="changeLanguage('tr')">
-                        <i class="fas fa-globe"></i> TR
-                    </button>
-                    <div class="lang-dropdown">
-                        <button onclick="changeLanguage('en')">EN</button>
-                        <button onclick="changeLanguage('ar')">AR</button>
-                        <button onclick="changeLanguage('ru')">RU</button>
-                    </div>
-                </div>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Ana Sayfa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#donate">Bağış Yap</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#wallet">Cüzdan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">Hakkımızda</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section with Visual Impact -->
-    <section class="hero-visual" id="hero">
-        <!-- Animated Background -->
-        <div class="hero-bg-animation">
-            <div class="particles"></div>
-            <div class="floating-icons">
-                <i class="fas fa-heart"></i>
-                <i class="fas fa-hand-holding-heart"></i>
-                <i class="fas fa-coins"></i>
-                <i class="fas fa-shield-alt"></i>
-                <i class="fas fa-users"></i>
-            </div>
-        </div>
-
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
         <div class="container">
-            <div class="hero-content">
-                <!-- Status Card -->
-                <div class="status-card premium">
-                    <div class="status-header">
-                        <div class="status-indicator active">
-                            <div class="pulse"></div>
-                            <i class="fas fa-plug"></i>
-                        </div>
-                        <h4>Pi Network Bağlantısı</h4>
-                    </div>
-                    <div class="status-body">
-                        <div class="status-metric">
-                            <span class="metric-label">Durum:</span>
-                            <span class="metric-value success">Aktif & Güvenli</span>
-                        </div>
-                        <div class="status-metric">
-                            <span class="metric-label">Gecikme:</span>
-                            <span class="metric-value">0.2s</span>
-                        </div>
-                        <div class="status-metric">
-                            <span class="metric-label">Son Güncelleme:</span>
-                            <span class="metric-value">Şimdi</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Main Hero Content -->
-                <div class="hero-main">
-                    <div class="hero-badge">
-                        <i class="fas fa-crown"></i>
-                        <span>VIP Bağış Platformu</span>
-                    </div>
-                    
-                    <h1 class="hero-title">
-                        <span class="hero-highlight">AYASOFYA</span>
-                        <span class="hero-subtitle">CHARITY</span>
-                    </h1>
-                    
-                    <p class="hero-description">
-                        Tarihi mirasımız Ayasofya'nın ruhuyla, <strong>blockchain teknolojisi</strong> kullanarak 
-                        ihtiyaç sahiplerine <strong>%100 şeffaf</strong> ve <strong>güvenli yardım</strong> ulaştırıyoruz. 
-                        Her bağışınız <strong>Pi Network blockchain'inde</strong> kalıcı olarak kayıt altında.
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <h1 class="hero-title">AYASOFYA CHARITY</h1>
+                    <p class="hero-subtitle">
+                        Tarihi mirasımız Ayasofya'nın ruhuyla, Pi Network blockchain teknolojisi ile 
+                        ihtiyaç sahiplerine %100 şeffaf ve güvenli yardım ulaştırıyoruz.
                     </p>
                     
-                    <!-- Impact Numbers -->
-                    <div class="impact-numbers">
-                        <div class="impact-item" data-aos="fade-up">
-                            <div class="impact-value">24,850+</div>
-                            <div class="impact-label">Toplam Bağış (π)</div>
-                        </div>
-                        <div class="impact-item" data-aos="fade-up" data-aos-delay="100">
-                            <div class="impact-value">1,247+</div>
-                            <div class="impact-label">Aktif Bağışçı</div>
-                        </div>
-                        <div class="impact-item" data-aos="fade-up" data-aos-delay="200">
-                            <div class="impact-value">42+</div>
-                            <div class="impact-label">Ülke</div>
-                        </div>
-                        <div class="impact-item" data-aos="fade-up" data-aos-delay="300">
-                            <div class="impact-value">99.8%</div>
-                            <div class="impact-label">Şeffaflık Oranı</div>
-                        </div>
+                    <div class="connection-status alert alert-success d-inline-flex align-items-center">
+                        <i class="fas fa-check-circle me-2"></i>
+                        Pi Network Bağlantısı: Aktif
                     </div>
                     
-                    <!-- CTA Buttons -->
-                    <div class="hero-actions">
-                        <button class="btn-hero-primary" onclick="scrollToSection('donate')">
-                            <i class="fas fa-rocket"></i>
-                            <span>Hemen Bağış Yap</span>
-                            <div class="btn-badge">🔥 Sınırlı Süre</div>
+                    <div class="mt-4">
+                        <button class="btn btn-warning btn-lg px-4" onclick="scrollToDonate()">
+                            <i class="fas fa-heart me-2"></i>Hemen Bağış Yap
                         </button>
-                        <button class="btn-hero-secondary" onclick="scrollToSection('how-it-works')">
-                            <i class="fas fa-play-circle"></i>
-                            <span>Nasıl Çalışır?</span>
-                        </button>
-                        <button class="btn-hero-outline" onclick="openVideoModal()">
-                            <i class="fas fa-video"></i>
-                            <span>Tanıtım Videosu</span>
-                        </button>
-                    </div>
-                    
-                    <!-- Trust Seals -->
-                    <div class="trust-seals">
-                        <div class="seal">
-                            <i class="fas fa-shield-check"></i>
-                            <span>256-bit SSL</span>
-                        </div>
-                        <div class="seal">
-                            <i class="fas fa-user-shield"></i>
-                            <span>GDPR Uyumlu</span>
-                        </div>
-                        <div class="seal">
-                            <i class="fas fa-lock"></i>
-                            <span>Blockchain Doğrulama</span>
-                        </div>
-                        <div class="seal">
-                            <i class="fas fa-bolt"></i>
-                            <span>Anında İşlem</span>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Live Donation Ticker -->
-    <div class="live-ticker">
-        <div class="ticker-container">
-            <div class="ticker-label">
-                <i class="fas fa-bolt"></i>
-                <span>CANLI BAĞIŞ AKIŞI</span>
-            </div>
-            <div class="ticker-content" id="liveTicker">
-                <!-- Live donations will appear here -->
-            </div>
-            <div class="ticker-total">
-                <i class="fas fa-chart-line"></i>
-                <span>Bugün: <strong id="todayTotal">0 π</strong></span>
-            </div>
-        </div>
-    </div>
-
-    <!-- How It Works -->
-    <section class="how-it-works" id="how-it-works">
+    <!-- Donation Section -->
+    <section class="py-5" id="donate">
         <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2 class="section-title">Nasıl Çalışır?</h2>
-                <p class="section-subtitle">3 Kolay Adımda Bağış Yapın</p>
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold">Bağış Seçenekleri</h2>
+                <p class="text-muted">Aşağıdaki seçeneklerden birini seçerek bağış yapabilirsiniz</p>
             </div>
             
-            <div class="steps-container">
-                <div class="step-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="step-number">01</div>
-                    <div class="step-icon">
-                        <i class="fas fa-wallet"></i>
-                    </div>
-                    <h3>Pi Cüzdanını Bağla</h3>
-                    <p>Pi Network cüzdanınızı güvenle bağlayın</p>
-                    <div class="step-badge">Güvenli</div>
-                </div>
-                
-                <div class="step-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="step-number">02</div>
-                    <div class="step-icon">
-                        <i class="fas fa-hand-holding-heart"></i>
-                    </div>
-                    <h3>Bağış Miktarını Seç</h3>
-                    <p>İstediğiniz miktarı veya hazır paketlerden seçin</p>
-                    <div class="step-badge">Esnek</div>
-                </div>
-                
-                <div class="step-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="step-number">03</div>
-                    <div class="step-icon">
-                        <i class="fas fa-check-circle"></i>
-                    </div>
-                    <h3>Onayla ve Tamamla</h3>
-                    <p>Bağışınız blockchain'e kaydedilsin</p>
-                    <div class="step-badge">Şeffaf</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Premium Donation Section -->
-    <section class="premium-donation" id="donate">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <div class="section-badge">
-                    <i class="fas fa-crown"></i>
-                    <span>VIP BAĞIŞ PAKETLERİ</span>
-                </div>
-                <h2 class="section-title">Bağışınızı Seçin</h2>
-                <p class="section-subtitle">Her bağış özel ayrıcalıklar ve takip edilebilir blockchain kaydı ile birlikte</p>
-            </div>
-            
-            <!-- Donation Packages -->
-            <div class="donation-packages">
-                <!-- Starter Package -->
-                <div class="package-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="package-header">
-                        <div class="package-badge popular">POPÜLER</div>
-                        <h3 class="package-title">Temel Bağışçı</h3>
-                        <div class="package-price">
-                            <span class="price-amount">1</span>
-                            <span class="price-currency">π</span>
-                        </div>
-                        <p class="package-period">Tek seferlik bağış</p>
-                    </div>
-                    
-                    <div class="package-features">
-                        <div class="feature">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Bağışçı Rozeti</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check-circle"></i>
-                            <span>E-posta Teşekkürü</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Blockchain Doğrulama</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Aylık Rapor Erişimi</span>
-                        </div>
-                    </div>
-                    
-                    <button class="btn-package-select" onclick="selectPackage(1)">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span>Bu Paketi Seç</span>
-                    </button>
-                    
-                    <div class="package-stats">
-                        <div class="stat">
-                            <span class="stat-value">1,247</span>
-                            <span class="stat-label">Bağışçı</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-value">4.8</span>
-                            <span class="stat-label">Puan</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Supporter Package -->
-                <div class="package-card premium" data-aos="fade-up" data-aos-delay="200">
-                    <div class="package-header">
-                        <div class="package-badge best">EN İYİ DEĞER</div>
-                        <h3 class="package-title">Destekçi</h3>
-                        <div class="package-price">
-                            <span class="price-amount">5</span>
-                            <span class="price-currency">π</span>
-                        </div>
-                        <p class="package-period">+ Premium Özellikler</p>
-                    </div>
-                    
-                    <div class="package-features">
-                        <div class="feature">
-                            <i class="fas fa-crown"></i>
-                            <span>Premium Rozet</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-gem"></i>
-                            <span>Özel Teşekkür</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-chart-line"></i>
-                            <span>Detaylı Etki Raporu</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-star"></i>
-                            <span>VIP Destek Hattı</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-award"></i>
-                            <span>Özel Sertifika</span>
-                        </div>
-                    </div>
-                    
-                    <button class="btn-package-select" onclick="selectPackage(5)">
-                        <i class="fas fa-crown"></i>
-                        <span>Premium Seç</span>
-                    </button>
-                    
-                    <div class="package-stats">
-                        <div class="stat">
-                            <span class="stat-value">856</span>
-                            <span class="stat-label">Bağışçı</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-value">4.9</span>
-                            <span class="stat-label">Puan</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- VIP Package -->
-                <div class="package-card vip" data-aos="fade-up" data-aos-delay="300">
-                    <div class="package-header">
-                        <div class="package-badge vip">VIP</div>
-                        <h3 class="package-title">Elçi</h3>
-                        <div class="package-price">
-                            <span class="price-amount">10</span>
-                            <span class="price-currency">π</span>
-                        </div>
-                        <p class="package-period">+ Tüm Ayrıcalıklar</p>
-                    </div>
-                    
-                    <div class="package-features">
-                        <div class="feature">
-                            <i class="fas fa-star"></i>
-                            <span>VIP Elçi Rozeti</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-trophy"></i>
-                            <span>Özel Plaket</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-user-check"></i>
-                            <span>Yüzde İsim Listesi</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-handshake"></i>
-                            <span>Özel Etkinlik Daveti</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-medal"></i>
-                            <span>Yıllık Ödül</span>
-                        </div>
-                    </div>
-                    
-                    <button class="btn-package-select" onclick="selectPackage(10)">
-                        <i class="fas fa-gem"></i>
-                        <span>VIP Ol</span>
-                    </button>
-                    
-                    <div class="package-stats">
-                        <div class="stat">
-                            <span class="stat-value">342</span>
-                            <span class="stat-label">Bağışçı</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-value">5.0</span>
-                            <span class="stat-label">Puan</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Custom Donation -->
-            <div class="custom-donation" data-aos="fade-up">
-                <div class="custom-header">
-                    <h3><i class="fas fa-edit"></i> Özel Miktar</h3>
-                    <p>Kendi miktarınızı belirleyin</p>
-                </div>
-                
-                <div class="custom-controls">
-                    <div class="amount-input">
-                        <input type="number" 
-                               id="customAmount" 
-                               min="0.1" 
-                               max="1000" 
-                               step="0.1"
-                               placeholder="π Miktarı">
-                        <span class="input-suffix">π</span>
-                    </div>
-                    
-                    <div class="quick-amounts">
-                        <button class="btn-quick-amount" onclick="setAmount(25)">25 π</button>
-                        <button class="btn-quick-amount" onclick="setAmount(50)">50 π</button>
-                        <button class="btn-quick-amount" onclick="setAmount(100)">100 π</button>
-                        <button class="btn-quick-amount" onclick="setAmount(500)">500 π</button>
-                    </div>
-                    
-                    <button class="btn-custom-donate" onclick="donateCustom()">
-                        <i class="fas fa-bolt"></i>
-                        <span>Özel Bağış Yap</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Live Donation Progress -->
-    <section class="donation-progress" id="progress">
-        <div class="container">
-            <div class="progress-header">
-                <h2>Canlı Bağış Hedefi</h2>
-                <div class="time-remaining">
-                    <i class="fas fa-clock"></i>
-                    <span>Bu Ay Kalan: <strong id="daysLeft">15 Gün</strong></span>
-                </div>
-            </div>
-            
-            <!-- Animated Progress Bar -->
-            <div class="animated-progress">
-                <div class="progress-labels">
-                    <span>Başlangıç</span>
-                    <span id="currentProgress">24,850 π</span>
-                    <span>Hedef: 50,000 π</span>
-                </div>
-                
-                <div class="progress-track">
-                    <div class="progress-fill" id="progressFill" style="width: 49.7%">
-                        <div class="fill-wave"></div>
-                        <div class="fill-sparkles">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    <div class="progress-milestones">
-                        <div class="milestone" style="left: 25%">
-                            <div class="milestone-dot"></div>
-                            <span class="milestone-label">25K π</span>
-                        </div>
-                        <div class="milestone" style="left: 50%">
-                            <div class="milestone-dot"></div>
-                            <span class="milestone-label">50K π</span>
-                        </div>
-                        <div class="milestone" style="left: 75%">
-                            <div class="milestone-dot"></div>
-                            <span class="milestone-label">75K π</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="progress-stats">
-                    <div class="stat">
-                        <div class="stat-value" id="totalCollected">24,850</div>
-                        <div class="stat-label">Toplanan (π)</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value" id="percentage">49.7%</div>
-                        <div class="stat-label">Tamamlanma</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value" id="remaining">25,150</div>
-                        <div class="stat-label">Kalan (π)</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value" id="dailyNeeded">1,676</div>
-                        <div class="stat-label">Günlük Hedef</div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Countdown Timer -->
-            <div class="countdown-timer">
-                <h4>Bu Ayın Hedefi İçin Geri Sayım</h4>
-                <div class="timer-display">
-                    <div class="time-unit">
-                        <span id="days">15</span>
-                        <small>Gün</small>
-                    </div>
-                    <div class="time-unit">
-                        <span id="hours">08</span>
-                        <small>Saat</small>
-                    </div>
-                    <div class="time-unit">
-                        <span id="minutes">42</span>
-                        <small>Dakika</small>
-                    </div>
-                    <div class="time-unit">
-                        <span id="seconds">19</span>
-                        <small>Saniye</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Impact Visualization -->
-    <section class="impact-visualization" id="impact">
-        <div class="container">
-            <div class="section-header">
-                <h2>Bağışlarınızın Etkisi</h2>
-                <p>Her π, gerçek bir fark yaratıyor</p>
-            </div>
-            
-            <div class="impact-grid">
-                <div class="impact-card" data-aos="fade-up">
-                    <div class="impact-icon">
-                        <i class="fas fa-home"></i>
-                    </div>
-                    <h3>142 Aile</h3>
-                    <p>Barınma Desteği Sağlandı</p>
-                    <div class="impact-progress">
-                        <div class="progress" style="width: 85%"></div>
-                    </div>
-                </div>
-                
-                <div class="impact-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="impact-icon">
-                        <i class="fas fa-utensils"></i>
-                    </div>
-                    <h3>8,542 Öğün</h3>
-                    <p>Sıcak Yemek Dağıtıldı</p>
-                    <div class="impact-progress">
-                        <div class="progress" style="width: 72%"></div>
-                    </div>
-                </div>
-                
-                <div class="impact-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="impact-icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <h3>324 Öğrenci</h3>
-                    <p>Eğitim Bursu Verildi</p>
-                    <div class="impact-progress">
-                        <div class="progress" style="width: 63%"></div>
-                    </div>
-                </div>
-                
-                <div class="impact-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="impact-icon">
-                        <i class="fas fa-heartbeat"></i>
-                    </div>
-                    <h3>1,247 Tedavi</h3>
-                    <p>Sağlık Desteği Sağlandı</p>
-                    <div class="impact-progress">
-                        <div class="progress" style="width: 91%"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Wallet Integration -->
-    <section class="wallet-integration">
-        <div class="container">
-            <div class="wallet-header">
-                <h2><i class="fas fa-wallet"></i> Pi Cüzdan Entegrasyonu</h2>
-                <p>Güvenli ve kolay bağlantı</p>
-            </div>
-            
-            <div class="wallet-content">
-                <div class="wallet-options">
-                    <div class="option-card" data-aos="fade-right">
-                        <div class="option-icon">
-                            <i class="fas fa-mobile-alt"></i>
-                        </div>
-                        <h3>Mobil Cüzdan</h3>
-                        <p>Pi Wallet uygulaması ile anında bağlanın</p>
-                        <button class="btn-option" onclick="connectMobileWallet()">
-                            <i class="fas fa-external-link-alt"></i>
-                            <span>Bağlan</span>
-                        </button>
-                    </div>
-                    
-                    <div class="option-card" data-aos="fade-up">
-                        <div class="option-icon">
-                            <i class="fas fa-desktop"></i>
-                        </div>
-                        <h3>Web Cüzdan</h3>
-                        <p>Browser extension ile hızlı erişim</p>
-                        <button class="btn-option" onclick="connectWebWallet()">
-                            <i class="fas fa-plug"></i>
-                            <span>Bağlan</span>
-                        </button>
-                    </div>
-                    
-                    <div class="option-card" data-aos="fade-left">
-                        <div class="option-icon">
-                            <i class="fas fa-qrcode"></i>
-                        </div>
-                        <h3>QR Kod ile</h3>
-                        <p>Manuel transfer için QR kod kullanın</p>
-                        <button class="btn-option" onclick="showQRCode()">
-                            <i class="fas fa-expand"></i>
-                            <span>QR Göster</span>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="donation-card text-center">
+                        <i class="fas fa-gem fa-3x text-primary mb-3"></i>
+                        <div class="pi-amount">1 π</div>
+                        <p class="mb-4">Temel bağış ile başlayın</p>
+                        <button class="btn donate-btn" onclick="donate(1)">
+                            <i class="fas fa-gift me-2"></i>Bağış Yap
                         </button>
                     </div>
                 </div>
                 
-                <!-- Wallet Address Display -->
-                <div class="wallet-address-display" data-aos="fade-up">
-                    <div class="address-header">
-                        <h4><i class="fas fa-address-card"></i> Manuel Transfer Adresi</h4>
-                        <div class="copy-badge" id="copyStatus">Kopyalamak için tıklayın</div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="donation-card text-center">
+                        <i class="fas fa-star fa-3x text-warning mb-3"></i>
+                        <div class="pi-amount">5 π</div>
+                        <p class="mb-4">Orta ölçekli bağış</p>
+                        <button class="btn donate-btn" onclick="donate(5)">
+                            <i class="fas fa-star me-2"></i>Bağış Yap
+                        </button>
                     </div>
-                    
-                    <div class="address-container" onclick="copyAddress()">
-                        <div class="address-qr">
-                            <canvas id="qrCanvas"></canvas>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="donation-card premium text-center">
+                        <i class="fas fa-crown fa-3x text-warning mb-3"></i>
+                        <div class="pi-amount">10 π</div>
+                        <p class="mb-4">Premium bağışçı olun</p>
+                        <button class="btn donate-btn" onclick="donate(10)">
+                            <i class="fas fa-crown me-2"></i>Bağış Yap
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="donation-card text-center">
+                        <i class="fas fa-edit fa-3x text-info mb-3"></i>
+                        <div class="pi-amount">? π</div>
+                        <div class="mb-3">
+                            <input type="number" class="form-control text-center" id="customAmount" placeholder="Miktar">
                         </div>
-                        <div class="address-text">
-                            <code id="walletAddress">GCXK5Y2J7EXAMPLEPIWALLETADDRESS123456789</code>
-                            <div class="address-actions">
-                                <button class="btn-copy">
-                                    <i class="fas fa-copy"></i>
-                                    Kopyala
-                                </button>
-                                <button class="btn-verify" onclick="verifyAddress()">
-                                    <i class="fas fa-shield-check"></i>
-                                    Doğrula
-                                </button>
+                        <button class="btn donate-btn" onclick="donateCustom()">
+                            <i class="fas fa-edit me-2"></i>Özel Bağış
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wallet Section -->
+    <section class="wallet-section" id="wallet">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="wallet-card">
+                        <h2 class="text-center mb-4">
+                            <i class="fas fa-wallet me-2"></i>
+                            Manuel Pi Transferi
+                        </h2>
+                        
+                        <p class="text-center text-muted mb-4">
+                            Aşağıdaki cüzdan adresine Pi göndererek de bağış yapabilirsiniz.
+                        </p>
+                        
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">AyasofyaCharity Resmi Cüzdan Adresi:</label>
+                            <div class="wallet-address">
+                                GCXK5Y2J7EXAMPLEPIWALLETADDRESS123456789
                             </div>
                         </div>
+                        
+                        <div class="text-center">
+                            <button class="btn btn-primary px-4" onclick="copyAddress()">
+                                <i class="fas fa-copy me-2"></i>Adresi Kopyala
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Transparency Dashboard -->
-    <section class="transparency-dashboard" id="transparency">
+    <!-- Footer -->
+    <footer class="footer" id="about">
         <div class="container">
-            <div class="dashboard-header">
-                <h2><i class="fas fa-chart-bar"></i> Şeffaflık Paneli</h2>
-                <p>%100 blockchain doğrulamalı tüm işlemler</p>
-            </div>
-            
-            <div class="dashboard-grid">
-                <!-- Live Transactions -->
-                <div class="dashboard-card live-transactions">
-                    <h3><i class="fas fa-bolt"></i> Canlı İşlemler</h3>
-                    <div class="transactions-list" id="transactionsList">
-                        <!-- Transactions loaded by JS -->
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h3 class="mb-3">AyasofyaCharity</h3>
+                    <p>
+                        Blockchain teknolojisi ile şeffaf bağış platformu.
+                        Tüm bağışlar Pi Network üzerinde kayıt altında.
+                    </p>
+                    <div class="social-icons mt-3">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
                     </div>
                 </div>
                 
-                <!-- Statistics -->
-                <div class="dashboard-card statistics">
-                    <h3><i class="fas fa-chart-pie"></i> İstatistikler</h3>
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <div class="stat-value">99.8%</div>
-                            <div class="stat-label">Başarı
+                <div class="col-lg-4 mb-4">
+                    <h5 class="mb-3">Hızlı Bağlantılar</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#home" class="text-light">Ana Sayfa</a></li>
+                        <li><a href="#donate" class="text-light">Bağış Yap</a></li>
+                        <li><a href="#wallet" class="text-light">Cüzdan Adresi</a></li>
+                        <li><a href="privacy.html" class="text-light">Gizlilik Politikası</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4 mb-4">
+                    <h5 class="mb-3">İletişim</h5>
+                    <p>
+                        <i class="fas fa-envelope me-2"></i>
+                        info@ayasofyacharity.org
+                    </p>
+                    <p>
+                        <i class="fas fa-map-marker-alt me-2"></i>
+                        İstanbul, Türkiye
+                    </p>
+                </div>
+            </div>
+            
+            <hr class="bg-light">
+            
+            <div class="text-center pt-3">
+                <p class="mb-0">
+                    &copy; 2024 AyasofyaCharity. Tüm hakları saklıdır.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Simple JavaScript -->
+    <script>
+        // Basit scroll fonksiyonu
+        function scrollToDonate() {
+            document.getElementById('donate').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+        
+        // Bağış fonksiyonu
+        function donate(amount) {
+            alert(amount + ' π bağış yapmak üzeresiniz.\nPi Wallet uygulaması açılacak.');
+            // Burada Pi SDK entegrasyonu olacak
+        }
+        
+        function donateCustom() {
+            const amount = document.getElementById('customAmount').value;
+            if (amount && amount > 0) {
+                donate(amount);
+            } else {
+                alert('Lütfen geçerli bir miktar girin.');
+            }
+        }
+        
+        // Adres kopyalama
+        function copyAddress() {
+            const address = 'GCXK5Y2J7EXAMPLEPIWALLETADDRESS123456789';
+            navigator.clipboard.writeText(address).then(() => {
+                alert('Cüzdan adresi kopyalandı!');
+            });
+        }
+        
+        // Sayfa yüklendiğinde
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('AyasofyaCharity DApp yüklendi');
+        });
+    </script>
+</body>
+</html>
