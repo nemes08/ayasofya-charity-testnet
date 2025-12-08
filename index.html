@@ -5,14 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ayasofya Charity</title>
 
+  <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- Pi Testnet SDK -->
   <script src="https://testnet.sdk.minepi.com/pi-sdk.js"></script>
 
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     body{
       font-family:'Poppins',sans-serif;
-      background:#f7f3ff;
+      background:linear-gradient(#fff,#f6f0ff);
       color:#222;
       text-align:center;
       padding:20px 16px 40px;
@@ -20,47 +23,26 @@
     .card{
       max-width:480px;
       margin:0 auto;
-      background:#fff;
-      border-radius:16px;
-      box-shadow:0 4px 18px rgba(0,0,0,0.08);
-      padding:18px 16px 24px;
+      background:#ffffff;
+      border-radius:18px;
+      box-shadow:0 6px 24px rgba(0,0,0,0.08);
+      padding:20px 18px 26px;
     }
     .logo{
-      width:180px;
+      width:190px;
       height:auto;
       border-radius:12px;
-      margin:8px auto 12px;
+      margin:4px auto 10px;
       display:block;
     }
-    .heart{font-size:26px;margin:4px 0 10px;color:#b83280;}
+    .heart{font-size:28px;margin:6px 0 10px;color:#b83280;}
     h1{font-size:22px;margin-bottom:4px;}
-    .subtitle{font-size:13px;color:#555;margin-bottom:10px;}
-
-    .lang-row{
-      margin-bottom:8px;
-      display:flex;
-      justify-content:center;
-      gap:6px;
-    }
-    .lang-btn{
-      border-radius:999px;
-      border:1px solid #ddd;
-      background:#fff;
-      padding:3px 10px;
-      font-size:11px;
-      cursor:pointer;
-      color:#555;
-    }
-    .lang-btn.active{
-      background:#4c1d95;
-      color:#fff;
-      border-color:#4c1d95;
-    }
+    .subtitle{font-size:13px;color:#555;margin-bottom:16px;}
 
     .section-title{
       font-size:16px;
       font-weight:600;
-      margin:16px 0 6px;
+      margin:18px 0 8px;
     }
 
     .status-row{
@@ -106,7 +88,7 @@
       cursor:pointer;
     }
 
-    .progress-wrap{margin-top:6px;font-size:11px;color:#555;}
+    .progress-wrap{margin-top:8px;font-size:11px;color:#555;}
     .progress-bar{
       height:6px;
       border-radius:999px;
@@ -121,7 +103,7 @@
       transition:width .4s;
     }
 
-    .share-title{font-size:13px;font-weight:500;margin:14px 0 4px;}
+    .share-title{font-size:13px;font-weight:500;margin:16px 0 4px;}
     .share-row{
       display:flex;
       justify-content:center;
@@ -134,7 +116,7 @@
       text-decoration:none;
     }
 
-    .mini-text{font-size:11px;color:#777;margin-top:6px;}
+    .mini-text{font-size:11px;color:#777;margin-top:8px;}
 
     .info-block{
       border-top:1px solid #eee;
@@ -152,57 +134,24 @@
 </head>
 <body>
   <div class="card">
-    <!-- LOGO -->
+
     <img src="images/ayasofya-charity-logo.png" alt="Ayasofya Charity Logo" class="logo">
 
-    <!-- KALP -->
     <div class="heart">💜</div>
 
-    <!-- DİL SEÇİMİ -->
-    <div class="lang-row">
-      <button class="lang-btn active" data-lang="tr">TR</button>
-      <button class="lang-btn" data-lang="en">EN</button>
-      <button class="lang-btn" data-lang="ar">AR</button>
-    </div>
-
-    <!-- BAŞLIK & ALT METİN -->
-    <h1 id="t-title"
-        data-tr="Ayasofya Charity"
-        data-en="Ayasofya Charity"
-        data-ar="صدقة آيا صوفيا">
-      Ayasofya Charity
-    </h1>
-    <p class="subtitle" id="t-sub"
-       data-tr="İhtiyaç sahiplerine destek — Pi Network üzerinden şeffaf bağış"
-       data-en="Support people in need — transparent donations over Pi Network"
-       data-ar="دعم المحتاجين — تبرعات شفافة عبر شبكة Pi">
+    <h1>Ayasofya Charity</h1>
+    <p class="subtitle">
       İhtiyaç sahiplerine destek — Pi Network üzerinden şeffaf bağış
     </p>
 
-    <!-- BAĞIŞ YAP -->
-    <div class="section-title" id="t-donate-title"
-         data-tr="Bağış Yap"
-         data-en="Donate"
-         data-ar="تبرع">
-      Bağış Yap
-    </div>
+    <div class="section-title">Bağış Yap</div>
 
     <div class="status-row" id="status">
       <span class="icon">✅</span>
-      <span id="t-status-text"
-            data-tr="Valide bağlantı sağlanmadı. Önce cüzdanınızı bağlayın."
-            data-en="Wallet not connected. Please connect your Pi wallet first."
-            data-ar="المحفظة غير متصلة. من فضلك قم بتوصيل محفظة Pi الخاصة بك أولاً.">
-        Valide bağlantı sağlanmadı. Önce cüzdanınızı bağlayın.
-      </span>
+      <span>Valide bağlantı sağlanmadı. Önce cüzdanınızı bağlayın.</span>
     </div>
 
-    <button class="donate-btn" style="margin-bottom:6px;"
-            onclick="connectWallet()"
-            id="t-connect-btn"
-            data-tr="Pi Testnet Cüzdanı Bağla"
-            data-en="Connect Pi Testnet Wallet"
-            data-ar="ربط محفظة Pi Testnet">
+    <button class="donate-btn" style="margin-bottom:6px;" onclick="connectWallet()">
       Pi Testnet Cüzdanı Bağla
     </button>
 
@@ -210,78 +159,40 @@
       <button class="amount-btn" onclick="selectAmount(1)">1 Pi</button>
       <button class="amount-btn" onclick="selectAmount(5)">5 Pi</button>
       <button class="amount-btn" onclick="selectAmount(10)">10 Pi</button>
-      <button class="donate-btn" onclick="sendDonation()" id="t-send-btn"
-              data-tr="Bağışı Gönder"
-              data-en="Send Donation"
-              data-ar="إرسال التبرع">
-        Bağışı Gönder
-      </button>
+      <button class="donate-btn" onclick="sendDonation()">Bağışı Gönder</button>
     </div>
 
     <div class="progress-wrap">
-      <div id="t-progress-text"
-           data-tr="Toplam: <span id='totalAmount'>0</span> / 10.000 Pi (test ortamı, gerçek para içermez)"
-           data-en="Total: <span id='totalAmount'>0</span> / 10,000 Pi (test environment, no real money)"
-           data-ar="الإجمالي: <span id='totalAmount'>0</span> / 10,000 Pi (بيئة اختبار، بدون مال حقيقي)">
-        Toplam: <span id="totalAmount">0</span> / 10.000 Pi (test ortamı, gerçek para içermez)
-      </div>
+      Toplam: <span id="totalAmount">0</span> / 10.000 Pi (test ortamı, gerçek para içermez)
       <div class="progress-bar">
         <div class="progress-fill" id="progressFill"></div>
       </div>
     </div>
 
-    <!-- DESTEKLE & PAYLAŞ -->
-    <div class="share-title" id="t-share-title"
-         data-tr="Destekle & Paylaş"
-         data-en="Support & Share"
-         data-ar="ادعم وشارك">
-      Destekle & Paylaş
-    </div>
+    <div class="share-title">Destekle & Paylaş</div>
     <div class="share-row">
       <a href="https://www.instagram.com/uursemen08?igsh=MXZ0cWhjeXhmcjJqMw==" aria-label="Instagram">📸</a>
       <a href="https://x.com/uursemen2?t=ry_c0nR81aeJkyFm60pQbw&s=09" aria-label="X (Twitter)">𝕏</a>
       <a href="https://www.youtube.com/@uursemen08" aria-label="YouTube">▶️</a>
-      <a href="https://tr.ee/PVNkRfcjMc" aria-label="TikTok / kısa link">🎵</a>
+      <a href="https://tr.ee/PVNkRfcjMc" aria-label="TikTok">🎵</a>
       <a href="https://linktr.ee/uur08" aria-label="Linktree">🌐</a>
       <a href="https://t.me/uur1453" aria-label="Telegram">@</a>
     </div>
 
-    <!-- KISA AÇIKLAMA BLOKLARI -->
+    <p class="mini-text">
+      Test ortamındasınız: Bağışlar Test Pi ile simüle edilir, gerçek para içermez.
+    </p>
+
     <div class="info-block">
-      <strong id="t-why-title"
-              data-tr="Neden Ayasofya Charity?"
-              data-en="Why Ayasofya Charity?"
-              data-ar="لماذا Ayasofya Charity؟">
-        Neden Ayasofya Charity?
-      </strong>
-      <span id="t-why-text"
-            data-tr="Amaç: İhtiyaç sahiplerine doğrudan dijital destek; her bağış Pi blockchain üzerinde izlenebilir ve raporlanabilir."
-            data-en="Goal: Direct digital support to people in need; every donation is traceable on the Pi blockchain and can be reported."
-            data-ar="الهدف: دعم رقمي مباشر للمحتاجين؛ كل تبرع يمكن تتبعه على بلوكشين Pi ويمكن الإبلاغ عنه.">
-        Amaç: İhtiyaç sahiplerine doğrudan dijital destek; her bağış Pi blockchain üzerinde izlenebilir ve raporlanabilir.
-      </span>
+      <strong>Neden Ayasofya Charity?</strong>
+      Amaç: İhtiyaç sahiplerine doğrudan dijital destek; her bağış Pi blockchain üzerinde izlenebilir ve raporlanabilir.
     </div>
 
     <div class="info-block">
-      <strong id="t-privacy-title"
-              data-tr="Güvenlik & Gizlilik"
-              data-en="Security & Privacy"
-              data-ar="الأمان والخصوصية">
-        Güvenlik & Gizlilik
-      </strong>
-      <span id="t-privacy-text"
-            data-tr="Sadece cüzdan adresiniz kaydedilir, kişisel veriler toplanmaz. Tüm işlemler Pi Testnet/Mainnet üzerinde herkese açık kayıtlıdır."
-            data-en="Only your wallet address is stored, no personal data collected. All transactions are publicly recorded on Pi Testnet/Mainnet."
-            data-ar="يتم حفظ عنوان محفظتك فقط، ولا يتم جمع بيانات شخصية. جميع المعاملات مسجلة علنًا على Pi Testnet/Mainnet.">
-        Sadece cüzdan adresiniz kaydedilir, kişisel veriler toplanmaz. Tüm işlemler Pi Testnet/Mainnet üzerinde herkese açık kayıtlıdır.
-      </span>
+      <strong>Güvenlik & Gizlilik</strong>
+      Sadece cüzdan adresiniz kaydedilir, kişisel veriler toplanmaz. Tüm işlemler Pi Testnet/Mainnet üzerinde herkese açık kayıtlıdır.
       <br>
-      <a href="#" class="info-link" id="t-privacy-link"
-         data-tr="Gizlilik Politikası & İletişim"
-         data-en="Privacy Policy & Contact"
-         data-ar="سياسة الخصوصية والتواصل">
-        Gizlilik Politikası & İletişim
-      </a>
+      <a href="#" class="info-link">Gizlilik Politikası & İletişim</a>
     </div>
 
     <footer>
@@ -290,28 +201,6 @@
   </div>
 
   <script>
-    // DİL DESTEĞİ
-    function applyLang(lang){
-      document.querySelectorAll('[data-'+lang+']').forEach(function(el){
-        const key = 'data-'+lang;
-        if(el.getAttribute(key)){
-          if(el.id === 't-progress-text'){
-            el.innerHTML = el.getAttribute(key);
-          }else{
-            el.textContent = el.getAttribute(key);
-          }
-        }
-      });
-    }
-    document.querySelectorAll('.lang-btn').forEach(function(btn){
-      btn.addEventListener('click',function(){
-        document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
-        btn.classList.add('active');
-        applyLang(btn.dataset.lang);
-      });
-    });
-
-    // BAĞIŞ LOJİĞİ (TESTNET)
     let selectedAmount = 1;
     let totalAmount = 0;
     let piAuth = null;
@@ -326,10 +215,11 @@
     async function connectWallet(){
       try{
         piAuth = await window.Pi.authenticate(['payments'], ()=>{});
-        const status = document.getElementById('status');
-        status.innerHTML = '✅ Valide bağlantı sağlandı! ('+piAuth.user.username+')';
+        document.getElementById('status').innerHTML =
+          '✅ Valide bağlantı sağlandı! ('+piAuth.user.username+')';
       }catch(e){
-        document.getElementById('status').innerHTML = '⚠️ Bağlantı hatası: '+e.message;
+        document.getElementById('status').innerHTML =
+          '⚠️ Bağlantı hatası: '+e.message;
       }
     }
 
